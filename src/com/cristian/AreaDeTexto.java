@@ -333,6 +333,7 @@ public class AreaDeTexto extends RSyntaxTextArea {
 		if (jfc == null) {
 			jfc = new JFileChooser();
 			jfc.setDialogTitle("Escolha o diretório de destino");
+			jfc.setFileView(new JFCFileView());
 		}
 		return jfc;
 	}
