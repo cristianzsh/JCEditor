@@ -981,6 +981,9 @@ public class JCEditor extends JFrame {
 		}
 	}
 
+	/**
+	* Evento que abre a página da linguagem Potigol
+	*/
 	class SobrePotigolListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			try {
