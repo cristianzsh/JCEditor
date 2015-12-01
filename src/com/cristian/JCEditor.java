@@ -72,7 +72,7 @@ public class JCEditor extends JFrame {
 	private JLabel fonteAtual;
 	private JLabel linguagem;
 	private JToolBar barraS;
-	private JMenuItem novoArq, salvarArq, abrirArq, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
+	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
 		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol;
@@ -82,13 +82,13 @@ public class JCEditor extends JFrame {
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema;
 	private InputStream in;
-	private JButton bNovo, bAbrir, bSalvar, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir;
+	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir;
 	private Image icone;
 	private ButtonGroup bg, bg2, bg3;
 	private String fonteEscolhida = "Monospaced";
 	private int tamanhoFonte = 12;
 	private String titulo;
-	public String sLAF, sTema;
+	public String sLAF, sTema, auxArquivo;
 	private ArrayList<AreaDeTexto> lista = new ArrayList<>();
 
 	/**
@@ -153,6 +153,7 @@ public class JCEditor extends JFrame {
 		configMenu(novoArq, "Novo", "imagens/novo.png", new NovoListener(), KeyEvent.VK_N, ActionEvent.CTRL_MASK, menu);
 		configMenu(abrirArq, "Abrir", "imagens/abrir.png", new AbrirListener(), KeyEvent.VK_O, ActionEvent.CTRL_MASK, menu);
 		configMenu(salvarArq, "Salvar", "imagens/salvar.png", new SalvarListener(), KeyEvent.VK_S, ActionEvent.CTRL_MASK, menu);
+		configMenu(salvarArqComo, "Salvar como", "imagens/salvarComo.png", new SalvarComoListener(), KeyEvent.VK_S, Event.CTRL_MASK | Event.SHIFT_MASK, menu);
 		configMenu(imprimir, "Imprimir", "imagens/imprimir.png", new ImprimirPotigolListener(), KeyEvent.VK_P, ActionEvent.CTRL_MASK, menu);
 		configMenu(executarPotigol, "Executar Potigol", "imagens/play.png", new ExecutarPotigolListener(), KeyEvent.VK_F9, 0, menu);
 		configMenu(fecharAba, "Fechar aba", "imagens/fecharAba.png", new FecharAbaListener(), KeyEvent.VK_W, ActionEvent.CTRL_MASK, menu);
@@ -239,6 +240,9 @@ public class JCEditor extends JFrame {
 
 		bSalvar = new JButton();
 		configBtns(bSalvar, "Salvar arquivo", "imagens/25x25/salvar25.png", new SalvarListener());
+
+		bSalvarComo = new JButton();
+		configBtns(bSalvarComo, "Salvar como", "imagens/25x25/salvarComo25.png", new SalvarComoListener());
 		barraS.add(separador);
 
 		bCopiar = new JButton();
@@ -669,6 +673,21 @@ public class JCEditor extends JFrame {
 
 			if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
 				bExecutarPotigol.setEnabled(true);
+			}
+		}
+	}
+
+	class SalvarComoListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			lista.get(arquivos.getSelectedIndex()).texto = lista.get(arquivos.getSelectedIndex()).getRSyntax().getText();
+			if (lista.get(arquivos.getSelectedIndex()).arquivo == null) {
+				lista.get(arquivos.getSelectedIndex()).salvarComo();
+				lista.get(arquivos.getSelectedIndex()).arquivo = null;
+				lista.get(arquivos.getSelectedIndex()).arquivoModificado(true);
+			} else {
+				auxArquivo = lista.get(arquivos.getSelectedIndex()).arquivo.toString();
+				lista.get(arquivos.getSelectedIndex()).salvarComo();
+				lista.get(arquivos.getSelectedIndex()).arquivo = new File(auxArquivo);
 			}
 		}
 	}
