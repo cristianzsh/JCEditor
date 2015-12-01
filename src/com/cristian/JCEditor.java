@@ -922,21 +922,22 @@ public class JCEditor extends JFrame {
 			}
 
 			if (lista.get(arquivos.getSelectedIndex()).isPotigol && lista.get(arquivos.getSelectedIndex()).arquivo != null) {
+				Runtime rt = Runtime.getRuntime();
+				Process p;
+				String cmd;
+				String usuario = System.getProperty("user.home") + "/ConfigJCE/.potigol";
+
 				if (System.getProperty("os.name").equals("Linux")) {
 					try {
-						Runtime rt = Runtime.getRuntime();
-						String usr = System.getProperty("user.home") + "/ConfigJCE/.potigol";
-						String cmd = usr + "/ExecPotigol.sh " + lista.get(arquivos.getSelectedIndex()).arquivo.toString().replace(" ", "?")
+						cmd = usuario + "/ExecPotigol.sh " + lista.get(arquivos.getSelectedIndex()).arquivo.toString().replace(" ", "?")
 							+ " " + lista.get(arquivos.getSelectedIndex()).arquivo.getName();
-						Process p = rt.exec(cmd);
-						p.waitFor();
+						p = rt.exec(cmd);
 					} catch (Exception ex) { ex.printStackTrace(); }
 				} else {
 					try {
-						Runtime rt = Runtime.getRuntime();
-						String usr = System.getProperty("user.home") + "/ConfigJCE/.potigol";
-						Process p = rt.exec("cmd.exe /c start " + usr + "/ExecPotigol.bat " +
-							"\"" + lista.get(arquivos.getSelectedIndex()).arquivo.toString() + "\" " + lista.get(arquivos.getSelectedIndex()).arquivo.getName());
+						cmd = "cmd.exe /c start " + usuario + "/ExecPotigol.bat " +
+							"\"" + lista.get(arquivos.getSelectedIndex()).arquivo.toString() + "\" " + lista.get(arquivos.getSelectedIndex()).arquivo.getName();
+						p = rt.exec(cmd);
 					} catch (Exception ex) { ex.printStackTrace(); }
 				}
 			}
