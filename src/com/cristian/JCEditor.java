@@ -650,7 +650,7 @@ public class JCEditor extends JFrame {
 	}
 
 	/**
-	* Classe é responsável por abrir o arquivo selecionado pelo usuário.
+	* Esta classe é responsável por salvar o arquivo selecionado pelo usuário.
 	* Antes de salvar, é feita uma verificação para constatar se o arquivo foi ou não modificado,
 	* se sim, ele apenas salva levando em consideração o caminho do arquivo existente, caso contrário,
 	* o usuário deverá informar um caminho. Em seguida, é definido a linguagem do JLabel e o título do JFrame.
