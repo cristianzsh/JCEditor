@@ -650,7 +650,7 @@ public class JCEditor extends JFrame {
 	}
 
 	/**
-	* classe é responsável por abrir o arquivo selecionado pelo usuário.
+	* Classe é responsável por abrir o arquivo selecionado pelo usuário.
 	* Antes de salvar, é feita uma verificação para constatar se o arquivo foi ou não modificado,
 	* se sim, ele apenas salva levando em consideração o caminho do arquivo existente, caso contrário,
 	* o usuário deverá informar um caminho. Em seguida, é definido a linguagem do JLabel e o título do JFrame.
@@ -677,6 +677,9 @@ public class JCEditor extends JFrame {
 		}
 	}
 
+	/**
+	* Responsável por salvar o arquivo mesmo se ele já existe ou não foi modificado (recurso "salvar como")
+	*/
 	class SalvarComoListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			lista.get(arquivos.getSelectedIndex()).texto = lista.get(arquivos.getSelectedIndex()).getRSyntax().getText();
