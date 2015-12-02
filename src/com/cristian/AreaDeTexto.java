@@ -219,7 +219,7 @@ public class AreaDeTexto extends RSyntaxTextArea {
 	* (contanto que o arquivo não seja nulo).
 	* @param a File - arquivo no qual a extensão será comparada
 	*/
-	private void extensao(File a) {
+	public void extensao(File a) {
 		String s = a.toString();
 
 		if (s.indexOf('.') != -1) {
