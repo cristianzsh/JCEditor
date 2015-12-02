@@ -88,7 +88,7 @@ public class JCEditor extends JFrame {
 	private String fonteEscolhida = "Monospaced";
 	private int tamanhoFonte = 12;
 	private String titulo;
-	public String sLAF, sTema, auxArquivo;
+	public String sLAF, sTema, auxArquivo, auxLinguagem;
 	private ArrayList<AreaDeTexto> lista = new ArrayList<>();
 
 	/**
@@ -687,10 +687,16 @@ public class JCEditor extends JFrame {
 				lista.get(arquivos.getSelectedIndex()).salvarComo();
 				lista.get(arquivos.getSelectedIndex()).arquivo = null;
 				lista.get(arquivos.getSelectedIndex()).arquivoModificado(true);
+				definirTitulo();
 			} else {
 				auxArquivo = lista.get(arquivos.getSelectedIndex()).arquivo.toString();
+				auxLinguagem = lista.get(arquivos.getSelectedIndex()).linguagem;
+
+				File arquivoAnterior = new File(auxArquivo);
 				lista.get(arquivos.getSelectedIndex()).salvarComo();
-				lista.get(arquivos.getSelectedIndex()).arquivo = new File(auxArquivo);
+				lista.get(arquivos.getSelectedIndex()).arquivo = arquivoAnterior;
+				updateLanguage(auxLinguagem);
+				lista.get(arquivos.getSelectedIndex()).extensao(arquivoAnterior);
 			}
 		}
 	}
