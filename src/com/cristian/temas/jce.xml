@@ -43,7 +43,7 @@
       <style token="COMMENT_MULTILINE" fg="676E54"/>
       <style token="COMMENT_KEYWORD" fg="ae9fbf"/>
       <style token="COMMENT_MARKUP" fg="ae9fbf"/>
-      <style token="FUNCTION" fg="E0E2E4"/>
+      <style token="FUNCTION" fg="66D9EF" italic="true"/>
       <style token="DATA_TYPE" fg="66D9EF" italic="true"/>
       <style token="LITERAL_BOOLEAN" fg="9880E9"/>
       <style token="LITERAL_NUMBER_DECIMAL_INT" fg="9880E9"/>
@@ -69,7 +69,7 @@
       <style token="VARIABLE" fg="ae9fbf" bold="true"/>
       <style token="WHITESPACE" fg="E0E2E4"/>
       
-      <style token="ERROR_IDENTIFIER" fg="E0E2E4" bg="272822"/>
+      <style token="ERROR_IDENTIFIER" fg="E0E2E4" bg="04790e"/>
       <style token="ERROR_NUMBER_FORMAT" fg="E0E2E4" bg="04790e"/>
       <style token="ERROR_STRING_DOUBLE" fg="E0E2E4" bg="04790e"/>
       <style token="ERROR_CHAR" fg="E0E2E4" bg="04790e"/>
