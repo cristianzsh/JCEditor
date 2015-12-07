@@ -484,27 +484,30 @@ public class JCEditor extends JFrame {
 				try {
 					ev.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
 					java.util.List lista2 = (java.util.List) ev.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-					File arquivoD = (File) lista2.get(0);
 
-					at = new AreaDeTexto();
-					lista.add(at);
-					arquivos.addTab("Sem nome", at);
-					arquivos.setSelectedIndex(lista.size() - 1);
-					adicionarDocumentListener();
-					arquivos.setTabComponentAt(arquivos.getSelectedIndex(), new ButtonTabComponent(arquivos, lista));
-					arquivos.setTitleAt(arquivos.getSelectedIndex(), arquivoD.getName());
+					for (int i = 0; i < lista2.size(); i++) {
+						File arquivoD = (File) lista2.get(i);
 
-					lista.get(arquivos.getSelectedIndex()).abrir(arquivoD);
-					lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
+						at = new AreaDeTexto();
+						lista.add(at);
+						arquivos.addTab("Sem nome", at);
+						arquivos.setSelectedIndex(lista.size() - 1);
+						adicionarDocumentListener();
+						arquivos.setTabComponentAt(arquivos.getSelectedIndex(), new ButtonTabComponent(arquivos, lista));
+						arquivos.setTitleAt(arquivos.getSelectedIndex(), arquivoD.getName());
 
-					linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
-					definirTitulo();
-					carregarTema(sTema);
-					updateFonte();
-					arrastarESoltar();
+						lista.get(arquivos.getSelectedIndex()).abrir(arquivoD);
+						lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
 
-					if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
-						bExecutarPotigol.setEnabled(true);
+						linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
+						definirTitulo();
+						carregarTema(sTema);
+						updateFonte();
+						arrastarESoltar();
+
+						if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
+							bExecutarPotigol.setEnabled(true);
+						}
 					}
 
 				} catch (Exception ex) {  }
