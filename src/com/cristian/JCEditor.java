@@ -299,7 +299,7 @@ public class JCEditor extends JFrame {
 		em consideração se o arquivo existe ou se é nulo */
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent ev) {
-				new MainClass().salvarPreferencias();
+				new Preferencias().salvarPreferencias(sLAF, sTema);
 
 				salvarAoSair();
 			}
