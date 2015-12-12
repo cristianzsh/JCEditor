@@ -375,6 +375,7 @@ public class JCEditor extends JFrame {
 					linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
 					definirTitulo();
 					arrastarESoltar();
+					lista.get(arquivos.getSelectedIndex()).getRSyntax().requestFocus();
 
 					if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
 						bExecutarPotigol.setEnabled(true);
@@ -386,7 +387,7 @@ public class JCEditor extends JFrame {
 		scrollPane = new JScrollPane(adp);
 		scrollPane.setBorder(null);
 		painelSeparador = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, scrollPane, arquivos);
-		painelSeparador.setDividerLocation(150);
+		painelSeparador.setDividerLocation(0);
 		painelSeparador.setOneTouchExpandable(true);
 		painelSeparador.setBorder(null);
 
@@ -536,6 +537,11 @@ public class JCEditor extends JFrame {
 
 					for (int i = 0; i < lista2.size(); i++) {
 						File arquivoD = (File) lista2.get(i);
+
+						if (arquivoD.isDirectory()) {
+							adp.adicionarFilhos(arquivoD);
+							return;
+						}
 
 						at = new AreaDeTexto();
 						lista.add(at);
