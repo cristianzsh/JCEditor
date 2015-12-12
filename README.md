@@ -3,7 +3,7 @@ Editor de texto criado em Java
 
 O JCE possui suporte a diversas linguagens e integração com a linguagem [Potigol](http://potigol.github.io/), desenvolvida no IFRN.
 
-![JCEditor](http://i.imgur.com/r3Mb3V7.png)
+![JCEditor](http://i.imgur.com/o8eaVe3.png)
 
 ![JCEditor](http://i.imgur.com/6XdyYz8.png)
 
