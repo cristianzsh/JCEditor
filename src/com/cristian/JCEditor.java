@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.KeyboardFocusManager;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -38,6 +40,9 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.SwingUtilities;
 import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
+import javax.swing.tree.TreePath;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ButtonGroup;
 import javax.swing.event.DocumentEvent;
@@ -64,7 +69,7 @@ import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 */
 
 public class JCEditor extends JFrame {
-	AreaDeTexto at;
+	private AreaDeTexto at;
 	private JTabbedPane arquivos;
 	private Font roboto = new Font("Roboto Light", Font.PLAIN, 14);
 	private JLabel separador = new JLabel("   ");
@@ -72,7 +77,7 @@ public class JCEditor extends JFrame {
 	private JLabel fonteAtual;
 	private JLabel linguagem;
 	private JToolBar barraS;
-	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
+	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, addProjeto, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
 		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol;
@@ -90,6 +95,9 @@ public class JCEditor extends JFrame {
 	private String titulo;
 	public String sLAF, sTema, auxArquivo, auxLinguagem;
 	private ArrayList<AreaDeTexto> lista = new ArrayList<>();
+	private JScrollPane scrollPane;
+	private JSplitPane painelSeparador;
+	private ArvoreDeProjetos adp;
 
 	/**
 	* O construtor define um título e chama o método de construção da interface gráfica.
@@ -152,6 +160,7 @@ public class JCEditor extends JFrame {
 		(menu ao qual o JMenuItem pertence) */
 		configMenu(novoArq, "Novo", "imagens/novo.png", new NovoListener(), KeyEvent.VK_N, ActionEvent.CTRL_MASK, menu);
 		configMenu(abrirArq, "Abrir", "imagens/abrir.png", new AbrirListener(), KeyEvent.VK_O, ActionEvent.CTRL_MASK, menu);
+		configMenu(addProjeto, "Adicionar projeto", "imagens/addProjeto.png", new AddProjetoListener(), KeyEvent.VK_O, Event.CTRL_MASK | Event.SHIFT_MASK, menu);
 		configMenu(salvarArq, "Salvar", "imagens/salvar.png", new SalvarListener(), KeyEvent.VK_S, ActionEvent.CTRL_MASK, menu);
 		configMenu(salvarArqComo, "Salvar como", "imagens/salvarComo.png", new SalvarComoListener(), KeyEvent.VK_S, Event.CTRL_MASK | Event.SHIFT_MASK, menu);
 		configMenu(imprimir, "Imprimir", "imagens/imprimir.png", new ImprimirPotigolListener(), KeyEvent.VK_P, ActionEvent.CTRL_MASK, menu);
@@ -301,6 +310,7 @@ public class JCEditor extends JFrame {
 			public void windowClosing(WindowEvent ev) {
 				new Preferencias().salvarPreferencias(sLAF, sTema);
 
+				adp.salvarProjetos();
 				salvarAoSair();
 			}
 		});
@@ -341,9 +351,48 @@ public class JCEditor extends JFrame {
 		barraDeMenu.add(preferencias);
 		barraDeMenu.add(sobre);
 
+		adp = new ArvoreDeProjetos();
+		adp.arvore.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent ev) {
+				TreePath tp = adp.arvore.getPathForLocation(ev.getX(), ev.getY());
+				
+				if (tp != null && !adp.arq.isDirectory() && ev.getClickCount() == 2) {
+					at = new AreaDeTexto();
+					lista.add(at);
+					arquivos.addTab("Sem nome", at);
+					arquivos.setSelectedIndex(lista.size() - 1);
+
+					int i = arquivos.getSelectedIndex();
+					arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista));
+					carregarTema(sTema);
+
+					lista.get(arquivos.getSelectedIndex()).abrir(adp.arq);
+					lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
+					adicionarDocumentListener();
+					updateFonte();
+					arquivos.setTitleAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.getName());
+					arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.toString());
+					linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
+					definirTitulo();
+					arrastarESoltar();
+
+					if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
+						bExecutarPotigol.setEnabled(true);
+					}
+				}
+			}
+		});
+
+		scrollPane = new JScrollPane(adp);
+		scrollPane.setBorder(null);
+		painelSeparador = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, true, scrollPane, arquivos);
+		painelSeparador.setDividerLocation(150);
+		painelSeparador.setOneTouchExpandable(true);
+		painelSeparador.setBorder(null);
+
 		getContentPane().add(BorderLayout.NORTH, barraS);
 		getContentPane().add(BorderLayout.SOUTH, panel);	// apenas define o layout dos componentes
-		getContentPane().add(BorderLayout.CENTER, arquivos);
+		getContentPane().add(BorderLayout.CENTER, painelSeparador);
 		this.setJMenuBar(barraDeMenu);
 		this.setIconImage(icone);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -561,6 +610,13 @@ public class JCEditor extends JFrame {
 			adt.getRSyntax().setFont(new Font(fonteEscolhida, Font.PLAIN, tamanhoFonte));
 		}
 		fonteAtual.setText(fonteEscolhida + " / Font.PLAIN / " + tamanhoFonte + "  |   ");
+	}
+
+	private void abrirProjeto() {
+		JFileChooser jfc = new JFileChooser();
+		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		jfc.showOpenDialog(this);
+		adp.adicionarFilhos(new File(jfc.getSelectedFile().toString()));
 	}
 
 	/**
@@ -839,6 +895,12 @@ public class JCEditor extends JFrame {
 			sLAF = this.laf;
 
 			updateFonte();
+		}
+	}
+
+	class AddProjetoListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			abrirProjeto();
 		}
 	}
 
