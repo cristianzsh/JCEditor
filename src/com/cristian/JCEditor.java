@@ -80,8 +80,8 @@ public class JCEditor extends JFrame {
 	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, addProjeto, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
 		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
-		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol;
-	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif, btnJava, btnPython;
+		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch;
+	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif;
 	private JRadioButtonMenuItem dark, jce, defaultT, defaultAlt, eclipse, idea, darkii, idle;
 	private JRadioButtonMenuItem gerarEstrutura;
 	private JMenuBar barraDeMenu;
@@ -209,35 +209,38 @@ public class JCEditor extends JFrame {
 		Sua estrutura é composta por: JRadioButtonMenuItem, String(nome no item de menu), ActionListener(recebe como
 		argumento uma String contendo o nome da linguagem e sua sintaxe), ButtonGroup, JMenu */
 		bg2 = new ButtonGroup();
-		configRadioMenus(java, "Java", new LinguagemListener("Java", SyntaxConstants.SYNTAX_STYLE_JAVA), bg2, linguagemMenu);
-		configRadioMenus(cPlusPlus, "C++", new LinguagemListener("C++", SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS), bg2, linguagemMenu);
-		configRadioMenus(pythonL, "Python", new LinguagemListener("Python", SyntaxConstants.SYNTAX_STYLE_PYTHON), bg2, linguagemMenu);
-		configRadioMenus(html, "HTML", new LinguagemListener("HTML", SyntaxConstants.SYNTAX_STYLE_HTML), bg2, linguagemMenu);
-		configRadioMenus(css, "CSS", new LinguagemListener("CSS", SyntaxConstants.SYNTAX_STYLE_CSS), bg2, linguagemMenu);
-		configRadioMenus(javaScript, "JavaScript", new LinguagemListener("JavaScript", SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT), bg2, linguagemMenu);
-		configRadioMenus(xml, "XML", new LinguagemListener("XML", SyntaxConstants.SYNTAX_STYLE_XML), bg2, linguagemMenu);
-		configRadioMenus(c, "C", new LinguagemListener("C", SyntaxConstants.SYNTAX_STYLE_C), bg2, linguagemMenu);
-		configRadioMenus(potigol, "Potigol", new PotigolListener(), bg2, linguagemMenu);
-		configRadioMenus(portugol, "Portugol", new PortugolListener(), bg2, linguagemMenu);
-		configRadioMenus(pascal, "Pascal", new LinguagemListener("Pascal", SyntaxConstants.SYNTAX_STYLE_DELPHI), bg2, linguagemMenu);
-		configRadioMenus(unixShell, "Unix Shell", new LinguagemListener("Unix Shell", SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL), bg2, linguagemMenu);
-		configRadioMenus(properties, "Properties", new LinguagemListener("Properties", SyntaxConstants.SYNTAX_STYLE_PROPERTIES_FILE), bg2, linguagemMenu);
-		configRadioMenus(groovy, "Groovy", new LinguagemListener("Groovy", SyntaxConstants.SYNTAX_STYLE_GROOVY), bg2, linguagemMenu);
-		configRadioMenus(jsp, "Java Server Pages", new LinguagemListener("Java Server Pages", SyntaxConstants.SYNTAX_STYLE_JSP), bg2, linguagemMenu);
 		configRadioMenus(actionScript, "ActionScript", new LinguagemListener("ActionScript", SyntaxConstants.SYNTAX_STYLE_ACTIONSCRIPT), bg2, linguagemMenu);
 		configRadioMenus(assembly, "Assembly", new LinguagemListener("Assembly", SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_X86), bg2, linguagemMenu);
+		configRadioMenus(batch, "Windows Batch", new LinguagemListener("Windows Batch", SyntaxConstants.SYNTAX_STYLE_WINDOWS_BATCH), bg2, linguagemMenu);
 		configRadioMenus(clojure, "Clojure", new LinguagemListener("Clojure", SyntaxConstants.SYNTAX_STYLE_CLOJURE), bg2, linguagemMenu);
+		configRadioMenus(css, "CSS", new LinguagemListener("CSS", SyntaxConstants.SYNTAX_STYLE_CSS), bg2, linguagemMenu);
+		configRadioMenus(c, "C", new LinguagemListener("C", SyntaxConstants.SYNTAX_STYLE_C), bg2, linguagemMenu);
+		configRadioMenus(cPlusPlus, "C++", new LinguagemListener("C++", SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS), bg2, linguagemMenu);
+		configRadioMenus(cSharp, "C#", new LinguagemListener("C#", SyntaxConstants.SYNTAX_STYLE_CSHARP), bg2, linguagemMenu);
 		configRadioMenus(d, "D", new LinguagemListener("D", SyntaxConstants.SYNTAX_STYLE_D), bg2, linguagemMenu);
 		configRadioMenus(delphi, "Delphi", new LinguagemListener("Delphi", SyntaxConstants.SYNTAX_STYLE_DELPHI), bg2, linguagemMenu);
 		configRadioMenus(fortran, "Fortran", new LinguagemListener("Fortran", SyntaxConstants.SYNTAX_STYLE_FORTRAN), bg2, linguagemMenu);
+		configRadioMenus(groovy, "Groovy", new LinguagemListener("Groovy", SyntaxConstants.SYNTAX_STYLE_GROOVY), bg2, linguagemMenu);
+		configRadioMenus(html, "HTML", new LinguagemListener("HTML", SyntaxConstants.SYNTAX_STYLE_HTML), bg2, linguagemMenu);
+		configRadioMenus(java, "Java", new LinguagemListener("Java", SyntaxConstants.SYNTAX_STYLE_JAVA), bg2, linguagemMenu);
+		configRadioMenus(javaScript, "JavaScript", new LinguagemListener("JavaScript", SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT), bg2, linguagemMenu);
+		configRadioMenus(jsp, "Java Server Pages", new LinguagemListener("Java Server Pages", SyntaxConstants.SYNTAX_STYLE_JSP), bg2, linguagemMenu);
 		configRadioMenus(json, "JSON", new LinguagemListener("JSON", SyntaxConstants.SYNTAX_STYLE_JSON), bg2, linguagemMenu);
 		configRadioMenus(latex, "LaTex", new LinguagemListener("LaTex", SyntaxConstants.SYNTAX_STYLE_LATEX), bg2, linguagemMenu);
 		configRadioMenus(lisp, "Lisp", new LinguagemListener("Lisp", SyntaxConstants.SYNTAX_STYLE_LISP), bg2, linguagemMenu);
 		configRadioMenus(lua, "Lua", new LinguagemListener("Lua", SyntaxConstants.SYNTAX_STYLE_LUA), bg2, linguagemMenu);
+		configRadioMenus(pascal, "Pascal", new LinguagemListener("Pascal", SyntaxConstants.SYNTAX_STYLE_DELPHI), bg2, linguagemMenu);
 		configRadioMenus(perl, "Perl", new LinguagemListener("Perl", SyntaxConstants.SYNTAX_STYLE_PERL), bg2, linguagemMenu);
 		configRadioMenus(php, "PHP", new LinguagemListener("PHP", SyntaxConstants.SYNTAX_STYLE_PHP), bg2, linguagemMenu);
+		configRadioMenus(portugol, "Portugol", new PortugolListener(), bg2, linguagemMenu);
+		configRadioMenus(potigol, "Potigol", new PotigolListener(), bg2, linguagemMenu);
+		configRadioMenus(properties, "Properties", new LinguagemListener("Properties", SyntaxConstants.SYNTAX_STYLE_PROPERTIES_FILE), bg2, linguagemMenu);
+		configRadioMenus(pythonL, "Python", new LinguagemListener("Python", SyntaxConstants.SYNTAX_STYLE_PYTHON), bg2, linguagemMenu);	
 		configRadioMenus(ruby, "Ruby", new LinguagemListener("Ruby", SyntaxConstants.SYNTAX_STYLE_RUBY), bg2, linguagemMenu);
 		configRadioMenus(scala, "Scala", new LinguagemListener("Scala", SyntaxConstants.SYNTAX_STYLE_SCALA), bg2, linguagemMenu);
+		configRadioMenus(vb, "Visual Basic", new LinguagemListener("Visual Basic", SyntaxConstants.SYNTAX_STYLE_VISUAL_BASIC), bg2, linguagemMenu);
+		configRadioMenus(unixShell, "Unix Shell", new LinguagemListener("Unix Shell", SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL), bg2, linguagemMenu);
+		configRadioMenus(xml, "XML", new LinguagemListener("XML", SyntaxConstants.SYNTAX_STYLE_XML), bg2, linguagemMenu);
 
 		/* Código de configuração dos JButtons da JToolBar.
 		O método recebe o botão a ser configurado, seu ToolTipText, seu ícone e seu listener */

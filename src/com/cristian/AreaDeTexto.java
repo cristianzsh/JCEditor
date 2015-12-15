@@ -85,6 +85,9 @@ public class AreaDeTexto extends RSyntaxTextArea {
 		extensao.put("php", SyntaxConstants.SYNTAX_STYLE_PHP);
 		extensao.put("rb", SyntaxConstants.SYNTAX_STYLE_RUBY);
 		extensao.put("scala", SyntaxConstants.SYNTAX_STYLE_SCALA);
+		extensao.put("cs", SyntaxConstants.SYNTAX_STYLE_CSHARP);
+		extensao.put("vb", SyntaxConstants.SYNTAX_STYLE_VISUAL_BASIC);
+		extensao.put("bat", SyntaxConstants.SYNTAX_STYLE_WINDOWS_BATCH);
 		extensao.put("alg", "text/portugol");
 		extensao.put("poti", "text/potigol");
 
@@ -279,6 +282,9 @@ public class AreaDeTexto extends RSyntaxTextArea {
 		linguagens.put("php", "PHP");
 		linguagens.put("rb", "Ruby");
 		linguagens.put("scala", "Scala");
+		linguagens.put("cs", "C#");
+		linguagens.put("vb", "Visual Basic");
+		linguagens.put("bat", "Windows Batch");
 		linguagens.put("alg", "Portugol");
 		linguagens.put("poti", "Potigol");
 		Set<String> chaves = linguagens.keySet();
