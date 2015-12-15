@@ -211,7 +211,7 @@ public class JCEditor extends JFrame {
 		bg2 = new ButtonGroup();
 		configRadioMenus(actionScript, "ActionScript", new LinguagemListener("ActionScript", SyntaxConstants.SYNTAX_STYLE_ACTIONSCRIPT), bg2, linguagemMenu);
 		configRadioMenus(assembly, "Assembly", new LinguagemListener("Assembly", SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_X86), bg2, linguagemMenu);
-		configRadioMenus(batch, "Windows Batch", new LinguagemListener("Windows Batch", SyntaxConstants.SYNTAX_STYLE_WINDOWS_BATCH), bg2, linguagemMenu);
+		configRadioMenus(batch, "Batch", new LinguagemListener("Windows Batch", SyntaxConstants.SYNTAX_STYLE_WINDOWS_BATCH), bg2, linguagemMenu);
 		configRadioMenus(clojure, "Clojure", new LinguagemListener("Clojure", SyntaxConstants.SYNTAX_STYLE_CLOJURE), bg2, linguagemMenu);
 		configRadioMenus(css, "CSS", new LinguagemListener("CSS", SyntaxConstants.SYNTAX_STYLE_CSS), bg2, linguagemMenu);
 		configRadioMenus(c, "C", new LinguagemListener("C", SyntaxConstants.SYNTAX_STYLE_C), bg2, linguagemMenu);
