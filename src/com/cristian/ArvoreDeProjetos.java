@@ -3,6 +3,13 @@ package com.cristian;
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -42,6 +49,31 @@ public class ArvoreDeProjetos extends JPanel {
 				if (tp != null) {
 					arq = new File(arquivos.get(arvore.getLastSelectedPathComponent().toString()));
 				}
+			}
+		});
+
+		DropTarget dt = new DropTarget(arvore, new DropTargetListener() {
+			public void dragEnter(DropTargetDragEvent ev) {  }
+
+			public void dragExit(DropTargetEvent ev) {  }
+
+			public void dragOver(DropTargetDragEvent ev) {  }
+
+			public void dropActionChanged(DropTargetDragEvent ev) {  }
+
+			public void drop(DropTargetDropEvent ev) {
+				try {
+					ev.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
+					java.util.List lista2 = (java.util.List) ev.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+
+					for (int i = 0; i < lista2.size(); i++) {
+						File arquivoD = (File) lista2.get(i);
+						if (arquivoD.isDirectory()) {
+							adicionarFilhos(arquivoD);
+						}
+					}
+
+				} catch (Exception ex) {  }
 			}
 		});
 
