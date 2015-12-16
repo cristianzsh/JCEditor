@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -50,6 +51,26 @@ public class Preferencias {
 				descompactar(arquivoDeConfiguracoes, pastaPotigol);
 			}
 		}
+
+		abrirArquivos();
+		if (!editor.getArquivosAbertos().isEmpty()) {
+			editor.configAoAbrir();
+		}
+		editor.setVisible(true);
+	}
+
+	public void abrirArquivos() {
+		try {
+			FileReader fr = new FileReader(new File(System.getProperty("user.home") + "/ConfigJCE/arquivos.list"));
+			BufferedReader leitor = new BufferedReader(fr);
+			String linha = null;
+
+			while ((linha = leitor.readLine()) != null) {
+				File f = new File(linha);
+				editor.adicionarAba(f);
+			}
+			leitor.close();
+		} catch (Exception ex) { ex.printStackTrace(); }
 	}
 
 	/**
@@ -68,11 +89,10 @@ public class Preferencias {
 				if (sub.equals("1")) {
 					if (conteudo.equals("jce")) {
 						lafJCE();
-						editor = new JCEditor();
 					} else {
 						UIManager.setLookAndFeel(conteudo);
-						editor = new JCEditor();
 					}
+					editor = new JCEditor();
 					editor.sLAF = conteudo;
 				}
 
@@ -93,6 +113,17 @@ public class Preferencias {
 			FileWriter fw = new FileWriter(HOME);
 			fw.write("1 " + laf + "\n");
 			fw.write("2 " + tema + "\n");
+			fw.flush();
+			fw.close();
+		} catch (Exception ex) {  }
+	}
+
+	public void salvarArquivosAbertos(ArrayList<String> lista) {
+		try {
+			FileWriter fw = new FileWriter(new File(System.getProperty("user.home") + "/ConfigJCE/arquivos.list"));
+			for (String l : lista) {
+				fw.write(l + "\n");
+			}
 			fw.flush();
 			fw.close();
 		} catch (Exception ex) {  }
@@ -132,6 +163,7 @@ public class Preferencias {
 					while ((bytes = is.read(buffer)) > 0) {
 						os.write(buffer, 0, bytes);
 					}
+					JOptionPane.showMessageDialog(null, "Potigol configurado com sucesso!");
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} finally {
@@ -148,7 +180,6 @@ public class Preferencias {
 					}
 				}
 			}
-			JOptionPane.showMessageDialog(null, "Potigol configurado com sucesso!");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
