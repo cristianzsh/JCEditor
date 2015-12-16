@@ -61,8 +61,9 @@ import javax.swing.plaf.basic.BasicButtonUI;
 public class ButtonTabComponent extends JPanel {
     private final JTabbedPane pane;
     private ArrayList<AreaDeTexto> adts;
+    private ArrayList<String> arquivosAbertos;
 
-    public ButtonTabComponent(final JTabbedPane pane, ArrayList<AreaDeTexto> adts) {
+    public ButtonTabComponent(final JTabbedPane pane, ArrayList<AreaDeTexto> adts, ArrayList<String> arqsAbertos) {
         //unset default FlowLayout' gaps
         super(new FlowLayout(FlowLayout.LEFT, 0, 0));
         if (pane == null) {
@@ -70,6 +71,7 @@ public class ButtonTabComponent extends JPanel {
         }
         this.pane = pane;
         this.adts = adts;
+        this.arquivosAbertos = arqsAbertos;
         setOpaque(false);
         
         //make JLabel read titles from JTabbedPane
@@ -129,6 +131,11 @@ public class ButtonTabComponent extends JPanel {
                         }
                     }
                 }
+
+                if (adts.get(indiceDoBotaoFechar).arquivo != null && !arquivosAbertos.isEmpty()) {
+                    arquivosAbertos.remove(adts.get(indiceDoBotaoFechar).arquivo.toString());
+                }
+                
                 adts.remove(indiceDoBotaoFechar);
                 pane.remove(indiceDoBotaoFechar);
             }
