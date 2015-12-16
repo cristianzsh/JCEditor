@@ -95,6 +95,7 @@ public class JCEditor extends JFrame {
 	private String titulo;
 	public String sLAF, sTema, auxArquivo, auxLinguagem;
 	private ArrayList<AreaDeTexto> lista = new ArrayList<>();
+	private ArrayList<String> arquivosAbertos = new ArrayList<>();
 	private JScrollPane scrollPane;
 	private JSplitPane painelSeparador;
 	private ArvoreDeProjetos adp;
@@ -142,7 +143,7 @@ public class JCEditor extends JFrame {
 		arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), "Sem nome");
 
 		int i = arquivos.getSelectedIndex();	// índice a aba atual
-		arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista));	// adiciona o botão de fechar à aba
+		arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista, arquivosAbertos));	// adiciona o botão de fechar à aba
 		adicionarDocumentListener();
 
 		/* Permite a navegação entre as abas utilizando Ctrl+Tab. */
@@ -311,9 +312,6 @@ public class JCEditor extends JFrame {
 		em consideração se o arquivo existe ou se é nulo */
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent ev) {
-				new Preferencias().salvarPreferencias(sLAF, sTema);
-
-				adp.salvarProjetos();
 				salvarAoSair();
 			}
 		});
@@ -360,24 +358,7 @@ public class JCEditor extends JFrame {
 				TreePath tp = adp.arvore.getPathForLocation(ev.getX(), ev.getY());
 				
 				if (tp != null && !adp.arq.isDirectory() && ev.getClickCount() == 2) {
-					at = new AreaDeTexto();
-					lista.add(at);
-					arquivos.addTab("Sem nome", at);
-					arquivos.setSelectedIndex(lista.size() - 1);
-
-					int i = arquivos.getSelectedIndex();
-					arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista));
-					carregarTema(sTema);
-
-					lista.get(arquivos.getSelectedIndex()).abrir(adp.arq);
-					lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
-					adicionarDocumentListener();
-					updateFonte();
-					arquivos.setTitleAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.getName());
-					arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.toString());
-					linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
-					definirTitulo();
-					arrastarESoltar();
+					adicionarAba(adp.arq);
 					lista.get(arquivos.getSelectedIndex()).getRSyntax().requestFocus();
 
 					if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
@@ -403,7 +384,6 @@ public class JCEditor extends JFrame {
 		this.setSize(844, 635);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(468, 328));
-		this.setVisible(true);
 	}
 
 	/**
@@ -499,6 +479,10 @@ public class JCEditor extends JFrame {
 				}
 			}
 		}
+
+		new Preferencias().salvarPreferencias(sLAF, sTema);
+		new Preferencias().salvarArquivosAbertos(arquivosAbertos);
+		adp.salvarProjetos();
 	}
 
 	/**
@@ -546,31 +530,36 @@ public class JCEditor extends JFrame {
 							return;
 						}
 
-						at = new AreaDeTexto();
-						lista.add(at);
-						arquivos.addTab("Sem nome", at);
-						arquivos.setSelectedIndex(lista.size() - 1);
-						adicionarDocumentListener();
-						arquivos.setTabComponentAt(arquivos.getSelectedIndex(), new ButtonTabComponent(arquivos, lista));
-						arquivos.setTitleAt(arquivos.getSelectedIndex(), arquivoD.getName());
-
-						lista.get(arquivos.getSelectedIndex()).abrir(arquivoD);
-						lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
-
-						linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
-						definirTitulo();
-						carregarTema(sTema);
-						updateFonte();
-						arrastarESoltar();
-
-						if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
-							bExecutarPotigol.setEnabled(true);
-						}
+						adicionarAba(arquivoD);
 					}
 
 				} catch (Exception ex) {  }
 			}
 		});
+	}
+
+	public void adicionarAba(File arquivo) {
+		at = new AreaDeTexto();
+		lista.add(at);
+		arquivos.addTab("Sem nome", at);
+		arquivos.setSelectedIndex(lista.size() - 1);
+		adicionarDocumentListener();
+		arquivos.setTabComponentAt(arquivos.getSelectedIndex(), new ButtonTabComponent(arquivos, lista, arquivosAbertos));
+		arquivos.setTitleAt(arquivos.getSelectedIndex(), arquivo.getName());
+
+		lista.get(arquivos.getSelectedIndex()).abrir(arquivo);
+		lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
+
+		linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
+		definirTitulo();
+		carregarTema(sTema);
+		updateFonte();
+		arrastarESoltar();
+		arquivosAbertos.add(arquivo.toString());
+
+		if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
+			bExecutarPotigol.setEnabled(true);
+		}
 	}
 
 	/**
@@ -626,6 +615,17 @@ public class JCEditor extends JFrame {
 		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 		jfc.showOpenDialog(this);
 		adp.adicionarFilhos(new File(jfc.getSelectedFile().toString()));
+	}
+
+	public void configAoAbrir() {
+		arquivos.remove(0);
+		lista.remove(0);
+		definirTitulo();
+		updateLanguage(lista.get(arquivos.getSelectedIndex()).linguagem);
+	}
+
+	public ArrayList<String> getArquivosAbertos() {
+		return this.arquivosAbertos;
 	}
 
 	/**
@@ -687,33 +687,11 @@ public class JCEditor extends JFrame {
 	*/
 	class AbrirListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			at = new AreaDeTexto();
-			lista.add(at);
-			arquivos.addTab("Sem nome", at);
-			arquivos.setSelectedIndex(lista.size() - 1);
-			int i = arquivos.getSelectedIndex();
-			arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista));
-			carregarTema(sTema);
-
 			if (lista.get(arquivos.getSelectedIndex()).fileChooser().showOpenDialog(null) == JFileChooser.CANCEL_OPTION) {
-				lista.remove(arquivos.getSelectedIndex());
-				arquivos.remove(arquivos.getSelectedIndex());
 				return;
 			}
 
-			lista.get(arquivos.getSelectedIndex()).abrir(lista.get(arquivos.getSelectedIndex()).fileChooser().getSelectedFile());
-			lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
-			adicionarDocumentListener();
-			updateFonte();
-			arquivos.setTitleAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.getName());
-			arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.toString());
-			linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
-			definirTitulo();
-			arrastarESoltar();
-
-			if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
-				bExecutarPotigol.setEnabled(true);
-			}
+			adicionarAba(lista.get(arquivos.getSelectedIndex()).fileChooser().getSelectedFile());
 		}
 	}
 
@@ -728,6 +706,7 @@ public class JCEditor extends JFrame {
 			lista.get(arquivos.getSelectedIndex()).texto = lista.get(arquivos.getSelectedIndex()).getRSyntax().getText();
 			if (lista.get(arquivos.getSelectedIndex()).arquivo == null) {
 				lista.get(arquivos.getSelectedIndex()).salvarComo();
+				arquivosAbertos.add(lista.get(arquivos.getSelectedIndex()).arquivo.toString());
 			} else {
 				if (lista.get(arquivos.getSelectedIndex()).arquivoModificado()) {
 					lista.get(arquivos.getSelectedIndex()).salvar(lista.get(arquivos.getSelectedIndex()).getRSyntax().getText());
@@ -781,7 +760,7 @@ public class JCEditor extends JFrame {
 			arquivos.setSelectedIndex(lista.size() - 1);
 
 			int i = arquivos.getSelectedIndex();
-			arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista));
+			arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista, arquivosAbertos));
 
 			lista.get(arquivos.getSelectedIndex()).verificarNome();
 
@@ -1077,6 +1056,10 @@ public class JCEditor extends JFrame {
 							lista.get(indice).salvar(lista.get(indice).getRSyntax().getText());
 						}
 					}
+				}
+
+				if (lista.get(indice).arquivo != null && !arquivosAbertos.isEmpty()) {
+					arquivosAbertos.remove(lista.get(indice).arquivo.toString());
 				}
 				lista.remove(indice);
 				arquivos.remove(indice);
