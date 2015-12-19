@@ -480,7 +480,7 @@ public class JCEditor extends JFrame {
 			}
 		}
 
-		new Preferencias().salvarPreferencias(sLAF, sTema);
+		new Preferencias().salvarPreferencias(sLAF, sTema, fonteEscolhida, tamanhoFonte);
 		new Preferencias().salvarArquivosAbertos(arquivosAbertos);
 		adp.salvarProjetos();
 	}
@@ -603,7 +603,7 @@ public class JCEditor extends JFrame {
 	* Método que atualiza o tamanho da fonte e a própria fonte utilizada em
 	* todos os campos de textos de todas as abas
 	*/
-	private void updateFonte() {
+	public void updateFonte() {
 		for (AreaDeTexto adt : lista) {
 			adt.getRSyntax().setFont(new Font(fonteEscolhida, Font.PLAIN, tamanhoFonte));
 		}
@@ -626,6 +626,14 @@ public class JCEditor extends JFrame {
 
 	public ArrayList<String> getArquivosAbertos() {
 		return this.arquivosAbertos;
+	}
+
+	public void setFonteEscolhida(String f) {
+		this.fonteEscolhida = f;
+	}
+
+	public void setTamanhoFonte(int tam) {
+		this.tamanhoFonte = tam;
 	}
 
 	/**

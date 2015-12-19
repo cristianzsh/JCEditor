@@ -37,7 +37,7 @@ public class Preferencias {
 		} else {
 			try {
 				arquivoConfig.mkdir();
-				salvarPreferencias("jce", "jce");
+				salvarPreferencias("jce", "jce", "Monospaced", 12);
 				abrirPreferencias();
 			} catch (Exception ex) { ex.printStackTrace(); }
 		}
@@ -74,7 +74,8 @@ public class Preferencias {
 	}
 
 	/**
-	* Método responsável por carregar as preferências do usuário (Look And Feel) e tema.
+	* Método responsável por carregar as preferências do usuário (Look And Feel), tema,
+	* fonte e tamanho da mesma.
 	*/
 	public void abrirPreferencias() {
 		try {
@@ -100,6 +101,16 @@ public class Preferencias {
 					editor.carregarTema(conteudo);
 					editor.sTema = conteudo;
 				}
+
+				if (sub.equals("3")) {
+					editor.setFonteEscolhida(conteudo);
+					editor.updateFonte();
+				}
+
+				if (sub.equals("4")) {
+					editor.setTamanhoFonte(Integer.parseInt(conteudo));
+					editor.updateFonte();
+				}
 			}
 		} catch (Exception ex) { ex.printStackTrace(); }
 	}
@@ -108,11 +119,13 @@ public class Preferencias {
 	* Método responsável por salvar as preferências do usuário, este método é
 	* chamado toda vez que o usuário fechar o programa.
 	*/
-	public void salvarPreferencias(String laf, String tema) {
+	public void salvarPreferencias(String laf, String tema, String fonte, int tamFonte) {
 		try {
 			FileWriter fw = new FileWriter(HOME);
 			fw.write("1 " + laf + "\n");
 			fw.write("2 " + tema + "\n");
+			fw.write("3 " + fonte + "\n");
+			fw.write("4 " + tamFonte + "\n");
 			fw.flush();
 			fw.close();
 		} catch (Exception ex) {  }
