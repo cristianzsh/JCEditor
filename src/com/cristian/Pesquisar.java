@@ -6,22 +6,25 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 /**
 * Classe que realiza a pesquisa no JTextArea atual
 * @author    Cristian Henrique (cristianmsbr@gmail.com)
-* @version   1.5
+* @version   1.6
 * @since     Segunda atualização
 */
 
 public class Pesquisar extends JDialog {
 	private JLabel pesquisarLabel, substituirLabel;
 	private JTextField fieldPesquisar, fieldSubstituir;
-	private JButton btnPesquisar, btnSubstituir, btnSubstituirTodos, btnProximo, btnVoltar;
-	private JPanel painelNorte, painelSul;
+	private JButton[] botoes = new JButton[5];
+	private JPanel painelOeste, painelLeste;
 	private JTextArea areaDeTexto;
 	private int posicaoInicial = 0;
 
@@ -32,6 +35,7 @@ public class Pesquisar extends JDialog {
 		super(jce);
 		construirGUI();
 		this.areaDeTexto = adt;
+		this.areaDeTexto.requestFocus();
 	}
 
 	/**
@@ -43,33 +47,42 @@ public class Pesquisar extends JDialog {
 		fieldPesquisar = new JTextField(15);
 		fieldSubstituir = new JTextField(15);
 
-		btnPesquisar = new JButton("Pesquisar");
-		btnSubstituir = new JButton("Substituir");
-		btnSubstituirTodos = new JButton("Substituir todos");
-		btnProximo = new JButton("Próximo");
-		btnVoltar = new JButton("Voltar");
+		botoes[0] = new JButton("Pesquisar");
+		botoes[1] = new JButton("Substituir");
+		botoes[2] = new JButton("Substituir todos");
+		botoes[3] = new JButton("Próximo");
+		botoes[4] = new JButton("Voltar");
 
-		btnPesquisar.addActionListener(new PesquisarListener());
-		btnProximo.addActionListener(new ProximoListener());
-		btnSubstituir.addActionListener(new SubstituirListener());
-		btnSubstituirTodos.addActionListener(new SubstituirTodosListener());
-		btnVoltar.addActionListener(new VoltarListener());
+		fieldPesquisar.addActionListener(new PesquisarListener());
+		Box boxLeste = new Box(BoxLayout.Y_AXIS);
 
-		painelNorte = new JPanel();
-		painelNorte.add(pesquisarLabel);
-		painelNorte.add(fieldPesquisar);
-		painelNorte.add(substituirLabel);
-		painelNorte.add(fieldSubstituir);
+		for (int i = 0; i < botoes.length; i++) {
+			botoes[i].setMinimumSize(new Dimension(130, 25));
+			botoes[i].setPreferredSize(new Dimension(130, 25));
+			botoes[i].setMaximumSize(new Dimension(130, 25));
 
-		painelSul = new JPanel();
-		painelSul.add(btnPesquisar);
-		painelSul.add(btnSubstituir);
-		painelSul.add(btnSubstituirTodos);
-		painelSul.add(btnProximo);
-		painelSul.add(btnVoltar);
+			boxLeste.add(botoes[i]);
+		}
 
-		this.getContentPane().add(BorderLayout.NORTH, painelNorte);
-		this.getContentPane().add(BorderLayout.SOUTH, painelSul);
+		botoes[0].addActionListener(new PesquisarListener());
+		botoes[3].addActionListener(new ProximoListener());
+		botoes[1].addActionListener(new SubstituirListener());
+		botoes[2].addActionListener(new SubstituirTodosListener());
+		botoes[4].addActionListener(new VoltarListener());
+
+		painelOeste = new JPanel();
+		Box boxOeste = new Box(BoxLayout.Y_AXIS);
+		boxOeste.add(pesquisarLabel);
+		boxOeste.add(fieldPesquisar);
+		boxOeste.add(substituirLabel);
+		boxOeste.add(fieldSubstituir);
+		painelOeste.add(boxOeste);
+
+		painelLeste = new JPanel();
+		painelLeste.add(boxLeste);
+
+		this.getContentPane().add(BorderLayout.WEST, painelOeste);
+		this.getContentPane().add(BorderLayout.EAST, painelLeste);
 		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
 		this.setResizable(false);
 		this.pack();
@@ -94,7 +107,6 @@ public class Pesquisar extends JDialog {
 			posicaoInicial = 0;
 			return;
 		} else {
-			//areaDeTexto.requestFocus();
 			areaDeTexto.select(pos, pos + textoPesquisar.length());
 			posicaoInicial = pos + textoPesquisar.length();
 		}
@@ -131,7 +143,6 @@ public class Pesquisar extends JDialog {
 				posicaoInicial = 1;
 				return;
 			} else {
-				//areaDeTexto.requestFocus();
 				areaDeTexto.select(pos, pos + textoPesquisar.length());
 				posicaoInicial = pos + textoPesquisar.length();
 			}
