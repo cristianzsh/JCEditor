@@ -82,7 +82,7 @@ public class JCEditor extends JFrame {
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch;
 	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif;
-	private JRadioButtonMenuItem dark, jce, defaultT, defaultAlt, eclipse, idea, darkii, idle;
+	private JRadioButtonMenuItem dark, jce, defaultT, defaultAlt, eclipse, idea, darkii, idle, vs;
 	private JRadioButtonMenuItem gerarEstrutura;
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema;
@@ -200,6 +200,7 @@ public class JCEditor extends JFrame {
 		configRadioMenus(eclipse, "Eclipse", new TemaListener("eclipse"), bg3, tema);
 		configRadioMenus(idea, "IDEA", new TemaListener("idea"), bg3, tema);
 		configRadioMenus(dark, "IDLE", new TemaListener("idle"), bg3, tema);
+		configRadioMenus(vs, "Visual Studio", new TemaListener("vs"), bg3, tema);
 
 		gerarEstrutura = new JRadioButtonMenuItem("Gerar estrutura");
 		gerarEstrutura.setIcon(new ImageIcon(getClass().getResource("imagens/estrutura.png")));
