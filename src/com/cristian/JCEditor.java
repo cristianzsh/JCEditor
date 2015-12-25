@@ -540,6 +540,14 @@ public class JCEditor extends JFrame {
 	}
 
 	public void adicionarAba(File arquivo) {
+		for (int i = 0; i < lista.size(); i++) {
+			if (arquivos.getTitleAt(i).equals(arquivo.getName())
+				&& lista.get(i).arquivo.toString().equals(arquivo.toString())) {
+				arquivos.setSelectedIndex(i);
+				return;
+			}
+		}
+
 		at = new AreaDeTexto();
 		lista.add(at);
 		arquivos.addTab("Sem nome", at);
