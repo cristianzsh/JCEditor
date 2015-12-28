@@ -80,7 +80,7 @@ public class JCEditor extends JFrame {
 	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, addProjeto, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
 		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
-		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch;
+		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch, plainText;
 	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif;
 	private JRadioButtonMenuItem dark, jce, defaultT, defaultAlt, eclipse, idea, darkii, idle, vs;
 	private JRadioButtonMenuItem gerarEstrutura;
@@ -234,6 +234,7 @@ public class JCEditor extends JFrame {
 		configRadioMenus(pascal, "Pascal", new LinguagemListener("Pascal", SyntaxConstants.SYNTAX_STYLE_DELPHI), bg2, linguagemMenu);
 		configRadioMenus(perl, "Perl", new LinguagemListener("Perl", SyntaxConstants.SYNTAX_STYLE_PERL), bg2, linguagemMenu);
 		configRadioMenus(php, "PHP", new LinguagemListener("PHP", SyntaxConstants.SYNTAX_STYLE_PHP), bg2, linguagemMenu);
+		configRadioMenus(plainText, "Plain text", new LinguagemListener("Texto simples", SyntaxConstants.SYNTAX_STYLE_NONE), bg2, linguagemMenu);
 		configRadioMenus(portugol, "Portugol", new PortugolListener(), bg2, linguagemMenu);
 		configRadioMenus(potigol, "Potigol", new PotigolListener(), bg2, linguagemMenu);
 		configRadioMenus(properties, "Properties", new LinguagemListener("Properties", SyntaxConstants.SYNTAX_STYLE_PROPERTIES_FILE), bg2, linguagemMenu);
@@ -581,6 +582,9 @@ public class JCEditor extends JFrame {
 		for (AreaDeTexto adt : lista) {
 			adt.setBorder(null);
 			adt.barra.setBorder(null);
+			scrollPane.setBorder(null);
+			painelSeparador.setBorder(null);
+			SwingUtilities.updateComponentTreeUI(adt.fileChooser());
 		}
 	}
 
