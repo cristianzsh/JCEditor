@@ -78,14 +78,14 @@ public class JCEditor extends JFrame {
 	private JLabel linguagem;
 	private JToolBar barraS;
 	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, addProjeto, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
-		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol;
+		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch, plainText;
 	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif;
 	private JRadioButtonMenuItem dark, jce, defaultT, defaultAlt, eclipse, idea, darkii, idle, vs;
 	private JRadioButtonMenuItem gerarEstrutura;
 	private JMenuBar barraDeMenu;
-	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema;
+	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema, projeto;
 	private InputStream in;
 	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir;
 	private Image icone;
@@ -123,6 +123,7 @@ public class JCEditor extends JFrame {
 		/* Cria objetos de menu */
 		menu = new JMenu("Arquivo");
 		editar = new JMenu("Editar");
+		projeto = new JMenu("Projeto");
 		formatar = new JMenu("Formatar");
 		linguagemMenu = new JMenu("Linguagem");
 		preferencias = new JMenu("Preferências");
@@ -132,6 +133,7 @@ public class JCEditor extends JFrame {
 
 		menu.setMnemonic('A');
 		editar.setMnemonic('E');
+		projeto.setMnemonic('R');
 		sobre.setMnemonic('S');
 		formatar.setMnemonic('F');
 		preferencias.setMnemonic('P');
@@ -161,7 +163,6 @@ public class JCEditor extends JFrame {
 		(menu ao qual o JMenuItem pertence) */
 		configMenu(novoArq, "Novo", "imagens/novo.png", new NovoListener(), KeyEvent.VK_N, ActionEvent.CTRL_MASK, menu);
 		configMenu(abrirArq, "Abrir", "imagens/abrir.png", new AbrirListener(), KeyEvent.VK_O, ActionEvent.CTRL_MASK, menu);
-		configMenu(addProjeto, "Adicionar projeto", "imagens/addProjeto.png", new AddProjetoListener(), KeyEvent.VK_O, Event.CTRL_MASK | Event.SHIFT_MASK, menu);
 		configMenu(salvarArq, "Salvar", "imagens/salvar.png", new SalvarListener(), KeyEvent.VK_S, ActionEvent.CTRL_MASK, menu);
 		configMenu(salvarArqComo, "Salvar como", "imagens/salvarComo.png", new SalvarComoListener(), KeyEvent.VK_S, Event.CTRL_MASK | Event.SHIFT_MASK, menu);
 		configMenu(imprimir, "Imprimir", "imagens/imprimir.png", new ImprimirPotigolListener(), KeyEvent.VK_P, ActionEvent.CTRL_MASK, menu);
@@ -179,6 +180,9 @@ public class JCEditor extends JFrame {
 		configMenu(fontePadrao, "Normal", "imagens/fontePadrao.png", new FontePadraoListener(), KeyEvent.VK_P, Event.CTRL_MASK | Event.SHIFT_MASK, formatar);
 		configMenu(aumentarFonte, "Aumentar", "imagens/aumentarFonte.png", new AumentarFonteListener(), KeyEvent.VK_EQUALS, ActionEvent.CTRL_MASK, formatar);
 		configMenu(diminuirFonte, "Diminuir", "imagens/diminuirFonte.png", new DiminuirFonteListener(), KeyEvent.VK_MINUS, ActionEvent.CTRL_MASK, formatar);
+		configMenu(addProjeto, "Adicionar", "imagens/addProjeto.png", new AddProjetoListener(), KeyEvent.VK_O, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
+		configMenu(delProjeto, "Remover", "imagens/remover.png", new RemoverProjetoListener(), KeyEvent.VK_D, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
+		configMenu(props, "Propriedades", "imagens/propriedades.png", new PropriedadesProjetoListener(), KeyEvent.VK_A, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
 
 		/* Código de configuração dos menus de Look And Feel
 		Sua estrutura é semelhante a do método "configMenu" exceto por utilizar um ButtonGroup(para que
@@ -349,18 +353,19 @@ public class JCEditor extends JFrame {
 		/* Adiciona os menus na barra principal */
 		barraDeMenu.add(menu);
 		barraDeMenu.add(editar);
+		barraDeMenu.add(projeto);
 		barraDeMenu.add(formatar);
 		barraDeMenu.add(linguagemMenu);
 		barraDeMenu.add(preferencias);
 		barraDeMenu.add(sobre);
 
 		adp = new ArvoreDeProjetos();
-		adp.arvore.addMouseListener(new MouseAdapter() {
+		adp.getArvore().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent ev) {
-				TreePath tp = adp.arvore.getPathForLocation(ev.getX(), ev.getY());
+				TreePath tp = adp.getArvore().getPathForLocation(ev.getX(), ev.getY());
 				
-				if (tp != null && !adp.arq.isDirectory() && ev.getClickCount() == 2) {
-					adicionarAba(adp.arq);
+				if (tp != null && !adp.getArq().isDirectory() && ev.getClickCount() == 2) {
+					adicionarAba(adp.getArq());
 					lista.get(arquivos.getSelectedIndex()).getRSyntax().requestFocus();
 
 					if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
@@ -910,6 +915,18 @@ public class JCEditor extends JFrame {
 	class AddProjetoListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			abrirProjeto();
+		}
+	}
+
+	class RemoverProjetoListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			adp.removerProjeto();
+		}
+	}
+
+	class PropriedadesProjetoListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			adp.propriedadesProjeto();
 		}
 	}
 
