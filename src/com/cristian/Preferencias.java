@@ -176,7 +176,6 @@ public class Preferencias {
 					while ((bytes = is.read(buffer)) > 0) {
 						os.write(buffer, 0, bytes);
 					}
-					JOptionPane.showMessageDialog(null, "Potigol configurado com sucesso!");
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				} finally {
@@ -193,6 +192,7 @@ public class Preferencias {
 					}
 				}
 			}
+			JOptionPane.showMessageDialog(null, "Potigol configurado com sucesso!");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		} finally {
