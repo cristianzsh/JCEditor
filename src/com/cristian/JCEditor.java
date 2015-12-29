@@ -64,7 +64,7 @@ import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 /**
 * Classe que cria a interface principal e manipula parte dos eventos
 * @author   Cristian Henrique (cristianmsbr@gmail.com)
-* @version  1.5
+* @version  1.7
 * @since    Desde a primeira versão
 */
 
