@@ -15,13 +15,14 @@ O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integ
 
 ## (Opcional) Criando um atalho
   - Crie um documento vazio e digite:
-  ````[Desktop Entry]
+  
+````[Desktop Entry]
   Name=JCEditor
   Type=Application
   Exec=java -jar /caminho_para_a_pasta_do_JCE/JCEditor.jar
   Icon=/caminho_para_o_ícone/jceIcone.png````
   
-(Informar um ícone é opcional)
+  (Informar um ícone é opcional)
   - Salve o arquivo criado com o nome desejado e a extensão ````.desktop````
 
 ## Configuração no Windows
