@@ -1,12 +1,31 @@
 # JCEditor
 Editor de texto criado em Java
 
-O JCE possui suporte a diversas linguagens e integração com a linguagem [Potigol](http://potigol.github.io/), desenvolvida no IFRN.
+O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integração com a linguagem [Potigol](http://potigol.github.io/), desenvolvida no IFRN.
 
-![JCEditor](http://i.imgur.com/gsFAkCo.png)
+## Configuração no Linux
+  ![JCEditor](http://i.imgur.com/DPjkN5K.png)
+  - Baixe os arquivos JCEditor.jar e configPotigol.zip e os coloque no mesmo diretório;
+  - Entre no Terminal e digite: ````java -jar JCEditor.jar````;
 
-![JCEditor](http://i.imgur.com/HTQnZB8.png)
+   Se tudo ocorrer normalmente, você verá uma mensagem informando que o Potigol está configurado.
+  - Ainda em um Terminal, entre na pasta ConfigJCE/.potigol(localizada em sua pasta de usuário) e digite:
+  
+  ````chmod 777 ExecPotigol.sh````
 
-Observações: a primeira execução do programa no Linux deve ser feita a partir do Terminal (comando "java -jar JCEditor.jar"), em seguida, você deverá dar permissões ao arquivo .sh responsável por executar o código em Potigol:
-entre na pasta ConfigJCE/.potigol (localizada em sua pasta de usuário) e digite "chmod 777 ExecPotigol.sh". Vale notar que
-o arquivo configPotigol.zip deve estar no mesmo diretório do executável. No Windows não será necessário utilizar esse processo com o CMD, bastando apenas executar diretamente.
+## (Opcional) Criando um atalho
+  - Crie um documento vazio e digite:
+  
+````[Desktop Entry]
+  Name=JCEditor
+  Type=Application
+  Exec=java -jar /caminho_para_a_pasta_do_JCE/JCEditor.jar
+  Icon=/caminho_para_o_ícone/jceIcone.png````
+  
+  (Informar um ícone é opcional)
+  - Salve o arquivo criado com o nome desejado e a extensão ````.desktop````
+
+## Configuração no Windows
+  ![JCEditor](http://i.imgur.com/NkCHcGC.png)
+  - Baixe os arquivos JCEditor.jar e configPotigol.zip e os coloque no mesmo diretório;
+  - Dê um duplo clique e, se tudo ocorrer normalmente, você verá uma mensagem informando que o Potigol foi configurado.
