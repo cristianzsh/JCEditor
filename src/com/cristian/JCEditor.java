@@ -359,6 +359,8 @@ public class JCEditor extends JFrame {
 		barraDeMenu.add(preferencias);
 		barraDeMenu.add(sobre);
 
+		/* Abre o arquivo selecionado na JTree quando o usuário clicar duas vezes sobre ele,
+		exceto para pastas. */
 		adp = new ArvoreDeProjetos();
 		adp.getArvore().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent ev) {
@@ -371,6 +373,15 @@ public class JCEditor extends JFrame {
 					if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
 						bExecutarPotigol.setEnabled(true);
 					}
+				}
+			}
+		});
+
+		/* Atalho para fechar a aba. */
+		arquivos.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent ev) {
+				if (ev.getButton() == MouseEvent.BUTTON2) {
+					fecharAba(arquivos.getSelectedIndex());
 				}
 			}
 		});
@@ -464,7 +475,12 @@ public class JCEditor extends JFrame {
 
 		mPrincipal.add(menu);
 	}
-
+	/**
+	* Este método é chamado quando o usuário clica no botão fechar ou no menu sair. Percorre todos os
+	* arquivos abertos em busca de modificações, em caso positivo, pergunta se o usuário deseja salvar
+	* o arquivo. Também chama o método que salva o Look and Feel, tema, fonte e tamanho da fonte e o
+	* método que salva uma lista com os arquivos abertos.
+	*/
 	private void salvarAoSair() {
 		for (int i = 0; i < lista.size(); i++) {
 			if (lista.get(i).arquivoModificado()) {
@@ -545,6 +561,12 @@ public class JCEditor extends JFrame {
 		});
 	}
 
+	/**
+	* Adiciona uma aba ao JTabbedPane, também adiciona
+	* os eventos que possibilitam a função de arrastar e soltar.
+	* Além de configurar a fonte e definir o título.
+	* @param arquivo File - arquivo que será adicionado
+	*/
 	public void adicionarAba(File arquivo) {
 		for (int i = 0; i < lista.size(); i++) {
 			if (arquivos.getTitleAt(i).equals(arquivo.getName())
@@ -627,7 +649,10 @@ public class JCEditor extends JFrame {
 		}
 		fonteAtual.setText(fonteEscolhida + " / Font.PLAIN / " + tamanhoFonte + "  |   ");
 	}
-
+	/**
+	* Cria um JFileChooser para seleção de pasta e em seguida chama o método adicionarFilhos, da classe
+	* ArvoreDeProjetos, que adiciona um nó a JTree contendo o projeto selecionado.
+	*/
 	private void abrirProjeto() {
 		JFileChooser jfc = new JFileChooser();
 		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -635,6 +660,10 @@ public class JCEditor extends JFrame {
 		adp.adicionarFilhos(new File(jfc.getSelectedFile().toString()));
 	}
 
+	/**
+	* Utilizado na classe Preferencias, apenas remove o primeiro índice do JTabbedPanel	
+	* em caso de existirem arquivos a serem abertos.
+	*/
 	public void configAoAbrir() {
 		arquivos.remove(0);
 		lista.remove(0);
@@ -642,16 +671,56 @@ public class JCEditor extends JFrame {
 		updateLanguage(lista.get(arquivos.getSelectedIndex()).linguagem);
 	}
 
+	/**
+	* Retorna uma lista contendo todos os arquivos abertos.
+	*/
 	public ArrayList<String> getArquivosAbertos() {
 		return this.arquivosAbertos;
 	}
 
+	/**
+	* Configura a fonte.
+	* @param f String - nova fonte
+	*/
 	public void setFonteEscolhida(String f) {
 		this.fonteEscolhida = f;
 	}
 
+	/**
+	* Configura o tamanho da fonte.
+	* @param tam int - novo tamanho da fonte
+	*/
 	public void setTamanhoFonte(int tam) {
 		this.tamanhoFonte = tam;
+	}
+
+	/**
+	* Método que fecha a aba informada. Antes de fechar a aba,
+	* verifica se o arquivo foi modificado, em caso positivo,
+	* pergunta se o usuário deseja salvar o mesmo.
+	* @param indice int - índice da aba que será fechada
+	*/
+	private void fecharAba(int indice) {
+		if (indice != -1 && lista.size() != 1) {
+			if (lista.get(indice).arquivoModificado()) {
+				int r = JOptionPane.showConfirmDialog(null, "Você deseja salvar o arquivo?",
+					"Fechar", JOptionPane.YES_NO_OPTION);
+				if (r == JOptionPane.OK_OPTION) {
+					lista.get(indice).texto = lista.get(indice).getRSyntax().getText();
+					if (lista.get(indice).arquivo == null) {
+						lista.get(indice).salvarComo();
+					} else {
+						lista.get(indice).salvar(lista.get(indice).getRSyntax().getText());
+					}
+				}
+			}
+
+			if (lista.get(indice).arquivo != null && !arquivosAbertos.isEmpty()) {
+				arquivosAbertos.remove(lista.get(indice).arquivo.toString());
+			}
+			lista.remove(indice);
+			arquivos.remove(indice);
+		}
 	}
 
 	/**
@@ -707,9 +776,7 @@ public class JCEditor extends JFrame {
 
 	/**
 	* Classe interna que implementa ActionListener
-	* Esta classe é responsável por abrir o arquivo selecionado pelo usuário em uma nova aba,
-	* também adiciona os eventos que possibilitam a função de arrastar e soltar.
-	* Além de configurar a fonte e definir o título.
+	* esta chama o método que adiciona uma aba ao JTabbedPane.
 	*/
 	class AbrirListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
@@ -912,18 +979,28 @@ public class JCEditor extends JFrame {
 		}
 	}
 
+	/**
+	* Evento que chama o método abrirProjeto.
+	*/
 	class AddProjetoListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			abrirProjeto();
 		}
 	}
 
+	/**
+	* Chama o método que remove o projeto selecionado na JTree.
+	*/
 	class RemoverProjetoListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			adp.removerProjeto();
 		}
 	}
 
+	/**
+	* Chama o método que mostra informações básicas sobre o projeto
+	* (nome, quantidade total de arquivos e tamanho).
+	*/
 	class PropriedadesProjetoListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			adp.propriedadesProjeto();
@@ -1075,33 +1152,11 @@ public class JCEditor extends JFrame {
 	}
 
 	/**
-	* Classe responsável pela ação de fechar a aba. Se torna mais simples que o evento
-	* de fechar pelo botão "X", pois o usuário só poderá fechar a aba se o índice selecionado
-	* for ela mesma, logo, só foi verificado o índice da aba atual (getSelectedIndex()).
+	* Chama o método que fecha a aba atual.
 	*/
 	class FecharAbaListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			int indice = arquivos.getSelectedIndex();
-			if (indice != -1 && lista.size() != 1) {
-				if (lista.get(indice).arquivoModificado()) {
-					int r = JOptionPane.showConfirmDialog(null, "Você deseja salvar o arquivo?",
-						"Fechar", JOptionPane.YES_NO_OPTION);
-					if (r == JOptionPane.OK_OPTION) {
-						lista.get(indice).texto = lista.get(indice).getRSyntax().getText();
-						if (lista.get(indice).arquivo == null) {
-							lista.get(indice).salvarComo();
-						} else {
-							lista.get(indice).salvar(lista.get(indice).getRSyntax().getText());
-						}
-					}
-				}
-
-				if (lista.get(indice).arquivo != null && !arquivosAbertos.isEmpty()) {
-					arquivosAbertos.remove(lista.get(indice).arquivo.toString());
-				}
-				lista.remove(indice);
-				arquivos.remove(indice);
-			}
+			fecharAba(arquivos.getSelectedIndex());
 		}
 	}
 
