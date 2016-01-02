@@ -18,7 +18,7 @@ import java.util.zip.ZipFile;
 /**
 * Classe responsável por abrir o programa com as devidas configurações
 * @author   Cristian Henrique (cristianmsbr@gmail.com)
-* @version  1.5
+* @version  1.7
 * @since    Terceira atualização
 */
 
@@ -59,6 +59,9 @@ public class Preferencias {
 		editor.setVisible(true);
 	}
 
+	/**
+	* Abre os arquivos da última execução através do caminho que está salvo no arquivo "arquivos.list".
+	*/
 	public void abrirArquivos() {
 		try {
 			FileReader fr = new FileReader(new File(System.getProperty("user.home") + "/ConfigJCE/arquivos.list"));
@@ -131,6 +134,9 @@ public class Preferencias {
 		} catch (Exception ex) {  }
 	}
 
+	/**
+	* Salva o caminho dos arquivos (contidos na ArrayList), para serem abertos novamente na próxima execução.
+	*/
 	public void salvarArquivosAbertos(ArrayList<String> lista) {
 		try {
 			FileWriter fw = new FileWriter(new File(System.getProperty("user.home") + "/ConfigJCE/arquivos.list"));
