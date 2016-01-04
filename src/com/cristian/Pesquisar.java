@@ -54,6 +54,7 @@ public class Pesquisar extends JDialog {
 		botoes[4] = new JButton("Voltar");
 
 		fieldPesquisar.addActionListener(new PesquisarListener());
+		fieldSubstituir.addActionListener(new FieldSubstituirListener());
 		Box boxLeste = new Box(BoxLayout.Y_AXIS);
 
 		for (int i = 0; i < botoes.length; i++) {
@@ -175,6 +176,17 @@ public class Pesquisar extends JDialog {
 			String textoPesquisar = fieldPesquisar.getText();
 			String textoSubstituir = fieldSubstituir.getText();
 			areaDeTexto.setText(areaDeTexto.getText().replaceAll(textoPesquisar, textoSubstituir));
+		}
+	}
+
+	class FieldSubstituirListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			pesquisar();
+			if (fieldSubstituir.getText().equals("") || fieldPesquisar.getText().equals("")) {
+				return;
+			}
+
+			areaDeTexto.replaceSelection(fieldSubstituir.getText());
 		}
 	}
 }
