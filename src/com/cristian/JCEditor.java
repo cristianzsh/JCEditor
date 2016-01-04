@@ -64,7 +64,7 @@ import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 /**
 * Classe que cria a interface principal e manipula parte dos eventos
 * @author   Cristian Henrique (cristianmsbr@gmail.com)
-* @version  1.7
+* @version  1.8
 * @since    Desde a primeira versão
 */
 
@@ -99,6 +99,7 @@ public class JCEditor extends JFrame {
 	private JScrollPane scrollPane;
 	private JSplitPane painelSeparador;
 	private ArvoreDeProjetos adp;
+	private String sistemaOperacional = System.getProperty("os.name");
 
 	/**
 	* O construtor define um título e chama o método de construção da interface gráfica.
@@ -285,7 +286,7 @@ public class JCEditor extends JFrame {
 		configBtns(bImprimir, "Imprimir", "imagens/25x25/imprimir25.png", new ImprimirPotigolListener());
 
 		/* Define o tamanho do ícone com base no SO */
-		if (System.getProperty("os.name").equals("Linux")) {
+		if (sistemaOperacional.equals("Linux") || sistemaOperacional.equals("Mac OS X")) {
 			icone = new ImageIcon(getClass().getResource("imagens/jceIcone.png")).getImage();
 		} else {
 			icone = new ImageIcon(getClass().getResource("imagens/jceIcone32.png")).getImage();
@@ -1118,24 +1119,23 @@ public class JCEditor extends JFrame {
 			}
 
 			if (lista.get(arquivos.getSelectedIndex()).isPotigol && lista.get(arquivos.getSelectedIndex()).arquivo != null) {
-				Runtime rt = Runtime.getRuntime();
-				Process p;
 				String cmd;
 				String usuario = System.getProperty("user.home") + "/ConfigJCE/.potigol";
 
-				if (System.getProperty("os.name").equals("Linux")) {
-					try {
+				try {
+					if (sistemaOperacional.equals("Linux")) {
 						cmd = usuario + "/ExecPotigol.sh " + lista.get(arquivos.getSelectedIndex()).arquivo.toString().replace(" ", "?")
 							+ " " + lista.get(arquivos.getSelectedIndex()).arquivo.getName();
-						p = rt.exec(cmd);
-					} catch (Exception ex) { ex.printStackTrace(); }
-				} else {
-					try {
+						Runtime.getRuntime().exec(cmd);
+					} else if (sistemaOperacional.equals("Mac OS X")) {
+						cmd = "osascript " + usuario + "/ExecPotigol.scpt " + lista.get(arquivos.getSelectedIndex()).arquivo.toString();
+						Runtime.getRuntime().exec(cmd);
+					} else {
 						cmd = "cmd.exe /c start " + usuario + "/ExecPotigol.bat " +
 							"\"" + lista.get(arquivos.getSelectedIndex()).arquivo.toString() + "\" " + lista.get(arquivos.getSelectedIndex()).arquivo.getName();
-						p = rt.exec(cmd);
-					} catch (Exception ex) { ex.printStackTrace(); }
-				}
+						Runtime.getRuntime().exec(cmd);
+					}
+				} catch (Exception ex) { ex.printStackTrace(); }
 			}
 		}
 	}
