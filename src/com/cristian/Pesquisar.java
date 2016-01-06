@@ -16,7 +16,7 @@ import java.awt.event.ActionEvent;
 /**
 * Classe que realiza a pesquisa no JTextArea atual
 * @author    Cristian Henrique (cristianmsbr@gmail.com)
-* @version   1.6
+* @version   1.8
 * @since     Segunda atualização
 */
 
@@ -39,7 +39,7 @@ public class Pesquisar extends JDialog {
 	}
 
 	/**
-	* Constroí a GUI e adiciona eventos aos botões.
+	* Constrói a GUI e adiciona eventos aos botões.
 	*/
 	public void construirGUI() {
 		pesquisarLabel = new JLabel("Pesquisar");
@@ -179,6 +179,9 @@ public class Pesquisar extends JDialog {
 		}
 	}
 
+	/**
+	* Substitui a String selecionada quando o usuário pressionar enter.
+	*/
 	class FieldSubstituirListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			pesquisar();
