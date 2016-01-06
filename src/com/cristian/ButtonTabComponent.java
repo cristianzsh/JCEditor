@@ -123,8 +123,8 @@ public class ButtonTabComponent extends JPanel {
                     int r = JOptionPane.showConfirmDialog(null, "Você deseja salvar o arquivo?",
                         "Fechar", JOptionPane.YES_NO_OPTION);
                     if (r == JOptionPane.OK_OPTION) {
-                        if (adts.get(indiceDoBotaoFechar).arquivo == null) {
-                            adts.get(indiceDoBotaoFechar).texto = adts.get(indiceDoBotaoFechar).getRSyntax().getText();
+                        if (adts.get(indiceDoBotaoFechar).getArquivo() == null) {
+                            adts.get(indiceDoBotaoFechar).setTexto(adts.get(indiceDoBotaoFechar).getRSyntax().getText());
                             adts.get(indiceDoBotaoFechar).salvarComo();
                         } else {
                             adts.get(indiceDoBotaoFechar).salvar(adts.get(indiceDoBotaoFechar).getRSyntax().getText());
@@ -132,8 +132,8 @@ public class ButtonTabComponent extends JPanel {
                     }
                 }
 
-                if (adts.get(indiceDoBotaoFechar).arquivo != null && !arquivosAbertos.isEmpty()) {
-                    arquivosAbertos.remove(adts.get(indiceDoBotaoFechar).arquivo.toString());
+                if (adts.get(indiceDoBotaoFechar).getArquivo() != null && !arquivosAbertos.isEmpty()) {
+                    arquivosAbertos.remove(adts.get(indiceDoBotaoFechar).getArquivo().toString());
                 }
                 
                 adts.remove(indiceDoBotaoFechar);

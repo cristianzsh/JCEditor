@@ -304,7 +304,7 @@ public class JCEditor extends JFrame {
 		panel.setBackground(new Color(91, 91, 91));
 		panel2.setBackground(new Color(91, 91, 91));
 
-		linguagem = new JLabel(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
+		linguagem = new JLabel(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
 		linguagem.setFont(new Font("Roboto Light", Font.BOLD, 12));
 		linguagem.setForeground(new Color(234, 234, 235));
 
@@ -333,10 +333,10 @@ public class JCEditor extends JFrame {
 				int index = source.getSelectedIndex();
 				if (index == arquivos.getSelectedIndex()) {
 					definirTitulo();
-					updateLanguage(lista.get(arquivos.getSelectedIndex()).linguagem);
+					updateLanguage(lista.get(arquivos.getSelectedIndex()).getLinguagem());
 				}
 
-				if (lista.get(arquivos.getSelectedIndex()).isPotigol && lista.get(arquivos.getSelectedIndex()).arquivo != null) {
+				if (lista.get(arquivos.getSelectedIndex()).isPotigol() && lista.get(arquivos.getSelectedIndex()).getArquivo() != null) {
 					bExecutarPotigol.setEnabled(true);
 				} else {
 					bExecutarPotigol.setEnabled(false);
@@ -371,7 +371,7 @@ public class JCEditor extends JFrame {
 					adicionarAba(adp.getArq());
 					lista.get(arquivos.getSelectedIndex()).getRSyntax().requestFocus();
 
-					if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
+					if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 						bExecutarPotigol.setEnabled(true);
 					}
 				}
@@ -412,12 +412,12 @@ public class JCEditor extends JFrame {
 	private void definirTitulo() {
 		titulo = "Sem nome - JCEditor";
 
-		if (lista.get(arquivos.getSelectedIndex()).arquivo != null && lista.get(arquivos.getSelectedIndex()).arquivoModificado()) {
-			titulo = lista.get(arquivos.getSelectedIndex()).arquivo.toString() + " •- JCEditor";
-			arquivos.setTitleAt(arquivos.getSelectedIndex(), "• " + lista.get(arquivos.getSelectedIndex()).arquivo.getName());
-		} else if (lista.get(arquivos.getSelectedIndex()).arquivo != null) {
-			titulo = lista.get(arquivos.getSelectedIndex()).arquivo.toString() + " - JCEditor";
-			arquivos.setTitleAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.getName());
+		if (lista.get(arquivos.getSelectedIndex()).getArquivo() != null && lista.get(arquivos.getSelectedIndex()).arquivoModificado()) {
+			titulo = lista.get(arquivos.getSelectedIndex()).getArquivo().toString() + " •- JCEditor";
+			arquivos.setTitleAt(arquivos.getSelectedIndex(), "• " + lista.get(arquivos.getSelectedIndex()).getArquivo().getName());
+		} else if (lista.get(arquivos.getSelectedIndex()).getArquivo() != null) {
+			titulo = lista.get(arquivos.getSelectedIndex()).getArquivo().toString() + " - JCEditor";
+			arquivos.setTitleAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).getArquivo().getName());
 		} else if (lista.get(arquivos.getSelectedIndex()).arquivoModificado()) {
 			titulo = "Sem nome •- JCEditor";
 			arquivos.setTitleAt(arquivos.getSelectedIndex(), "• Sem nome");
@@ -486,16 +486,16 @@ public class JCEditor extends JFrame {
 		for (int i = 0; i < lista.size(); i++) {
 			if (lista.get(i).arquivoModificado()) {
 				String nomeArquivo = null;
-				if (lista.get(i).arquivo == null) {
+				if (lista.get(i).getArquivo() == null) {
 					nomeArquivo = "Sem nome";
 				} else {
-					nomeArquivo = lista.get(i).arquivo.getName();
+					nomeArquivo = lista.get(i).getArquivo().getName();
 				}
 				int r = JOptionPane.showConfirmDialog(JCEditor.this, "Você deseja salvar o arquivo \"" + nomeArquivo + "\"?",
 					"Sair", JOptionPane.YES_NO_OPTION);
-				lista.get(i).texto = lista.get(i).getRSyntax().getText();
+				lista.get(i).setTexto(lista.get(i).getRSyntax().getText());
 				if (r == JOptionPane.OK_OPTION) {
-					if (lista.get(i).arquivo == null) {
+					if (lista.get(i).getArquivo() == null) {
 						lista.get(i).salvarComo();
 					} else {
 						lista.get(i).salvar(lista.get(i).getRSyntax().getText());
@@ -571,7 +571,7 @@ public class JCEditor extends JFrame {
 	public void adicionarAba(File arquivo) {
 		for (int i = 0; i < lista.size(); i++) {
 			if (arquivos.getTitleAt(i).equals(arquivo.getName())
-				&& lista.get(i).arquivo.toString().equals(arquivo.toString())) {
+				&& lista.get(i).getArquivo().toString().equals(arquivo.toString())) {
 				arquivos.setSelectedIndex(i);
 				return;
 			}
@@ -588,14 +588,14 @@ public class JCEditor extends JFrame {
 		lista.get(arquivos.getSelectedIndex()).abrir(arquivo);
 		lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
 
-		linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
+		linguagem.setText(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
 		definirTitulo();
 		carregarTema(sTema);
 		updateFonte();
 		arrastarESoltar();
 		arquivosAbertos.add(arquivo.toString());
 
-		if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
+		if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 			bExecutarPotigol.setEnabled(true);
 		}
 	}
@@ -609,7 +609,7 @@ public class JCEditor extends JFrame {
 		barraDeMenu.setBorder(null);
 		for (AreaDeTexto adt : lista) {
 			adt.setBorder(null);
-			adt.barra.setBorder(null);
+			adt.getBarra().setBorder(null);
 			scrollPane.setBorder(null);
 			painelSeparador.setBorder(null);
 			SwingUtilities.updateComponentTreeUI(adt.fileChooser());
@@ -636,8 +636,8 @@ public class JCEditor extends JFrame {
 	* @param nome String - nome da linguagem
 	*/
 	private void updateLanguage(String nome) {
-		lista.get(arquivos.getSelectedIndex()).linguagem = nome;
-		linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
+		lista.get(arquivos.getSelectedIndex()).setLinguagem(nome);
+		linguagem.setText(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
 	}
 
 	/**
@@ -669,7 +669,7 @@ public class JCEditor extends JFrame {
 		arquivos.remove(0);
 		lista.remove(0);
 		definirTitulo();
-		updateLanguage(lista.get(arquivos.getSelectedIndex()).linguagem);
+		updateLanguage(lista.get(arquivos.getSelectedIndex()).getLinguagem());
 	}
 
 	/**
@@ -707,8 +707,8 @@ public class JCEditor extends JFrame {
 				int r = JOptionPane.showConfirmDialog(null, "Você deseja salvar o arquivo?",
 					"Fechar", JOptionPane.YES_NO_OPTION);
 				if (r == JOptionPane.OK_OPTION) {
-					lista.get(indice).texto = lista.get(indice).getRSyntax().getText();
-					if (lista.get(indice).arquivo == null) {
+					lista.get(indice).setTexto(lista.get(indice).getRSyntax().getText());
+					if (lista.get(indice).getArquivo() == null) {
 						lista.get(indice).salvarComo();
 					} else {
 						lista.get(indice).salvar(lista.get(indice).getRSyntax().getText());
@@ -716,8 +716,8 @@ public class JCEditor extends JFrame {
 				}
 			}
 
-			if (lista.get(indice).arquivo != null && !arquivosAbertos.isEmpty()) {
-				arquivosAbertos.remove(lista.get(indice).arquivo.toString());
+			if (lista.get(indice).getArquivo() != null && !arquivosAbertos.isEmpty()) {
+				arquivosAbertos.remove(lista.get(indice).getArquivo().toString());
 			}
 			lista.remove(indice);
 			arquivos.remove(indice);
@@ -797,22 +797,22 @@ public class JCEditor extends JFrame {
 	*/
 	class SalvarListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			lista.get(arquivos.getSelectedIndex()).texto = lista.get(arquivos.getSelectedIndex()).getRSyntax().getText();
-			if (lista.get(arquivos.getSelectedIndex()).arquivo == null) {
+			lista.get(arquivos.getSelectedIndex()).setTexto(lista.get(arquivos.getSelectedIndex()).getRSyntax().getText());
+			if (lista.get(arquivos.getSelectedIndex()).getArquivo() == null) {
 				lista.get(arquivos.getSelectedIndex()).salvarComo();
-				arquivosAbertos.add(lista.get(arquivos.getSelectedIndex()).arquivo.toString());
+				arquivosAbertos.add(lista.get(arquivos.getSelectedIndex()).getArquivo().toString());
 			} else {
 				if (lista.get(arquivos.getSelectedIndex()).arquivoModificado()) {
 					lista.get(arquivos.getSelectedIndex()).salvar(lista.get(arquivos.getSelectedIndex()).getRSyntax().getText());
 				}
 			}
 
-			arquivos.setTitleAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.getName());
-			arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).arquivo.toString());
-			linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
+			arquivos.setTitleAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).getArquivo().getName());
+			arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), lista.get(arquivos.getSelectedIndex()).getArquivo().toString());
+			linguagem.setText(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
 			definirTitulo();
 
-			if (lista.get(arquivos.getSelectedIndex()).isPotigol) {
+			if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 				bExecutarPotigol.setEnabled(true);
 			}
 		}
@@ -823,19 +823,19 @@ public class JCEditor extends JFrame {
 	*/
 	class SalvarComoListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			lista.get(arquivos.getSelectedIndex()).texto = lista.get(arquivos.getSelectedIndex()).getRSyntax().getText();
-			if (lista.get(arquivos.getSelectedIndex()).arquivo == null) {
+			lista.get(arquivos.getSelectedIndex()).setTexto(lista.get(arquivos.getSelectedIndex()).getRSyntax().getText());
+			if (lista.get(arquivos.getSelectedIndex()).getArquivo() == null) {
 				lista.get(arquivos.getSelectedIndex()).salvarComo();
-				lista.get(arquivos.getSelectedIndex()).arquivo = null;
+				lista.get(arquivos.getSelectedIndex()).setArquivo(null);
 				lista.get(arquivos.getSelectedIndex()).arquivoModificado(true);
 				definirTitulo();
 			} else {
-				auxArquivo = lista.get(arquivos.getSelectedIndex()).arquivo.toString();
-				auxLinguagem = lista.get(arquivos.getSelectedIndex()).linguagem;
+				auxArquivo = lista.get(arquivos.getSelectedIndex()).getArquivo().toString();
+				auxLinguagem = lista.get(arquivos.getSelectedIndex()).getLinguagem();
 
 				File arquivoAnterior = new File(auxArquivo);
 				lista.get(arquivos.getSelectedIndex()).salvarComo();
-				lista.get(arquivos.getSelectedIndex()).arquivo = arquivoAnterior;
+				lista.get(arquivos.getSelectedIndex()).setArquivo(arquivoAnterior);
 				updateLanguage(auxLinguagem);
 				lista.get(arquivos.getSelectedIndex()).extensao(arquivoAnterior);
 			}
@@ -861,13 +861,9 @@ public class JCEditor extends JFrame {
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
 			carregarTema(sTema);
 
-			if (lista.get(arquivos.getSelectedIndex()).nomeIgual = true) {
-				lista.get(arquivos.getSelectedIndex()).linguagem = "Texto simples";
-			}
-
 			adicionarDocumentListener();
 			arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), "Sem nome");
-			linguagem.setText(lista.get(arquivos.getSelectedIndex()).linguagem + "   ");
+			linguagem.setText(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
 			definirTitulo();
 			bg2.clearSelection();
 			arrastarESoltar();
@@ -1059,7 +1055,7 @@ public class JCEditor extends JFrame {
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setSyntaxEditingStyle(sintaxe);
 			updateLanguage(nomeLinguagem);
 
-			if (lista.get(arquivos.getSelectedIndex()).arquivo == null && gerarEstrutura.isSelected()) {
+			if (lista.get(arquivos.getSelectedIndex()).getArquivo() == null && gerarEstrutura.isSelected()) {
 				new GerarEstrutura(lista.get(arquivos.getSelectedIndex()).getRSyntax(), nomeLinguagem);
 			}
 
@@ -1077,7 +1073,7 @@ public class JCEditor extends JFrame {
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setSyntaxEditingStyle("text/portugol");
 			updateLanguage("Portugol");
 
-			if (lista.get(arquivos.getSelectedIndex()).arquivo == null && gerarEstrutura.isSelected()) {
+			if (lista.get(arquivos.getSelectedIndex()).getArquivo() == null && gerarEstrutura.isSelected()) {
 				new GerarEstrutura(lista.get(arquivos.getSelectedIndex()).getRSyntax(), "Portugol");
 			}
 
@@ -1087,7 +1083,7 @@ public class JCEditor extends JFrame {
 
 	/**
 	* Classe necessária para adicionar suporte à linguagem Potigol. Verifica se o arquivo existe
-	* e se o índice é um código em Potigol (através da variável "isPotigol"), em caso positivo,
+	* e se o índice é um código em Potigol (através da variável "isPotigol()"), em caso positivo,
 	* libera a execução do código.
 	*/
 	class PotigolListener implements ActionListener {
@@ -1097,7 +1093,7 @@ public class JCEditor extends JFrame {
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setSyntaxEditingStyle("text/potigol");
 			updateLanguage("Potigol");
 
-			if (lista.get(arquivos.getSelectedIndex()).arquivo != null && lista.get(arquivos.getSelectedIndex()).isPotigol) {
+			if (lista.get(arquivos.getSelectedIndex()).getArquivo() != null && lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 				bExecutarPotigol.setEnabled(true);
 			}
 		}
@@ -1118,21 +1114,21 @@ public class JCEditor extends JFrame {
 				definirTitulo();
 			}
 
-			if (lista.get(arquivos.getSelectedIndex()).isPotigol && lista.get(arquivos.getSelectedIndex()).arquivo != null) {
+			if (lista.get(arquivos.getSelectedIndex()).isPotigol() && lista.get(arquivos.getSelectedIndex()).getArquivo() != null) {
 				String cmd;
 				String usuario = System.getProperty("user.home") + "/ConfigJCE/.potigol";
 
 				try {
 					if (sistemaOperacional.equals("Linux")) {
-						cmd = usuario + "/ExecPotigol.sh " + lista.get(arquivos.getSelectedIndex()).arquivo.toString().replace(" ", "?")
-							+ " " + lista.get(arquivos.getSelectedIndex()).arquivo.getName();
+						cmd = usuario + "/ExecPotigol.sh " + lista.get(arquivos.getSelectedIndex()).getArquivo().toString().replace(" ", "?")
+							+ " " + lista.get(arquivos.getSelectedIndex()).getArquivo().getName();
 						Runtime.getRuntime().exec(cmd);
 					} else if (sistemaOperacional.equals("Mac OS X")) {
-						cmd = "osascript " + usuario + "/ExecPotigol.scpt " + lista.get(arquivos.getSelectedIndex()).arquivo.toString();
+						cmd = "osascript " + usuario + "/ExecPotigol.scpt " + lista.get(arquivos.getSelectedIndex()).getArquivo().toString();
 						Runtime.getRuntime().exec(cmd);
 					} else {
 						cmd = "cmd.exe /c start " + usuario + "/ExecPotigol.bat " +
-							"\"" + lista.get(arquivos.getSelectedIndex()).arquivo.toString() + "\" " + lista.get(arquivos.getSelectedIndex()).arquivo.getName();
+							"\"" + lista.get(arquivos.getSelectedIndex()).getArquivo().toString() + "\" " + lista.get(arquivos.getSelectedIndex()).getArquivo().getName();
 						Runtime.getRuntime().exec(cmd);
 					}
 				} catch (Exception ex) { ex.printStackTrace(); }

@@ -33,7 +33,7 @@ import org.fife.rsta.ac.java.JavaLanguageSupport;
 * Possui métodos para detecção da linguagem de programação,
 * além de métodos para salvar e abrir arquivos.
 * @author    Cristian Henrique (cristianmsbr@gmail.com)
-* @version   1.5
+* @version   1.8
 * @since     Segunda atualização
 */
 
@@ -42,14 +42,13 @@ public class AreaDeTexto extends RSyntaxTextArea {
 	private JPanel pnlText = null;
 	private InputStream in;
 	private Map<String, String> extensao = new HashMap<>();
-	JFileChooser jfc;
-	boolean modificado = false;
-	RTextScrollPane barra = null;
-	File arquivo = null;
-	String linguagem = "Texto simples";
-	boolean nomeIgual = false;
-	String texto;
-	boolean isPotigol;
+	private JFileChooser jfc;
+	private boolean modificado = false;
+	private RTextScrollPane barra = null;
+	private File arquivo = null;
+	private String linguagem = "Texto simples";
+	private String texto;
+	private boolean potigol;
 
 	/**
 	* O construtor da classe define uma lista do tipo HashMap, esta lista
@@ -116,6 +115,13 @@ public class AreaDeTexto extends RSyntaxTextArea {
 		}
 
 		this.arquivo = a;
+	}
+
+	/**
+	* Retorna o valor da variável arquivo.
+	*/
+	public File getArquivo() {
+		return this.arquivo;
 	}
 
 	/**
@@ -243,7 +249,7 @@ public class AreaDeTexto extends RSyntaxTextArea {
 				linguagem = ext.toUpperCase();
 
 				if (ext.equalsIgnoreCase("poti")) {
-					isPotigol = true;
+					potigol = true;
 				}
 				verificarNome();
 			}
@@ -310,7 +316,7 @@ public class AreaDeTexto extends RSyntaxTextArea {
 			display.setHighlightCurrentLine(true);
 			display.setAnimateBracketMatching(true);
 			display.setAntiAliasingEnabled(true);
-			display.setFont(new Font("monospaced", Font.BOLD, 12));
+			display.setFont(new Font("Monospaced", Font.BOLD, 12));
 		}
 		return display;
 	}
@@ -342,5 +348,40 @@ public class AreaDeTexto extends RSyntaxTextArea {
 			jfc.setFileView(new JFCFileView());
 		}
 		return jfc;
+	}
+
+	/**
+	* Retorna o valor da barra de rolagem.
+	*/
+	public RTextScrollPane getBarra() {
+		return this.barra;
+	}
+
+	/**
+	* Retorna o valor da variável linguagem.
+	*/
+	public String getLinguagem() {
+		return this.linguagem;
+	}
+
+	/**
+	* Modifica o valor da variável linguagem.
+	*/
+	public void setLinguagem(String linguagem) {
+		this.linguagem = linguagem;
+	}
+
+	/**
+	* Modifica o valor da variável texto.
+	*/
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
+	/**
+	* Retorna o valor da variável potigol.
+	*/
+	public boolean isPotigol() {
+		return this.potigol;
 	}
 }
