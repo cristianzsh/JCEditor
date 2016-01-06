@@ -1083,7 +1083,7 @@ public class JCEditor extends JFrame {
 
 	/**
 	* Classe necessária para adicionar suporte à linguagem Potigol. Verifica se o arquivo existe
-	* e se o índice é um código em Potigol (através da variável "isPotigol()"), em caso positivo,
+	* e se o índice é um código em Potigol (através da variável "isPotigol"), em caso positivo,
 	* libera a execução do código.
 	*/
 	class PotigolListener implements ActionListener {
