@@ -399,7 +399,7 @@ public class JCEditor extends JFrame {
 		getContentPane().add(BorderLayout.CENTER, painelSeparador);
 		this.setJMenuBar(barraDeMenu);
 		this.setIconImage(icone);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(844, 635);
 		this.setLocationRelativeTo(null);
 		this.setMinimumSize(new Dimension(468, 328));
@@ -492,7 +492,7 @@ public class JCEditor extends JFrame {
 					nomeArquivo = lista.get(i).getArquivo().getName();
 				}
 				int r = JOptionPane.showConfirmDialog(JCEditor.this, "Você deseja salvar o arquivo \"" + nomeArquivo + "\"?",
-					"Sair", JOptionPane.YES_NO_OPTION);
+					"Sair", JOptionPane.YES_NO_CANCEL_OPTION);
 				lista.get(i).setTexto(lista.get(i).getRSyntax().getText());
 				if (r == JOptionPane.OK_OPTION) {
 					if (lista.get(i).getArquivo() == null) {
@@ -500,6 +500,8 @@ public class JCEditor extends JFrame {
 					} else {
 						lista.get(i).salvar(lista.get(i).getRSyntax().getText());
 					}
+				} else if (r == JOptionPane.CANCEL_OPTION) {
+					return;
 				}
 			}
 		}
@@ -507,6 +509,7 @@ public class JCEditor extends JFrame {
 		new Preferencias().salvarPreferencias(sLAF, sTema, fonteEscolhida, tamanhoFonte);
 		new Preferencias().salvarArquivosAbertos(arquivosAbertos);
 		adp.salvarProjetos();
+		System.exit(0);
 	}
 
 	/**
@@ -705,7 +708,7 @@ public class JCEditor extends JFrame {
 		if (indice != -1 && lista.size() != 1) {
 			if (lista.get(indice).arquivoModificado()) {
 				int r = JOptionPane.showConfirmDialog(null, "Você deseja salvar o arquivo?",
-					"Fechar", JOptionPane.YES_NO_OPTION);
+					"Fechar", JOptionPane.YES_NO_CANCEL_OPTION);
 				if (r == JOptionPane.OK_OPTION) {
 					lista.get(indice).setTexto(lista.get(indice).getRSyntax().getText());
 					if (lista.get(indice).getArquivo() == null) {
@@ -713,6 +716,8 @@ public class JCEditor extends JFrame {
 					} else {
 						lista.get(indice).salvar(lista.get(indice).getRSyntax().getText());
 					}
+				} else if (r == JOptionPane.CANCEL_OPTION) {
+					return;
 				}
 			}
 
@@ -771,7 +776,6 @@ public class JCEditor extends JFrame {
 	class SairListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			salvarAoSair();
-			System.exit(0);
 		}
 	}
 
