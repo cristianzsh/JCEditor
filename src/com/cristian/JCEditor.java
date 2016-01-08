@@ -1014,11 +1014,12 @@ public class JCEditor extends JFrame {
 	class EscolherFonteListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
 			Object[] nomesFonte = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+			String auxFonte = fonteEscolhida;
 
 			fonteEscolhida = (String) JOptionPane.showInputDialog(JCEditor.this, "Escolha a fonte", "Fonte", JOptionPane.PLAIN_MESSAGE, null,
 				nomesFonte, "");
 			if (fonteEscolhida == null) {
-				lista.get(arquivos.getSelectedIndex()).setFont(new Font(fonteEscolhida, Font.PLAIN, tamanhoFonte));
+				fonteEscolhida = auxFonte;
 			} else {
 				updateFonte();
 			}
