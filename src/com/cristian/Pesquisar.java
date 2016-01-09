@@ -1,17 +1,19 @@
 package com.cristian;
 
-import javax.swing.JDialog;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import javax.swing.FocusManager;
+import javax.swing.ImageIcon;
+import javax.swing.JToolBar;
 
 /**
 * Classe que realiza a pesquisa no JTextArea atual
@@ -20,76 +22,70 @@ import java.awt.event.ActionEvent;
 * @since     Segunda atualização
 */
 
-public class Pesquisar extends JDialog {
-	private JLabel pesquisarLabel, substituirLabel;
+public class Pesquisar extends JToolBar {
 	private JTextField fieldPesquisar, fieldSubstituir;
-	private JButton[] botoes = new JButton[5];
-	private JPanel painelOeste, painelLeste;
+	private JButton[] botoes = new JButton[6];
+	private ActionListener[] eventos = {new PesquisarListener(), new SubstituirListener(),
+		new SubstituirTodosListener(), new VoltarListener(), new ProximoListener(), new OcultarListener()};
+	private String[] imagens = {"pesquisar25", "substituir25", "substituirTodos25", "anterior25", "proximo25", "sair25"};
+	private String[] toolTip = {"Pesquisar", "Substituir", "Substituir todos", "Anterior", "Próximo", "Ocultar"};
 	private JTextArea areaDeTexto;
 	private int posicaoInicial = 0;
 
 	/**
 	* O construtor é responsável por iniciar a interface de pesquisa.
 	*/
-	public Pesquisar(JTextArea adt, JCEditor jce) {
-		super(jce);
+	public Pesquisar(JTextArea adt) {
 		construirGUI();
 		this.areaDeTexto = adt;
 		this.areaDeTexto.requestFocus();
+		this.setFloatable(false);
 	}
 
 	/**
 	* Constrói a GUI e adiciona eventos aos botões.
 	*/
 	public void construirGUI() {
-		pesquisarLabel = new JLabel("Pesquisar");
-		substituirLabel = new JLabel("Substituir");
-		fieldPesquisar = new JTextField(15);
-		fieldSubstituir = new JTextField(15);
+		fieldPesquisar = new JTextField(15) {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
 
-		botoes[0] = new JButton("Pesquisar");
-		botoes[1] = new JButton("Substituir");
-		botoes[2] = new JButton("Substituir todos");
-		botoes[3] = new JButton("Próximo");
-		botoes[4] = new JButton("Voltar");
+				if (getText().isEmpty() && ! (FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)) {
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setBackground(Color.GRAY);
+					g2.setFont(getFont().deriveFont(Font.PLAIN));
+					g2.drawString("Pesquisar", 5, 18);
+					g2.dispose();
+				}
+			}};
+		fieldSubstituir = new JTextField(15) {
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+
+				if (getText().isEmpty() && ! (FocusManager.getCurrentKeyboardFocusManager().getFocusOwner() == this)) {
+					Graphics2D g2 = (Graphics2D) g.create();
+					g2.setBackground(Color.GRAY);
+					g2.setFont(getFont().deriveFont(Font.PLAIN));
+					g2.drawString("Substituir", 5, 18);
+					g2.dispose();
+				}
+			}};;
 
 		fieldPesquisar.addActionListener(new PesquisarListener());
-		fieldSubstituir.addActionListener(new FieldSubstituirListener());
-		Box boxLeste = new Box(BoxLayout.Y_AXIS);
+		fieldPesquisar.addKeyListener(new OcultarBarraListener());
+		fieldSubstituir.addKeyListener(new OcultarBarraListener());
+		this.add(fieldPesquisar);
+		this.add(fieldSubstituir);
 
 		for (int i = 0; i < botoes.length; i++) {
-			botoes[i].setMinimumSize(new Dimension(130, 25));
-			botoes[i].setPreferredSize(new Dimension(130, 25));
-			botoes[i].setMaximumSize(new Dimension(130, 25));
-
-			boxLeste.add(botoes[i]);
+			botoes[i] = new JButton(new ImageIcon(getClass().getResource("imagens/25x25/" + imagens[i] + ".png")));
+			botoes[i].addActionListener(eventos[i]);
+			botoes[i].setToolTipText(toolTip[i]);
+			EfeitoBtn efBtn = new EfeitoBtn(botoes[i]);
+			this.add(botoes[i]);
 		}
-
-		botoes[0].addActionListener(new PesquisarListener());
-		botoes[3].addActionListener(new ProximoListener());
-		botoes[1].addActionListener(new SubstituirListener());
-		botoes[2].addActionListener(new SubstituirTodosListener());
-		botoes[4].addActionListener(new VoltarListener());
-
-		painelOeste = new JPanel();
-		Box boxOeste = new Box(BoxLayout.Y_AXIS);
-		boxOeste.add(pesquisarLabel);
-		boxOeste.add(fieldPesquisar);
-		boxOeste.add(substituirLabel);
-		boxOeste.add(fieldSubstituir);
-		painelOeste.add(boxOeste);
-
-		painelLeste = new JPanel();
-		painelLeste.add(boxLeste);
-
-		this.getContentPane().add(BorderLayout.WEST, painelOeste);
-		this.getContentPane().add(BorderLayout.EAST, painelLeste);
-		this.setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
-		this.setResizable(false);
-		this.pack();
-		this.setLocationRelativeTo(null);
-		this.setTitle("Pesquisar");
-		this.setVisible(true);
 	}
 
 	/**
@@ -111,6 +107,13 @@ public class Pesquisar extends JDialog {
 			areaDeTexto.select(pos, pos + textoPesquisar.length());
 			posicaoInicial = pos + textoPesquisar.length();
 		}
+	}
+
+	/**
+	* Retorna o campo de pesquisa, este receberá focus quando a barra estiver visível.
+	*/
+	public JTextField getFieldPesquisar() {
+		return this.fieldPesquisar;
 	}
 
 	/**
@@ -190,6 +193,28 @@ public class Pesquisar extends JDialog {
 			}
 
 			areaDeTexto.replaceSelection(fieldSubstituir.getText());
+		}
+	}
+
+	/**
+	* Oculta a área de pesquisa quando Esc for pressionado.
+	*/
+	class OcultarBarraListener implements KeyListener {
+		public void keyPressed(KeyEvent ev) {
+			if (ev.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				Pesquisar.this.setVisible(false);
+			}
+		}
+		public void keyReleased(KeyEvent ev) {  }
+		public void keyTyped(KeyEvent ev) {  }
+	}
+
+	/**
+	* Oculta a área de pesquisa quando o botão fechar for clicado.
+	*/
+	class OcultarListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			Pesquisar.this.setVisible(false);
 		}
 	}
 }

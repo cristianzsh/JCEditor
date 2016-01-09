@@ -876,11 +876,12 @@ public class JCEditor extends JFrame {
 	}
 
 	/**
-	* Abre o JDialog que realiza a pesquisa por palavras no JTextArea da aba atual
+	* Abre a JToolBar que realiza a pesquisa por palavras no JTextArea da aba atual
 	*/
 	class PesquisarListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-			new Pesquisar(lista.get(arquivos.getSelectedIndex()).getRSyntax(), JCEditor.this);
+			lista.get(arquivos.getSelectedIndex()).getBarraPesquisa().setVisible(true);
+			lista.get(arquivos.getSelectedIndex()).getBarraPesquisa().getFieldPesquisar().requestFocus();
 		}
 	}
 

@@ -37,7 +37,7 @@ import org.fife.rsta.ac.java.JavaLanguageSupport;
 * @since     Segunda atualização
 */
 
-public class AreaDeTexto extends RSyntaxTextArea {
+public class AreaDeTexto extends JPanel {
 	private RSyntaxTextArea display = null;
 	private JPanel pnlText = null;
 	private InputStream in;
@@ -49,6 +49,7 @@ public class AreaDeTexto extends RSyntaxTextArea {
 	private String linguagem = "Texto simples";
 	private String texto;
 	private boolean potigol;
+	private Pesquisar bPesquisa;
 
 	/**
 	* O construtor da classe define uma lista do tipo HashMap, esta lista
@@ -103,6 +104,10 @@ public class AreaDeTexto extends RSyntaxTextArea {
 		} catch (IOException ex) {  }
 
 		lsf.register(getRSyntax());
+
+		bPesquisa = new Pesquisar(getRSyntax());
+		bPesquisa.setVisible(false);
+		this.add(BorderLayout.SOUTH, bPesquisa);
 	}
 
 	/**
@@ -384,5 +389,12 @@ public class AreaDeTexto extends RSyntaxTextArea {
 	*/
 	public boolean isPotigol() {
 		return this.potigol;
+	}
+
+	/**
+	* Retorna a barra de pesquisa.
+	*/
+	public Pesquisar getBarraPesquisa() {
+		return this.bPesquisa;
 	}
 }
