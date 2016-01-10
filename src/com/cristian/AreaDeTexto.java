@@ -313,7 +313,6 @@ public class AreaDeTexto extends JPanel {
 	public RSyntaxTextArea getRSyntax() {
 		if (display == null) {
 			display = new RSyntaxTextArea();
-			display.setCodeFoldingEnabled(true);
 			in = getClass().getResourceAsStream("temas/jce.xml");
 			try {
 				Theme tema = Theme.load(in);
@@ -336,7 +335,6 @@ public class AreaDeTexto extends JPanel {
 			barra.setBorder(null);
 			barra.setBackground(new Color(39, 39, 39));
 			barra.setLineNumbersEnabled(true);
-			barra.setFoldIndicatorEnabled(true);
 			barra.setName("Barra");
 			barra.setViewportView(getRSyntax());
 			barra.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));

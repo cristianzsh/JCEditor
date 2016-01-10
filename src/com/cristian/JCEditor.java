@@ -84,7 +84,7 @@ public class JCEditor extends JFrame {
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch, plainText;
 	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif;
 	private JRadioButtonMenuItem dark, jce, defaultT, defaultAlt, eclipse, idea, darkii, idle, vs;
-	private JRadioButtonMenuItem gerarEstrutura;
+	private JRadioButtonMenuItem gerarEstrutura, dobrarCodigo;
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema, projeto;
 	private InputStream in;
@@ -353,8 +353,15 @@ public class JCEditor extends JFrame {
 		arquivos.addChangeListener(changeListener);
 		arrastarESoltar();
 
+		dobrarCodigo = new JRadioButtonMenuItem("Dobrar código");
+		dobrarCodigo.setIcon(new ImageIcon(getClass().getResource("imagens/dobrarCodigo.png")));
+		dobrarCodigo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
+		dobrarCodigo.addActionListener(new DobrarCodigoListener());
+
 		preferencias.add(lookAndFeel);
 		preferencias.add(tema);
+		preferencias.addSeparator();
+		preferencias.add(dobrarCodigo);
 
 		/* Adiciona os menus na barra principal */
 		barraDeMenu.add(menu);
@@ -511,7 +518,14 @@ public class JCEditor extends JFrame {
 			}
 		}
 
-		new Preferencias().salvarPreferencias(sLAF, sTema, fonteEscolhida, tamanhoFonte);
+		String dobCodigo;
+		if (dobrarCodigo.isSelected()) {
+			dobCodigo = "dobrarCodigo";
+		} else {
+			dobCodigo = "nDobrarCodigo";
+		}
+
+		new Preferencias().salvarPreferencias(sLAF, sTema, fonteEscolhida, tamanhoFonte, dobCodigo);
 		new Preferencias().salvarArquivosAbertos(arquivosAbertos);
 		adp.salvarProjetos();
 		System.exit(0);
@@ -602,6 +616,11 @@ public class JCEditor extends JFrame {
 		updateFonte();
 		arrastarESoltar();
 		arquivosAbertos.add(arquivo.toString());
+
+		if (dobrarCodigo.isSelected()) {
+			lista.get(arquivos.getSelectedIndex()).getRSyntax().setCodeFoldingEnabled(true);
+			lista.get(arquivos.getSelectedIndex()).barraDeRolagem().setFoldIndicatorEnabled(true);
+		}
 
 		if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 			bExecutarPotigol.setEnabled(true);
@@ -701,6 +720,13 @@ public class JCEditor extends JFrame {
 	*/
 	public void setTamanhoFonte(int tam) {
 		this.tamanhoFonte = tam;
+	}
+
+	/**
+	* Retorna o menu de dobramento de código.
+	*/
+	public JRadioButtonMenuItem getDobrarCodigo() {
+		return this.dobrarCodigo;
 	}
 
 	/**
@@ -877,6 +903,11 @@ public class JCEditor extends JFrame {
 			bg2.clearSelection();
 			arrastarESoltar();
 			updateFonte();
+
+			if (dobrarCodigo.isSelected()) {
+				lista.get(arquivos.getSelectedIndex()).getRSyntax().setCodeFoldingEnabled(true);
+				lista.get(arquivos.getSelectedIndex()).barraDeRolagem().setFoldIndicatorEnabled(true);
+			}
 		}
 	}
 
@@ -1177,6 +1208,25 @@ public class JCEditor extends JFrame {
 			} catch (Exception ex) {
 				JOptionPane.showMessageDialog(null, "Não foi possível abrir a página.", "Erro",
 					JOptionPane.ERROR_MESSAGE);
+			}
+		}
+	}
+
+	/**
+	* Evento que define se o recurso de dobramento de código será ativado ou não.
+	*/
+	class DobrarCodigoListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			if (!dobrarCodigo.isSelected()) {
+				for (int i = 0; i < lista.size(); i++) {
+					lista.get(i).barraDeRolagem().setFoldIndicatorEnabled(false);
+					lista.get(i).getRSyntax().setCodeFoldingEnabled(false);
+				}
+			} else {
+				for (int i = 0; i < lista.size(); i++) {
+					lista.get(i).barraDeRolagem().setFoldIndicatorEnabled(true);
+					lista.get(i).getRSyntax().setCodeFoldingEnabled(true);
+				}
 			}
 		}
 	}
