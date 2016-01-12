@@ -2,6 +2,8 @@ package com.cristian;
 
 import java.awt.Image;
 import java.awt.BorderLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -9,7 +11,7 @@ import javax.swing.JDialog;
 /**
 * Exibe o diálogo de "Sobre" quando o botão versão for pressionado
 * @author    Cristian Henrique (cristianmsbr@gmail.com)
-* @version   1.2
+* @version   1.9
 * @since     Desde a primeira versão
 */
 
@@ -28,6 +30,14 @@ public class VersaoDialog extends JDialog {
 		}
 
 		JLabel creditos = new JLabel(new ImageIcon(getClass().getResource("imagens/versao.png")));
+
+		this.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent ev) {
+				if (ev.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					VersaoDialog.this.dispose();
+				}
+			}
+		});
 
 		this.setIconImage(icone);
 		this.getContentPane().add(BorderLayout.CENTER, creditos);

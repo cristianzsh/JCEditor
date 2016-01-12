@@ -3,6 +3,8 @@ package com.cristian;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.JDialog;
@@ -14,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 /**
 * Classe que exibe as propriedades do SO do usuário
 * @author    Cristian Henrique (cristianmsbr@gmail.com)
-* @version   1.5
+* @version   1.9
 * @since     Segunda atualização
 */
 public class PropriedadesSistema extends JDialog {
@@ -58,6 +60,14 @@ public class PropriedadesSistema extends JDialog {
 			TitledBorder.DEFAULT_POSITION,
 			new Font("Roboto Light", 1, 14)
 			));
+
+		this.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent ev) {
+				if (ev.getKeyCode() == KeyEvent.VK_ESCAPE) {
+					PropriedadesSistema.this.dispose();
+				}
+			}
+		});
 
 		this.getContentPane().add(BorderLayout.NORTH, label);
 		this.getContentPane().add(BorderLayout.CENTER, tabela);
