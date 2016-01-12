@@ -18,7 +18,7 @@ import javax.swing.JToolBar;
 /**
 * Classe que realiza a pesquisa no JTextArea atual
 * @author    Cristian Henrique (cristianmsbr@gmail.com)
-* @version   1.8
+* @version   1.9
 * @since     Segunda atualização
 */
 
