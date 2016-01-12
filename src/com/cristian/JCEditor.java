@@ -610,6 +610,7 @@ public class JCEditor extends JFrame {
 		lista.get(arquivos.getSelectedIndex()).abrir(arquivo);
 		lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
 
+		arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), arquivo.toString());
 		linguagem.setText(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
 		definirTitulo();
 		carregarTema(sTema);
@@ -693,8 +694,8 @@ public class JCEditor extends JFrame {
 	* em caso de existirem arquivos a serem abertos.
 	*/
 	public void configAoAbrir() {
-		arquivos.remove(0);
 		lista.remove(0);
+		arquivos.remove(0);
 		definirTitulo();
 		updateLanguage(lista.get(arquivos.getSelectedIndex()).getLinguagem());
 	}
