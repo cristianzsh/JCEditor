@@ -18,7 +18,7 @@ import java.util.zip.ZipFile;
 /**
 * Classe responsável por abrir o programa com as devidas configurações
 * @author   Cristian Henrique (cristianmsbr@gmail.com)
-* @version  1.8
+* @version  1.9
 * @since    Terceira atualização
 */
 
@@ -37,7 +37,7 @@ public class Preferencias {
 		} else {
 			try {
 				arquivoConfig.mkdir();
-				salvarPreferencias("jce", "jce", "Monospaced", 12, "dobrarCodigo");
+				salvarPreferencias("jce", "jce", "Monospaced", 12, "dobrarCodigo", "quebrarLinha");
 				abrirPreferencias();
 			} catch (Exception ex) { ex.printStackTrace(); }
 		}
@@ -118,6 +118,10 @@ public class Preferencias {
 				if (sub.equals("5") && conteudo.equals("dobrarCodigo")) {
 					editor.getDobrarCodigo().setSelected(true);
 				}
+
+				if (sub.equals("6") && conteudo.equals("quebrarLinha")) {
+					editor.getQuebrarLinha().setSelected(true);
+				}
 			}
 		} catch (Exception ex) { ex.printStackTrace(); }
 	}
@@ -126,7 +130,7 @@ public class Preferencias {
 	* Método responsável por salvar as preferências do usuário, este método é
 	* chamado toda vez que o usuário fechar o programa.
 	*/
-	public void salvarPreferencias(String laf, String tema, String fonte, int tamFonte, String dobCodigo) {
+	public void salvarPreferencias(String laf, String tema, String fonte, int tamFonte, String dobCodigo, String qLinha) {
 		try {
 			FileWriter fw = new FileWriter(HOME);
 			fw.write("1 " + laf + "\n");
@@ -134,6 +138,7 @@ public class Preferencias {
 			fw.write("3 " + fonte + "\n");
 			fw.write("4 " + tamFonte + "\n");
 			fw.write("5 " + dobCodigo + "\n");
+			fw.write("6 " + qLinha + "\n");
 			fw.flush();
 			fw.close();
 		} catch (Exception ex) {  }

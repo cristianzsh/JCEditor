@@ -84,7 +84,7 @@ public class JCEditor extends JFrame {
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch, plainText;
 	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif;
 	private JRadioButtonMenuItem dark, jce, defaultT, defaultAlt, eclipse, idea, darkii, idle, vs;
-	private JRadioButtonMenuItem gerarEstrutura, dobrarCodigo;
+	private JRadioButtonMenuItem gerarEstrutura, dobrarCodigo, quebrarLinha;
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema, projeto;
 	private InputStream in;
@@ -358,10 +358,16 @@ public class JCEditor extends JFrame {
 		dobrarCodigo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
 		dobrarCodigo.addActionListener(new DobrarCodigoListener());
 
+		quebrarLinha = new JRadioButtonMenuItem("Quebrar linha");
+		quebrarLinha.setIcon(new ImageIcon(getClass().getResource("imagens/quebrarLinha.png")));
+		quebrarLinha.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+		quebrarLinha.addActionListener(new QuebrarLinhaListener());
+
 		preferencias.add(lookAndFeel);
 		preferencias.add(tema);
 		preferencias.addSeparator();
 		preferencias.add(dobrarCodigo);
+		preferencias.add(quebrarLinha);
 
 		/* Adiciona os menus na barra principal */
 		barraDeMenu.add(menu);
@@ -518,14 +524,16 @@ public class JCEditor extends JFrame {
 			}
 		}
 
-		String dobCodigo;
+		String dobCodigo = null, quebLinha = null;
 		if (dobrarCodigo.isSelected()) {
 			dobCodigo = "dobrarCodigo";
-		} else {
-			dobCodigo = "nDobrarCodigo";
 		}
 
-		new Preferencias().salvarPreferencias(sLAF, sTema, fonteEscolhida, tamanhoFonte, dobCodigo);
+		if (quebrarLinha.isSelected()) {
+			quebLinha = "quebrarLinha";
+		}
+
+		new Preferencias().salvarPreferencias(sLAF, sTema, fonteEscolhida, tamanhoFonte, dobCodigo, quebLinha);
 		new Preferencias().salvarArquivosAbertos(arquivosAbertos);
 		adp.salvarProjetos();
 		System.exit(0);
@@ -608,6 +616,7 @@ public class JCEditor extends JFrame {
 		arquivos.setTitleAt(arquivos.getSelectedIndex(), arquivo.getName());
 
 		lista.get(arquivos.getSelectedIndex()).abrir(arquivo);
+		lista.get(arquivos.getSelectedIndex()).getRSyntax().discardAllEdits();
 		lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
 
 		arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), arquivo.toString());
@@ -621,6 +630,11 @@ public class JCEditor extends JFrame {
 		if (dobrarCodigo.isSelected()) {
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setCodeFoldingEnabled(true);
 			lista.get(arquivos.getSelectedIndex()).barraDeRolagem().setFoldIndicatorEnabled(true);
+		}
+
+		if (quebrarLinha.isSelected()) {
+			lista.get(arquivos.getSelectedIndex()).getRSyntax().setLineWrap(true);
+			lista.get(arquivos.getSelectedIndex()).getRSyntax().setWrapStyleWord(true);
 		}
 
 		if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
@@ -728,6 +742,13 @@ public class JCEditor extends JFrame {
 	*/
 	public JRadioButtonMenuItem getDobrarCodigo() {
 		return this.dobrarCodigo;
+	}
+
+	/**
+	* Retorna o menu de quebra de linha.
+	*/
+	public JRadioButtonMenuItem getQuebrarLinha() {
+		return this.quebrarLinha;
 	}
 
 	/**
@@ -908,6 +929,11 @@ public class JCEditor extends JFrame {
 			if (dobrarCodigo.isSelected()) {
 				lista.get(arquivos.getSelectedIndex()).getRSyntax().setCodeFoldingEnabled(true);
 				lista.get(arquivos.getSelectedIndex()).barraDeRolagem().setFoldIndicatorEnabled(true);
+			}
+
+			if (quebrarLinha.isSelected()) {
+				lista.get(arquivos.getSelectedIndex()).getRSyntax().setLineWrap(true);
+				lista.get(arquivos.getSelectedIndex()).getRSyntax().setWrapStyleWord(true);
 			}
 		}
 	}
@@ -1227,6 +1253,25 @@ public class JCEditor extends JFrame {
 				for (int i = 0; i < lista.size(); i++) {
 					lista.get(i).barraDeRolagem().setFoldIndicatorEnabled(true);
 					lista.get(i).getRSyntax().setCodeFoldingEnabled(true);
+				}
+			}
+		}
+	}
+
+	/**
+	* Evento que define se o recurso de quebra de linha será ativado ou não.
+	*/
+	class QuebrarLinhaListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			if (!quebrarLinha.isSelected()) {
+				for (int i = 0; i < lista.size(); i++) {
+					lista.get(i).getRSyntax().setLineWrap(false);
+					lista.get(i).getRSyntax().setWrapStyleWord(false);
+				}
+			} else {
+				for (int i = 0; i < lista.size(); i++) {
+					lista.get(i).getRSyntax().setLineWrap(true);
+					lista.get(i).getRSyntax().setWrapStyleWord(true);
 				}
 			}
 		}
