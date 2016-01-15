@@ -79,7 +79,7 @@ public class JCEditor extends JFrame {
 	private JLabel linguagem;
 	private JToolBar barraS;
 	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, addProjeto, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
-		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props;
+		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props, desfazer, refazer;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch, plainText;
 	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif;
@@ -88,7 +88,7 @@ public class JCEditor extends JFrame {
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema, projeto;
 	private InputStream in;
-	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir;
+	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir, bDesfazer, bRefazer;
 	private Image icone;
 	private ButtonGroup bg, bg2, bg3;
 	private String fonteEscolhida = "Monospaced";
@@ -173,6 +173,9 @@ public class JCEditor extends JFrame {
 		configMenu(fecharAba, "Fechar aba", "imagens/fecharAba.png", new FecharAbaListener(), KeyEvent.VK_W, ActionEvent.CTRL_MASK, menu);
 		menu.addSeparator();
 		configMenu(sair, "Sair", "imagens/sair.png", new SairListener(), KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK, menu);
+		configMenu(desfazer, "Desfazer", "imagens/desfazer.png", new DesfazerListener(), KeyEvent.VK_Z, ActionEvent.CTRL_MASK, editar);
+		configMenu(refazer, "Refazer", "imagens/refazer.png", new RefazerListener(), KeyEvent.VK_Y, ActionEvent.CTRL_MASK, editar);
+		editar.addSeparator();
 		configMenu(recortar, "Recortar", "imagens/recortar.png", new RecortarListener(), KeyEvent.VK_X, ActionEvent.CTRL_MASK, editar);
 		configMenu(copiar, "Copiar", "imagens/copiar.png", new CopiarListener(), KeyEvent.VK_C, ActionEvent.CTRL_MASK, editar);
 		configMenu(colar, "Colar", "imagens/colar.png", new ColarListener(), KeyEvent.VK_V, ActionEvent.CTRL_MASK, editar);
@@ -278,6 +281,12 @@ public class JCEditor extends JFrame {
 
 		bRecortar = new JButton();
 		configBtns(bRecortar, "Recortar", "imagens/25x25/recortar25.png", new RecortarListener());
+
+		bDesfazer = new JButton();
+		configBtns(bDesfazer, "Desfazer", "imagens/25x25/desfazer25.png", new DesfazerListener());
+
+		bRefazer = new JButton();
+		configBtns(bRefazer, "Refazer", "imagens/25x25/refazer25.png", new RefazerListener());
 
 		bPesquisar = new JButton();
 		configBtns(bPesquisar, "Pesquisar", "imagens/25x25/pesquisar25.png", new PesquisarListener());
@@ -1274,6 +1283,24 @@ public class JCEditor extends JFrame {
 					lista.get(i).getRSyntax().setWrapStyleWord(true);
 				}
 			}
+		}
+	}
+
+	/**
+	* Evento de desfaz a última ação no JTextArea atual.
+	*/
+	class DesfazerListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			lista.get(arquivos.getSelectedIndex()).getRSyntax().undoLastAction();
+		}
+	}
+
+	/**
+	* Evento de refaz a última ação no JTextArea atual.
+	*/
+	class RefazerListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			lista.get(arquivos.getSelectedIndex()).getRSyntax().redoLastAction();	
 		}
 	}
 }
