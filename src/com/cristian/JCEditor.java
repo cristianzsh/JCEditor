@@ -88,7 +88,7 @@ public class JCEditor extends JFrame {
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema, projeto;
 	private InputStream in;
-	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir, bDesfazer, bRefazer, bSelecionarTudo;
+	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir, bDesfazer, bRefazer;
 	private Image icone;
 	private ButtonGroup bg, bg2, bg3;
 	private String fonteEscolhida = "Monospaced";
@@ -175,11 +175,12 @@ public class JCEditor extends JFrame {
 		configMenu(sair, "Sair", "imagens/sair.png", new SairListener(), KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK, menu);
 		configMenu(desfazer, "Desfazer", "imagens/desfazer.png", new DesfazerListener(), KeyEvent.VK_Z, ActionEvent.CTRL_MASK, editar);
 		configMenu(refazer, "Refazer", "imagens/refazer.png", new RefazerListener(), KeyEvent.VK_Y, ActionEvent.CTRL_MASK, editar);
-		configMenu(selecionarTudo, "Selecionar tudo", "imagens/selecionarTudo.png", new SelecionarTudoListener(), KeyEvent.VK_A, ActionEvent.CTRL_MASK, editar);
 		editar.addSeparator();
 		configMenu(recortar, "Recortar", "imagens/recortar.png", new RecortarListener(), KeyEvent.VK_X, ActionEvent.CTRL_MASK, editar);
 		configMenu(copiar, "Copiar", "imagens/copiar.png", new CopiarListener(), KeyEvent.VK_C, ActionEvent.CTRL_MASK, editar);
 		configMenu(colar, "Colar", "imagens/colar.png", new ColarListener(), KeyEvent.VK_V, ActionEvent.CTRL_MASK, editar);
+		editar.addSeparator();
+		configMenu(selecionarTudo, "Selecionar tudo", "imagens/selecionarTudo.png", new SelecionarTudoListener(), KeyEvent.VK_A, ActionEvent.CTRL_MASK, editar);
 		configMenu(sobrePotigol, "Potigol", "imagens/potigol.png", new SobrePotigolListener(), KeyEvent.VK_I, ActionEvent.CTRL_MASK, sobre);
 		configMenu(sobrePC, "Sobre este PC", "imagens/config.png", new SobrePCListener(), KeyEvent.VK_F3, 0, sobre);
 		configMenu(versao, "Versão", "imagens/versaoIcone.png", new VersaoListener(), KeyEvent.VK_F1, 0, sobre);
@@ -288,9 +289,6 @@ public class JCEditor extends JFrame {
 
 		bRefazer = new JButton();
 		configBtns(bRefazer, "Refazer", "imagens/25x25/refazer25.png", new RefazerListener());
-
-		bSelecionarTudo = new JButton();
-		configBtns(bSelecionarTudo, "Selecionar tudo", "imagens/25x25/selecionarTudo25.png", new SelecionarTudoListener());
 
 		bPesquisar = new JButton();
 		configBtns(bPesquisar, "Pesquisar", "imagens/25x25/pesquisar25.png", new PesquisarListener());
