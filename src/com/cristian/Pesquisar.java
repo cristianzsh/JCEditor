@@ -202,6 +202,7 @@ public class Pesquisar extends JToolBar {
 	class OcultarBarraListener implements KeyListener {
 		public void keyPressed(KeyEvent ev) {
 			if (ev.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				areaDeTexto.requestFocus();
 				Pesquisar.this.setVisible(false);
 			}
 		}
@@ -214,6 +215,7 @@ public class Pesquisar extends JToolBar {
 	*/
 	class OcultarListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
+			areaDeTexto.requestFocus();
 			Pesquisar.this.setVisible(false);
 		}
 	}
