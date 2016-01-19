@@ -7,26 +7,26 @@
    <!--<baseFont family="..." size="12"/>-->
    
    <!--  General editor colors. -->
-   <background color="ffffff"/>
-   <caret color="000000"/>
-   <selection useFG="false" bg="c8c8ff" roundedEdges="false"/>
-   <currentLineHighlight color="ffffaa" fade="false"/>
-   <marginLine fg="394448"/>
-   <markAllHighlight color="6b8189"/> <!-- TODO: Fix me -->
-   <markOccurrencesHighlight color="5b7179" border="false"/>
-   <matchedBracket fg="000080" bg="eaeaff" highlightBoth="false" animate="true"/>
-   <hyperlinks fg="a082bd"/>
+   <background color="ffffff" />
+   <caret color="000000" />
+   <selection fg="ffffff" bg="526da5" />
+   <currentLineHighlight color="ffffd7" fade="false" />
+   <marginLine fg="b0b4b9" />
+   <markAllHighlight color="ccccff" />
+   <markOccurrencesHighlight color="ccccff" border="false" />
+   <matchedBracket fg="99ccff" bg="99ccff" highlightBoth="true" animate="false" />
+   <hyperlinks fg="0000ff" />
    <secondaryLanguages>
-      <language index="1" bg="fff0cc"/>
-      <language index="2" bg="dafeda"/>
-      <language index="3" bg="ffe0f0"/>
+      <language index="1" bg="fff0cc" />
+      <language index="2" bg="dafeda" />
+      <language index="3" bg="ffe0f0" />
    </secondaryLanguages>
-   
+
    <!-- Gutter styling. -->
-   <gutterBorder color="81969A"/>
-   <lineNumbers fg="768379"/>
-   <foldIndicator fg="6A8088" iconBg="2f383c"/>
-   <iconRowHeader activeLineRange="3399ff"/>
+   <gutterBorder color="dddddd" />
+   <lineNumbers fg="787878" />
+   <foldIndicator fg="808080" iconBg="ffffff" />
+   <iconRowHeader activeLineRange="3399ff" />
    
    <!-- Syntax tokens. -->
    <tokenStyles>
