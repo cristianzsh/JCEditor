@@ -700,6 +700,7 @@ public class JCEditor extends JFrame {
 	public void updateFonte() {
 		for (AreaDeTexto adt : lista) {
 			adt.getRSyntax().setFont(new Font(fonteEscolhida, Font.PLAIN, tamanhoFonte));
+			adt.barraDeRolagem().getGutter().setLineNumberFont(new Font("Monospaced", Font.PLAIN, tamanhoFonte));
 		}
 		fonteAtual.setText(fonteEscolhida + " / Font.PLAIN / " + tamanhoFonte + "  |   ");
 	}
