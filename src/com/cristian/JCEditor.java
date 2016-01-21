@@ -163,59 +163,59 @@ public class JCEditor extends JFrame {
 		/* Código de configuração dos menus de funções, sua estrutura é:
 		JMenuItem, String(nome do menu), String(imagem do menu), ActionListener, KeyEvent, ActionEvent, JMenu
 		(menu ao qual o JMenuItem pertence) */
-		configMenu(novoArq, "Novo", "imagens/novo.png", new NovoListener(), KeyEvent.VK_N, ActionEvent.CTRL_MASK, menu);
-		configMenu(abrirArq, "Abrir", "imagens/abrir.png", new AbrirListener(), KeyEvent.VK_O, ActionEvent.CTRL_MASK, menu);
-		configMenu(salvarArq, "Salvar", "imagens/salvar.png", new SalvarListener(), KeyEvent.VK_S, ActionEvent.CTRL_MASK, menu);
-		configMenu(salvarArqComo, "Salvar como", "imagens/salvarComo.png", new SalvarComoListener(), KeyEvent.VK_S, Event.CTRL_MASK | Event.SHIFT_MASK, menu);
+		novoArq = configMenu("Novo", "imagens/novo.png", new NovoListener(), KeyEvent.VK_N, ActionEvent.CTRL_MASK, menu);
+		abrirArq = configMenu("Abrir", "imagens/abrir.png", new AbrirListener(), KeyEvent.VK_O, ActionEvent.CTRL_MASK, menu);
+		salvarArq = configMenu("Salvar", "imagens/salvar.png", new SalvarListener(), KeyEvent.VK_S, ActionEvent.CTRL_MASK, menu);
+		salvarArqComo = configMenu("Salvar como", "imagens/salvarComo.png", new SalvarComoListener(), KeyEvent.VK_S, Event.CTRL_MASK | Event.SHIFT_MASK, menu);
 		menu.addSeparator();
-		configMenu(imprimir, "Imprimir", "imagens/imprimir.png", new ImprimirPotigolListener(), KeyEvent.VK_P, ActionEvent.CTRL_MASK, menu);
-		configMenu(executarPotigol, "Executar Potigol", "imagens/play.png", new ExecutarPotigolListener(), KeyEvent.VK_F9, 0, menu);
-		configMenu(fecharAba, "Fechar aba", "imagens/fecharAba.png", new FecharAbaListener(), KeyEvent.VK_W, ActionEvent.CTRL_MASK, menu);
+		imprimir = configMenu("Imprimir", "imagens/imprimir.png", new ImprimirPotigolListener(), KeyEvent.VK_P, ActionEvent.CTRL_MASK, menu);
+		executarPotigol = configMenu("Executar Potigol", "imagens/play.png", new ExecutarPotigolListener(), KeyEvent.VK_F9, 0, menu);
+		fecharAba = configMenu("Fechar aba", "imagens/fecharAba.png", new FecharAbaListener(), KeyEvent.VK_W, ActionEvent.CTRL_MASK, menu);
 		menu.addSeparator();
-		configMenu(sair, "Sair", "imagens/sair.png", new SairListener(), KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK, menu);
-		configMenu(desfazer, "Desfazer", "imagens/desfazer.png", new DesfazerListener(), KeyEvent.VK_Z, ActionEvent.CTRL_MASK, editar);
-		configMenu(refazer, "Refazer", "imagens/refazer.png", new RefazerListener(), KeyEvent.VK_Y, ActionEvent.CTRL_MASK, editar);
+		sair = configMenu("Sair", "imagens/sair.png", new SairListener(), KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK, menu);
+		desfazer = configMenu("Desfazer", "imagens/desfazer.png", new DesfazerListener(), KeyEvent.VK_Z, ActionEvent.CTRL_MASK, editar);
+		refazer = configMenu("Refazer", "imagens/refazer.png", new RefazerListener(), KeyEvent.VK_Y, ActionEvent.CTRL_MASK, editar);
 		editar.addSeparator();
-		configMenu(recortar, "Recortar", "imagens/recortar.png", new RecortarListener(), KeyEvent.VK_X, ActionEvent.CTRL_MASK, editar);
-		configMenu(copiar, "Copiar", "imagens/copiar.png", new CopiarListener(), KeyEvent.VK_C, ActionEvent.CTRL_MASK, editar);
-		configMenu(colar, "Colar", "imagens/colar.png", new ColarListener(), KeyEvent.VK_V, ActionEvent.CTRL_MASK, editar);
+		recortar = configMenu("Recortar", "imagens/recortar.png", new RecortarListener(), KeyEvent.VK_X, ActionEvent.CTRL_MASK, editar);
+		copiar = configMenu("Copiar", "imagens/copiar.png", new CopiarListener(), KeyEvent.VK_C, ActionEvent.CTRL_MASK, editar);
+		colar = configMenu("Colar", "imagens/colar.png", new ColarListener(), KeyEvent.VK_V, ActionEvent.CTRL_MASK, editar);
 		editar.addSeparator();
-		configMenu(selecionarTudo, "Selecionar tudo", "imagens/selecionarTudo.png", new SelecionarTudoListener(), KeyEvent.VK_A, ActionEvent.CTRL_MASK, editar);
-		configMenu(sobrePotigol, "Potigol", "imagens/potigol.png", new SobrePotigolListener(), KeyEvent.VK_I, ActionEvent.CTRL_MASK, sobre);
-		configMenu(sobrePC, "Sobre este PC", "imagens/config.png", new SobrePCListener(), KeyEvent.VK_F3, 0, sobre);
-		configMenu(versao, "Versão", "imagens/versaoIcone.png", new VersaoListener(), KeyEvent.VK_F1, 0, sobre);
-		configMenu(pesquisar, "Pesquisar","imagens/pesquisar.png", new PesquisarListener(), KeyEvent.VK_F, ActionEvent.CTRL_MASK, formatar);
-		configMenu(fonte, "Fonte", "imagens/fonte.png", new EscolherFonteListener(), KeyEvent.VK_R, ActionEvent.CTRL_MASK, formatar);
+		selecionarTudo = configMenu("Selecionar tudo", "imagens/selecionarTudo.png", new SelecionarTudoListener(), KeyEvent.VK_A, ActionEvent.CTRL_MASK, editar);
+		sobrePotigol = configMenu("Potigol", "imagens/potigol.png", new SobrePotigolListener(), KeyEvent.VK_I, ActionEvent.CTRL_MASK, sobre);
+		sobrePC = configMenu("Sobre este PC", "imagens/config.png", new SobrePCListener(), KeyEvent.VK_F3, 0, sobre);
+		versao = configMenu("Versão", "imagens/versaoIcone.png", new VersaoListener(), KeyEvent.VK_F1, 0, sobre);
+		pesquisar = configMenu("Pesquisar","imagens/pesquisar.png", new PesquisarListener(), KeyEvent.VK_F, ActionEvent.CTRL_MASK, formatar);
+		fonte = configMenu("Fonte", "imagens/fonte.png", new EscolherFonteListener(), KeyEvent.VK_R, ActionEvent.CTRL_MASK, formatar);
 		formatar.addSeparator();
-		configMenu(fontePadrao, "Normal", "imagens/fontePadrao.png", new FontePadraoListener(), KeyEvent.VK_0, Event.CTRL_MASK, formatar);
-		configMenu(aumentarFonte, "Aumentar", "imagens/aumentarFonte.png", new AumentarFonteListener(), KeyEvent.VK_EQUALS, ActionEvent.CTRL_MASK, formatar);
-		configMenu(diminuirFonte, "Diminuir", "imagens/diminuirFonte.png", new DiminuirFonteListener(), KeyEvent.VK_MINUS, ActionEvent.CTRL_MASK, formatar);
+		fontePadrao = configMenu("Normal", "imagens/fontePadrao.png", new FontePadraoListener(), KeyEvent.VK_0, Event.CTRL_MASK, formatar);
+		aumentarFonte = configMenu("Aumentar", "imagens/aumentarFonte.png", new AumentarFonteListener(), KeyEvent.VK_EQUALS, ActionEvent.CTRL_MASK, formatar);
+		diminuirFonte = configMenu("Diminuir", "imagens/diminuirFonte.png", new DiminuirFonteListener(), KeyEvent.VK_MINUS, ActionEvent.CTRL_MASK, formatar);
 		formatar.addSeparator();
-		configMenu(addProjeto, "Adicionar", "imagens/addProjeto.png", new AddProjetoListener(), KeyEvent.VK_O, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
-		configMenu(delProjeto, "Remover", "imagens/remover.png", new RemoverProjetoListener(), KeyEvent.VK_D, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
-		configMenu(props, "Propriedades", "imagens/propriedades.png", new PropriedadesProjetoListener(), KeyEvent.VK_A, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
+		addProjeto = configMenu("Adicionar", "imagens/addProjeto.png", new AddProjetoListener(), KeyEvent.VK_O, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
+		delProjeto = configMenu("Remover", "imagens/remover.png", new RemoverProjetoListener(), KeyEvent.VK_D, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
+		props = configMenu("Propriedades", "imagens/propriedades.png", new PropriedadesProjetoListener(), KeyEvent.VK_A, Event.CTRL_MASK | Event.SHIFT_MASK, projeto);
 
 		/* Código de configuração dos menus de Look And Feel
 		Sua estrutura é semelhante a do método "configMenu" exceto por utilizar um ButtonGroup(para que
 		só exista um botão selecionado) e também pelo fato de não existir um ícone */
 		bg = new ButtonGroup();
-		configRadioMenus(padrao, "JCE", new LAFPadraoListener(), bg, lookAndFeel);
-		configRadioMenus(nimbus, "Nimbus", new LAFListener("javax.swing.plaf.nimbus.NimbusLookAndFeel"), bg, lookAndFeel);
-		configRadioMenus(metal, "Metal", new LAFListener("javax.swing.plaf.metal.MetalLookAndFeel"), bg, lookAndFeel);
-		configRadioMenus(sistema, "Sistema", new LAFListener(UIManager.getSystemLookAndFeelClassName()), bg, lookAndFeel);
-		configRadioMenus(motif, "Motif", new LAFListener("com.sun.java.swing.plaf.motif.MotifLookAndFeel"), bg, lookAndFeel);
+		padrao = configRadioMenus("JCE", new LAFPadraoListener(), bg, lookAndFeel);
+		nimbus = configRadioMenus("Nimbus", new LAFListener("javax.swing.plaf.nimbus.NimbusLookAndFeel"), bg, lookAndFeel);
+		metal = configRadioMenus("Metal", new LAFListener("javax.swing.plaf.metal.MetalLookAndFeel"), bg, lookAndFeel);
+		sistema = configRadioMenus("Sistema", new LAFListener(UIManager.getSystemLookAndFeelClassName()), bg, lookAndFeel);
+		motif = configRadioMenus("Motif", new LAFListener("com.sun.java.swing.plaf.motif.MotifLookAndFeel"), bg, lookAndFeel);
 
 		/* Código de configuração dos menus de temas */
 		bg3 = new ButtonGroup();
-		configRadioMenus(jce, "JCE", new TemaListener("jce"), bg3, tema);
-		configRadioMenus(dark, "Dark", new TemaListener("dark"), bg3, tema);
-		configRadioMenus(dark, "Dark II", new TemaListener("darkii"), bg3, tema);
-		configRadioMenus(defaultT, "Default", new TemaListener("default"), bg3, tema);
-		configRadioMenus(defaultAlt, "Default-Alt", new TemaListener("default-alt"), bg3, tema);
-		configRadioMenus(eclipse, "Eclipse", new TemaListener("eclipse"), bg3, tema);
-		configRadioMenus(idea, "IDEA", new TemaListener("idea"), bg3, tema);
-		configRadioMenus(dark, "IDLE", new TemaListener("idle"), bg3, tema);
-		configRadioMenus(vs, "Visual Studio", new TemaListener("vs"), bg3, tema);
+		jce = configRadioMenus("JCE", new TemaListener("jce"), bg3, tema);
+		dark = configRadioMenus("Dark", new TemaListener("dark"), bg3, tema);
+		darkii = configRadioMenus("Dark II", new TemaListener("darkii"), bg3, tema);
+		defaultT = configRadioMenus("Default", new TemaListener("default"), bg3, tema);
+		defaultAlt = configRadioMenus("Default-Alt", new TemaListener("default-alt"), bg3, tema);
+		eclipse = configRadioMenus("Eclipse", new TemaListener("eclipse"), bg3, tema);
+		idea = configRadioMenus("IDEA", new TemaListener("idea"), bg3, tema);
+		dark = configRadioMenus("IDLE", new TemaListener("idle"), bg3, tema);
+		vs = configRadioMenus("Visual Studio", new TemaListener("vs"), bg3, tema);
 
 		gerarEstrutura = new JRadioButtonMenuItem("Gerar estrutura");
 		gerarEstrutura.setIcon(new ImageIcon(getClass().getResource("imagens/estrutura.png")));
@@ -226,80 +226,57 @@ public class JCEditor extends JFrame {
 		Sua estrutura é composta por: JRadioButtonMenuItem, String(nome no item de menu), ActionListener(recebe como
 		argumento uma String contendo o nome da linguagem e sua sintaxe), ButtonGroup, JMenu */
 		bg2 = new ButtonGroup();
-		configRadioMenus(actionScript, "ActionScript", new LinguagemListener("ActionScript", SyntaxConstants.SYNTAX_STYLE_ACTIONSCRIPT), bg2, linguagemMenu);
-		configRadioMenus(assembly, "Assembly", new LinguagemListener("Assembly", SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_X86), bg2, linguagemMenu);
-		configRadioMenus(batch, "Batch", new LinguagemListener("Windows Batch", SyntaxConstants.SYNTAX_STYLE_WINDOWS_BATCH), bg2, linguagemMenu);
-		configRadioMenus(clojure, "Clojure", new LinguagemListener("Clojure", SyntaxConstants.SYNTAX_STYLE_CLOJURE), bg2, linguagemMenu);
-		configRadioMenus(css, "CSS", new LinguagemListener("CSS", SyntaxConstants.SYNTAX_STYLE_CSS), bg2, linguagemMenu);
-		configRadioMenus(c, "C", new LinguagemListener("C", SyntaxConstants.SYNTAX_STYLE_C), bg2, linguagemMenu);
-		configRadioMenus(cPlusPlus, "C++", new LinguagemListener("C++", SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS), bg2, linguagemMenu);
-		configRadioMenus(cSharp, "C#", new LinguagemListener("C#", SyntaxConstants.SYNTAX_STYLE_CSHARP), bg2, linguagemMenu);
-		configRadioMenus(d, "D", new LinguagemListener("D", SyntaxConstants.SYNTAX_STYLE_D), bg2, linguagemMenu);
-		configRadioMenus(delphi, "Delphi", new LinguagemListener("Delphi", SyntaxConstants.SYNTAX_STYLE_DELPHI), bg2, linguagemMenu);
-		configRadioMenus(fortran, "Fortran", new LinguagemListener("Fortran", SyntaxConstants.SYNTAX_STYLE_FORTRAN), bg2, linguagemMenu);
-		configRadioMenus(groovy, "Groovy", new LinguagemListener("Groovy", SyntaxConstants.SYNTAX_STYLE_GROOVY), bg2, linguagemMenu);
-		configRadioMenus(html, "HTML", new LinguagemListener("HTML", SyntaxConstants.SYNTAX_STYLE_HTML), bg2, linguagemMenu);
-		configRadioMenus(java, "Java", new LinguagemListener("Java", SyntaxConstants.SYNTAX_STYLE_JAVA), bg2, linguagemMenu);
-		configRadioMenus(javaScript, "JavaScript", new LinguagemListener("JavaScript", SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT), bg2, linguagemMenu);
-		configRadioMenus(jsp, "Java Server Pages", new LinguagemListener("Java Server Pages", SyntaxConstants.SYNTAX_STYLE_JSP), bg2, linguagemMenu);
-		configRadioMenus(json, "JSON", new LinguagemListener("JSON", SyntaxConstants.SYNTAX_STYLE_JSON), bg2, linguagemMenu);
-		configRadioMenus(latex, "LaTex", new LinguagemListener("LaTex", SyntaxConstants.SYNTAX_STYLE_LATEX), bg2, linguagemMenu);
-		configRadioMenus(lisp, "Lisp", new LinguagemListener("Lisp", SyntaxConstants.SYNTAX_STYLE_LISP), bg2, linguagemMenu);
-		configRadioMenus(lua, "Lua", new LinguagemListener("Lua", SyntaxConstants.SYNTAX_STYLE_LUA), bg2, linguagemMenu);
-		configRadioMenus(pascal, "Pascal", new LinguagemListener("Pascal", SyntaxConstants.SYNTAX_STYLE_DELPHI), bg2, linguagemMenu);
-		configRadioMenus(perl, "Perl", new LinguagemListener("Perl", SyntaxConstants.SYNTAX_STYLE_PERL), bg2, linguagemMenu);
-		configRadioMenus(php, "PHP", new LinguagemListener("PHP", SyntaxConstants.SYNTAX_STYLE_PHP), bg2, linguagemMenu);
-		configRadioMenus(plainText, "Plain text", new LinguagemListener("Texto simples", SyntaxConstants.SYNTAX_STYLE_NONE), bg2, linguagemMenu);
-		configRadioMenus(portugol, "Portugol", new PortugolListener(), bg2, linguagemMenu);
-		configRadioMenus(potigol, "Potigol", new PotigolListener(), bg2, linguagemMenu);
-		configRadioMenus(properties, "Properties", new LinguagemListener("Properties", SyntaxConstants.SYNTAX_STYLE_PROPERTIES_FILE), bg2, linguagemMenu);
-		configRadioMenus(pythonL, "Python", new LinguagemListener("Python", SyntaxConstants.SYNTAX_STYLE_PYTHON), bg2, linguagemMenu);	
-		configRadioMenus(ruby, "Ruby", new LinguagemListener("Ruby", SyntaxConstants.SYNTAX_STYLE_RUBY), bg2, linguagemMenu);
-		configRadioMenus(scala, "Scala", new LinguagemListener("Scala", SyntaxConstants.SYNTAX_STYLE_SCALA), bg2, linguagemMenu);
-		configRadioMenus(vb, "Visual Basic", new LinguagemListener("Visual Basic", SyntaxConstants.SYNTAX_STYLE_VISUAL_BASIC), bg2, linguagemMenu);
-		configRadioMenus(unixShell, "Unix Shell", new LinguagemListener("Unix Shell", SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL), bg2, linguagemMenu);
-		configRadioMenus(xml, "XML", new LinguagemListener("XML", SyntaxConstants.SYNTAX_STYLE_XML), bg2, linguagemMenu);
+		actionScript = configRadioMenus("ActionScript", new LinguagemListener("ActionScript", SyntaxConstants.SYNTAX_STYLE_ACTIONSCRIPT), bg2, linguagemMenu);
+		assembly = configRadioMenus("Assembly", new LinguagemListener("Assembly", SyntaxConstants.SYNTAX_STYLE_ASSEMBLER_X86), bg2, linguagemMenu);
+		batch = configRadioMenus("Batch", new LinguagemListener("Windows Batch", SyntaxConstants.SYNTAX_STYLE_WINDOWS_BATCH), bg2, linguagemMenu);
+		clojure = configRadioMenus("Clojure", new LinguagemListener("Clojure", SyntaxConstants.SYNTAX_STYLE_CLOJURE), bg2, linguagemMenu);
+		css = configRadioMenus("CSS", new LinguagemListener("CSS", SyntaxConstants.SYNTAX_STYLE_CSS), bg2, linguagemMenu);
+		c = configRadioMenus("C", new LinguagemListener("C", SyntaxConstants.SYNTAX_STYLE_C), bg2, linguagemMenu);
+		cPlusPlus = configRadioMenus("C++", new LinguagemListener("C++", SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS), bg2, linguagemMenu);
+		cSharp = configRadioMenus("C#", new LinguagemListener("C#", SyntaxConstants.SYNTAX_STYLE_CSHARP), bg2, linguagemMenu);
+		d = configRadioMenus("D", new LinguagemListener("D", SyntaxConstants.SYNTAX_STYLE_D), bg2, linguagemMenu);
+		delphi = configRadioMenus("Delphi", new LinguagemListener("Delphi", SyntaxConstants.SYNTAX_STYLE_DELPHI), bg2, linguagemMenu);
+		fortran = configRadioMenus("Fortran", new LinguagemListener("Fortran", SyntaxConstants.SYNTAX_STYLE_FORTRAN), bg2, linguagemMenu);
+		groovy = configRadioMenus("Groovy", new LinguagemListener("Groovy", SyntaxConstants.SYNTAX_STYLE_GROOVY), bg2, linguagemMenu);
+		html = configRadioMenus("HTML", new LinguagemListener("HTML", SyntaxConstants.SYNTAX_STYLE_HTML), bg2, linguagemMenu);
+		java = configRadioMenus("Java", new LinguagemListener("Java", SyntaxConstants.SYNTAX_STYLE_JAVA), bg2, linguagemMenu);
+		javaScript = configRadioMenus("JavaScript", new LinguagemListener("JavaScript", SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT), bg2, linguagemMenu);
+		jsp = configRadioMenus("Java Server Pages", new LinguagemListener("Java Server Pages", SyntaxConstants.SYNTAX_STYLE_JSP), bg2, linguagemMenu);
+		json = configRadioMenus("JSON", new LinguagemListener("JSON", SyntaxConstants.SYNTAX_STYLE_JSON), bg2, linguagemMenu);
+		latex = configRadioMenus("LaTex", new LinguagemListener("LaTex", SyntaxConstants.SYNTAX_STYLE_LATEX), bg2, linguagemMenu);
+		lisp = configRadioMenus("Lisp", new LinguagemListener("Lisp", SyntaxConstants.SYNTAX_STYLE_LISP), bg2, linguagemMenu);
+		lua = configRadioMenus("Lua", new LinguagemListener("Lua", SyntaxConstants.SYNTAX_STYLE_LUA), bg2, linguagemMenu);
+		pascal = configRadioMenus("Pascal", new LinguagemListener("Pascal", SyntaxConstants.SYNTAX_STYLE_DELPHI), bg2, linguagemMenu);
+		perl = configRadioMenus("Perl", new LinguagemListener("Perl", SyntaxConstants.SYNTAX_STYLE_PERL), bg2, linguagemMenu);
+		php = configRadioMenus("PHP", new LinguagemListener("PHP", SyntaxConstants.SYNTAX_STYLE_PHP), bg2, linguagemMenu);
+		plainText = configRadioMenus("Plain text", new LinguagemListener("Texto simples", SyntaxConstants.SYNTAX_STYLE_NONE), bg2, linguagemMenu);
+		portugol = configRadioMenus("Portugol", new PortugolListener(), bg2, linguagemMenu);
+		potigol = configRadioMenus("Potigol", new PotigolListener(), bg2, linguagemMenu);
+		properties = configRadioMenus("Properties", new LinguagemListener("Properties", SyntaxConstants.SYNTAX_STYLE_PROPERTIES_FILE), bg2, linguagemMenu);
+		pythonL = configRadioMenus("Python", new LinguagemListener("Python", SyntaxConstants.SYNTAX_STYLE_PYTHON), bg2, linguagemMenu);	
+		ruby = configRadioMenus("Ruby", new LinguagemListener("Ruby", SyntaxConstants.SYNTAX_STYLE_RUBY), bg2, linguagemMenu);
+		scala = configRadioMenus("Scala", new LinguagemListener("Scala", SyntaxConstants.SYNTAX_STYLE_SCALA), bg2, linguagemMenu);
+		vb = configRadioMenus("Visual Basic", new LinguagemListener("Visual Basic", SyntaxConstants.SYNTAX_STYLE_VISUAL_BASIC), bg2, linguagemMenu);
+		unixShell = configRadioMenus("Unix Shell", new LinguagemListener("Unix Shell", SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL), bg2, linguagemMenu);
+		xml = configRadioMenus("XML", new LinguagemListener("XML", SyntaxConstants.SYNTAX_STYLE_XML), bg2, linguagemMenu);
 
 		/* Código de configuração dos JButtons da JToolBar.
 		O método recebe o botão a ser configurado, seu ToolTipText, seu ícone e seu listener */
-		bNovo = new JButton();
-		configBtns(bNovo, "Novo arquivo", "imagens/25x25/novo25.png", new NovoListener());
-
-		bAbrir = new JButton();
-		configBtns(bAbrir, "Abrir arquivo", "imagens/25x25/abrir25.png", new AbrirListener());
-
-		bSalvar = new JButton();
-		configBtns(bSalvar, "Salvar arquivo", "imagens/25x25/salvar25.png", new SalvarListener());
-
-		bSalvarComo = new JButton();
-		configBtns(bSalvarComo, "Salvar como", "imagens/25x25/salvarComo25.png", new SalvarComoListener());
+		bNovo = configBtns("Novo arquivo", "imagens/25x25/novo25.png", new NovoListener());
+		bAbrir = configBtns("Abrir arquivo", "imagens/25x25/abrir25.png", new AbrirListener());
+		bSalvar = configBtns("Salvar arquivo", "imagens/25x25/salvar25.png", new SalvarListener());
+		bSalvarComo = configBtns("Salvar como", "imagens/25x25/salvarComo25.png", new SalvarComoListener());
 		barraS.add(separador);
-
-		bCopiar = new JButton();
-		configBtns(bCopiar, "Copiar", "imagens/25x25/copiar25.png", new CopiarListener());
-
-		bColar = new JButton();
-		configBtns(bColar, "Colar", "imagens/25x25/colar25.png", new ColarListener());
-
-		bRecortar = new JButton();
-		configBtns(bRecortar, "Recortar", "imagens/25x25/recortar25.png", new RecortarListener());
-
-		bDesfazer = new JButton();
-		configBtns(bDesfazer, "Desfazer", "imagens/25x25/desfazer25.png", new DesfazerListener());
-
-		bRefazer = new JButton();
-		configBtns(bRefazer, "Refazer", "imagens/25x25/refazer25.png", new RefazerListener());
-
-		bPesquisar = new JButton();
-		configBtns(bPesquisar, "Pesquisar", "imagens/25x25/pesquisar25.png", new PesquisarListener());
+		bCopiar = configBtns("Copiar", "imagens/25x25/copiar25.png", new CopiarListener());
+		bColar = configBtns("Colar", "imagens/25x25/colar25.png", new ColarListener());
+		bRecortar = configBtns("Recortar", "imagens/25x25/recortar25.png", new RecortarListener());
+		bDesfazer = configBtns("Desfazer", "imagens/25x25/desfazer25.png", new DesfazerListener());
+		bRefazer = configBtns("Refazer", "imagens/25x25/refazer25.png", new RefazerListener());
+		bPesquisar = configBtns("Pesquisar", "imagens/25x25/pesquisar25.png", new PesquisarListener());
 		barraS.add(separador2);
-
-		bExecutarPotigol = new JButton();
-		configBtns(bExecutarPotigol, "Executar Potigol", "imagens/25x25/play25.png", new ExecutarPotigolListener());
+		bExecutarPotigol = configBtns("Executar Potigol", "imagens/25x25/play25.png", new ExecutarPotigolListener());
 		bExecutarPotigol.setEnabled(false);
-
-		bImprimir = new JButton();
-		configBtns(bImprimir, "Imprimir", "imagens/25x25/imprimir25.png", new ImprimirPotigolListener());
+		bImprimir = configBtns("Imprimir", "imagens/25x25/imprimir25.png", new ImprimirPotigolListener());
 
 		/* Define o tamanho do ícone com base no SO */
 		if (sistemaOperacional.equals("Linux") || sistemaOperacional.equals("Mac OS X")) {
@@ -456,7 +433,6 @@ public class JCEditor extends JFrame {
 
 	/**
 	* Método que cria os menus para as funções do programa (copiar, colar, abrir, etc.)
-	* @param itemDeMenu JMenuItem - item de menu a ser configurado
 	* @param nome String - nome que será dado ao JMenuItem
 	* @param img String - caminho da imagem PNG do JMenuItem
 	* @param ev ActionListener - evento que será executado ao pressionar o menu
@@ -464,47 +440,52 @@ public class JCEditor extends JFrame {
 	* @param ac2 int - accelerator (ActionEvent)
 	* @param principal JMenu - menu ao qual o JMenuItem pertence
 	*/
-	private void configMenu(JMenuItem itemDeMenu, String nome , String img, ActionListener ev, int ac, int ac2, JMenu principal) {
-		itemDeMenu = new JMenuItem(nome);
+	private JMenuItem configMenu(String nome , String img, ActionListener ev, int ac, int ac2, JMenu principal) {
+		JMenuItem itemDeMenu = new JMenuItem(nome);
 		itemDeMenu.setIcon(new ImageIcon(getClass().getResource(img)));
 		itemDeMenu.addActionListener(ev);
 		itemDeMenu.setFont(roboto);
 		itemDeMenu.setAccelerator(KeyStroke.getKeyStroke(ac, ac2));
 		principal.add(itemDeMenu);
+
+		return itemDeMenu;
 	}
 
 	/**
 	* Método que cria o ToolTipText, adiciona a imagem, ActionListener, efeito(classe EfeitoBtn) e,
 	* por fim, adiciona o JButton na JToolBar (barraS)
-	* @param btn JButton - botão que será configurado
 	* @param toolTipText String - ToolTipText que será exibido
 	* @param img String - caminho da imagem do JButton
 	* @param ev ActionListener - evento que será executado ao pressionar o botão
 	*/
-	private void configBtns(JButton btn , String toolTipText, String img, ActionListener ev) {
+	private JButton configBtns(String toolTipText, String img, ActionListener ev) {
+		JButton btn = new JButton();
 		btn.setToolTipText(toolTipText);
 		btn.setIcon(new ImageIcon(getClass().getResource(img)));
 		btn.addActionListener(ev);
 		EfeitoBtn eb = new EfeitoBtn(btn);
 		barraS.add(btn);
+
+		return btn;
 	}
 
 	/**
 	* Método que cria os JRadioButtonMenuItem(s)
-	* @param menu JRadioButtonMenuItem - menu de rádio que será configurado
 	* @param nome String - nome do menu
 	* @param ev ActionListener - evento que será executado ao pressionar o menu
 	* @param bg ButtonGroup - grupo a qual o menu pertence (não é possível ter mais de um selecionado)
 	* @param mPrincipal - menu ao qual o menu de rádio pertence
 	*/
-	private void configRadioMenus(JRadioButtonMenuItem menu, String nome, ActionListener ev, ButtonGroup bg, JMenu mPrincipal) {
-		menu = new JRadioButtonMenuItem(nome);
+	private JRadioButtonMenuItem configRadioMenus(String nome, ActionListener ev, ButtonGroup bg, JMenu mPrincipal) {
+		JRadioButtonMenuItem menu = new JRadioButtonMenuItem(nome);
 		menu.addActionListener(ev);
 		menu.setFont(roboto);
 		bg.add(menu);
 
 		mPrincipal.add(menu);
+		return menu;
 	}
+
 	/**
 	* Este método é chamado quando o usuário clica no botão fechar ou no menu sair. Percorre todos os
 	* arquivos abertos em busca de modificações, em caso positivo, pergunta se o usuário deseja salvar
@@ -924,8 +905,6 @@ public class JCEditor extends JFrame {
 
 			int i = arquivos.getSelectedIndex();
 			arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista, arquivosAbertos));
-
-			lista.get(arquivos.getSelectedIndex()).verificarNome();
 
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
 			carregarTema(sTema);
