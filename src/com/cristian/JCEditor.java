@@ -619,16 +619,6 @@ public class JCEditor extends JFrame {
 		arrastarESoltar();
 		arquivosAbertos.add(arquivo.toString());
 
-		if (dobrarCodigo.isSelected()) {
-			lista.get(arquivos.getSelectedIndex()).getRSyntax().setCodeFoldingEnabled(true);
-			lista.get(arquivos.getSelectedIndex()).barraDeRolagem().setFoldIndicatorEnabled(true);
-		}
-
-		if (quebrarLinha.isSelected()) {
-			lista.get(arquivos.getSelectedIndex()).getRSyntax().setLineWrap(true);
-			lista.get(arquivos.getSelectedIndex()).getRSyntax().setWrapStyleWord(true);
-		}
-
 		if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 			bExecutarPotigol.setEnabled(true);
 		}
@@ -662,6 +652,16 @@ public class JCEditor extends JFrame {
 				Theme tema = Theme.load(in);
 				tema.apply(adt.getRSyntax());
 			} catch (IOException ex) {  }
+		}
+
+		if (dobrarCodigo.isSelected()) {
+			lista.get(arquivos.getSelectedIndex()).getRSyntax().setCodeFoldingEnabled(true);
+			lista.get(arquivos.getSelectedIndex()).barraDeRolagem().setFoldIndicatorEnabled(true);
+		}
+
+		if (quebrarLinha.isSelected()) {
+			lista.get(arquivos.getSelectedIndex()).getRSyntax().setLineWrap(true);
+			lista.get(arquivos.getSelectedIndex()).getRSyntax().setWrapStyleWord(true);
 		}
 	}
 
@@ -916,16 +916,6 @@ public class JCEditor extends JFrame {
 			bg2.clearSelection();
 			arrastarESoltar();
 			updateFonte();
-
-			if (dobrarCodigo.isSelected()) {
-				lista.get(arquivos.getSelectedIndex()).getRSyntax().setCodeFoldingEnabled(true);
-				lista.get(arquivos.getSelectedIndex()).barraDeRolagem().setFoldIndicatorEnabled(true);
-			}
-
-			if (quebrarLinha.isSelected()) {
-				lista.get(arquivos.getSelectedIndex()).getRSyntax().setLineWrap(true);
-				lista.get(arquivos.getSelectedIndex()).getRSyntax().setWrapStyleWord(true);
-			}
 		}
 	}
 

@@ -101,7 +101,6 @@ public class Preferencias {
 				}
 
 				if (sub.equals("2")) {
-					editor.carregarTema(conteudo);
 					editor.sTema = conteudo;
 				}
 
@@ -123,6 +122,7 @@ public class Preferencias {
 					editor.getQuebrarLinha().setSelected(true);
 				}
 			}
+			editor.carregarTema(editor.sTema);
 		} catch (Exception ex) { ex.printStackTrace(); }
 	}
 
