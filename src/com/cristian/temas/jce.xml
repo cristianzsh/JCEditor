@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE RSyntaxTheme SYSTEM "theme.dtd">
 
-<!--
-	Dark theme based off of Notepad++'s Obsidian theme.
-	See theme.dtd and org.fife.ui.rsyntaxtextarea.Theme for more information.
--->
 <RSyntaxTheme version="1.0">
 
    <!-- Omitting baseFont will use a system-appropriate monospaced. -->
@@ -18,7 +14,7 @@
    <marginLine fg="394448"/>
    <markAllHighlight color="6b8189"/> <!-- TODO: Fix me -->
    <markOccurrencesHighlight color="5b7179" border="false"/>
-   <matchedBracket fg="6A8088" bg="6b8189" highlightBoth="false" animate="true"/>
+   <matchedBracket fg="DBE0CC" highlightBoth="true" animate="false"/>
    <hyperlinks fg="a082bd"/>
    <secondaryLanguages>
       <language index="1" bg="333344"/>
@@ -27,9 +23,9 @@
    </secondaryLanguages>
    
    <!-- Gutter styling. -->
-   <gutterBorder color="81969A"/>
-   <lineNumbers fg="81969A"/>
-   <foldIndicator fg="6A8088" iconBg="2f383c"/>
+   <gutterBorder color="272822"/>
+   <lineNumbers fg="8F908A"/>
+   <foldIndicator fg="8F908A" iconBg="272822"/>
    <iconRowHeader activeLineRange="3399ff"/>
    
    <!-- Syntax tokens. -->
