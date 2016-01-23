@@ -33,7 +33,7 @@
       <style token="IDENTIFIER" fg="000000"/>
       <style token="RESERVED_WORD" fg="ff5a22" bold="true"/>
       <style token="RESERVED_WORD_2" fg="ff5a22" bold="true"/>
-      <style token="ANNOTATION" fg="E8E2B7"/>
+      <style token="ANNOTATION" fg="808000"/>
       <style token="COMMENT_DOCUMENTATION" fg="6C788C"/>
       <style token="COMMENT_EOL" fg="66747B"/>
       <style token="COMMENT_MULTILINE" fg="66747B"/>
