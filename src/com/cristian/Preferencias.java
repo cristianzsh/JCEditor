@@ -106,12 +106,10 @@ public class Preferencias {
 
 				if (sub.equals("3")) {
 					editor.setFonteEscolhida(conteudo);
-					editor.updateFonte();
 				}
 
 				if (sub.equals("4")) {
 					editor.setTamanhoFonte(Integer.parseInt(conteudo));
-					editor.updateFonte();
 				}
 
 				if (sub.equals("5") && conteudo.equals("dobrarCodigo")) {
@@ -123,6 +121,7 @@ public class Preferencias {
 				}
 			}
 			editor.carregarTema(editor.sTema);
+			editor.updateFonte();
 		} catch (Exception ex) { ex.printStackTrace(); }
 	}
 

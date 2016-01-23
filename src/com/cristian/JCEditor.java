@@ -603,7 +603,6 @@ public class JCEditor extends JFrame {
 		lista.add(at);
 		arquivos.addTab("Sem nome", at);
 		arquivos.setSelectedIndex(lista.size() - 1);
-		adicionarDocumentListener();
 		arquivos.setTabComponentAt(arquivos.getSelectedIndex(), new ButtonTabComponent(arquivos, lista, arquivosAbertos));
 		arquivos.setTitleAt(arquivos.getSelectedIndex(), arquivo.getName());
 
@@ -613,11 +612,8 @@ public class JCEditor extends JFrame {
 
 		arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), arquivo.toString());
 		linguagem.setText(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
-		definirTitulo();
-		carregarTema(sTema);
-		updateFonte();
-		arrastarESoltar();
 		arquivosAbertos.add(arquivo.toString());
+		carregarTema(sTema);
 
 		if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 			bExecutarPotigol.setEnabled(true);
@@ -663,6 +659,11 @@ public class JCEditor extends JFrame {
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setLineWrap(true);
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setWrapStyleWord(true);
 		}
+
+		adicionarDocumentListener();
+		updateFonte();
+		arrastarESoltar();
+		definirTitulo();
 	}
 
 	/**
@@ -697,7 +698,7 @@ public class JCEditor extends JFrame {
 	}
 
 	/**
-	* Utilizado na classe Preferencias, apenas remove o primeiro índice do JTabbedPanel	
+	* Utilizado na classe Preferencias, apenas remove o primeiro índice do JTabbedPane	
 	* em caso de existirem arquivos a serem abertos.
 	*/
 	public void configAoAbrir() {
@@ -907,15 +908,10 @@ public class JCEditor extends JFrame {
 			arquivos.setTabComponentAt(i, new ButtonTabComponent(arquivos, lista, arquivosAbertos));
 
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_NONE);
-			carregarTema(sTema);
-
-			adicionarDocumentListener();
 			arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), "Sem nome");
 			linguagem.setText(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
-			definirTitulo();
 			bg2.clearSelection();
-			arrastarESoltar();
-			updateFonte();
+			carregarTema(sTema);
 		}
 	}
 
