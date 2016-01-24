@@ -17,9 +17,9 @@
    <matchedBracket fg="DBE0CC" highlightBoth="true" animate="false"/>
    <hyperlinks fg="a082bd"/>
    <secondaryLanguages>
-      <language index="1" bg="333344"/>
-      <language index="2" bg="223322"/>
-      <language index="3" bg="332222"/>
+      <language index="1" bg="373833"/>
+      <language index="2" bg="373833"/>
+      <language index="3" bg="373833"/>
    </secondaryLanguages>
    
    <!-- Gutter styling. -->
@@ -48,11 +48,11 @@
       <style token="LITERAL_STRING_DOUBLE_QUOTE" fg="9880E9"/>
       <style token="LITERAL_CHAR" fg="EC7600"/>
       <style token="LITERAL_BACKQUOTE" fg="9880E9"/>
-      <style token="MARKUP_TAG_DELIMITER" fg="678CB1"/>
-      <style token="MARKUP_TAG_NAME" fg="ABBFD3" bold="true"/>
-      <style token="MARKUP_TAG_ATTRIBUTE" fg="B3B689"/>
-      <style token="MARKUP_TAG_ATTRIBUTE_VALUE" fg="e1e2cf"/>
-      <style token="MARKUP_COMMENT" fg="66747B"/>
+      <style token="MARKUP_TAG_DELIMITER" fg="FFFFFF"/>
+      <style token="MARKUP_TAG_NAME" fg="f92672" bold="false"/>
+      <style token="MARKUP_TAG_ATTRIBUTE" fg="99DC2A"/>
+      <style token="MARKUP_TAG_ATTRIBUTE_VALUE" fg="E6DB74"/>
+      <style token="MARKUP_COMMENT" fg="676E54"/>
       <style token="MARKUP_DTD" fg="A082BD"/>
       <style token="MARKUP_PROCESSING_INSTRUCTION" fg="A082BD"/>
       <style token="MARKUP_CDATA" fg="d5e6f0"/>
