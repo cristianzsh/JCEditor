@@ -609,6 +609,7 @@ public class JCEditor extends JFrame {
 		lista.get(arquivos.getSelectedIndex()).abrir(arquivo);
 		lista.get(arquivos.getSelectedIndex()).getRSyntax().discardAllEdits();
 		lista.get(arquivos.getSelectedIndex()).arquivoModificado(false);
+		lista.get(arquivos.getSelectedIndex()).getRSyntax().setCaretPosition(0);
 
 		arquivos.setToolTipTextAt(arquivos.getSelectedIndex(), arquivo.toString());
 		linguagem.setText(lista.get(arquivos.getSelectedIndex()).getLinguagem() + "   ");
