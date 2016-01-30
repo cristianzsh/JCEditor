@@ -33,7 +33,7 @@ import org.fife.rsta.ac.java.JavaLanguageSupport;
 * Possui métodos para detecção da linguagem de programação,
 * além de métodos para salvar e abrir arquivos.
 * @author    Cristian Henrique (cristianmsbr@gmail.com)
-* @version   1.8
+* @version   1.9
 * @since     Segunda atualização
 */
 
@@ -352,13 +352,6 @@ public class AreaDeTexto extends JPanel {
 			jfc.setFileView(new JFCFileView());
 		}
 		return jfc;
-	}
-
-	/**
-	* Retorna o valor da barra de rolagem.
-	*/
-	public RTextScrollPane getBarra() {
-		return this.barra;
 	}
 
 	/**

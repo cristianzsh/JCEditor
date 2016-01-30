@@ -75,8 +75,7 @@ public class JCEditor extends JFrame {
 	private Font roboto = new Font("Roboto Light", Font.PLAIN, 14);
 	private JLabel separador = new JLabel("   ");
 	private JLabel separador2 = new JLabel("   ");
-	private JLabel fonteAtual;
-	private JLabel linguagem;
+	private JLabel fonteAtual, linguagem;
 	private JToolBar barraS;
 	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, addProjeto, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
 		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props, desfazer, refazer, selecionarTudo;
@@ -93,8 +92,8 @@ public class JCEditor extends JFrame {
 	private ButtonGroup bg, bg2, bg3;
 	private String fonteEscolhida = "Monospaced";
 	private int tamanhoFonte = 12;
-	private String titulo;
-	public String sLAF, sTema, auxArquivo, auxLinguagem;
+	private String titulo, auxArquivo, auxLinguagem;
+	public String sLAF, sTema;
 	private ArrayList<AreaDeTexto> lista = new ArrayList<>();
 	private ArrayList<String> arquivosAbertos = new ArrayList<>();
 	private JScrollPane scrollPane;
@@ -630,7 +629,7 @@ public class JCEditor extends JFrame {
 		barraDeMenu.setBorder(null);
 		for (AreaDeTexto adt : lista) {
 			adt.setBorder(null);
-			adt.getBarra().setBorder(null);
+			adt.barraDeRolagem().setBorder(null);
 			scrollPane.setBorder(null);
 			painelSeparador.setBorder(null);
 			SwingUtilities.updateComponentTreeUI(adt.fileChooser());
