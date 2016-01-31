@@ -81,8 +81,6 @@ public class JCEditor extends JFrame {
 		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props, desfazer, refazer, selecionarTudo;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch, plainText;
-	private JRadioButtonMenuItem padrao, nimbus, metal, sistema, motif;
-	private JRadioButtonMenuItem dark, jce, defaultT, defaultAlt, eclipse, idea, darkii, idle, vs;
 	private JRadioButtonMenuItem gerarEstrutura, dobrarCodigo, quebrarLinha;
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema, projeto;
@@ -96,6 +94,7 @@ public class JCEditor extends JFrame {
 	public String sLAF, sTema;
 	private ArrayList<AreaDeTexto> lista = new ArrayList<>();
 	private ArrayList<String> arquivosAbertos = new ArrayList<>();
+	private JRadioButtonMenuItem[] menusAparencia = new JRadioButtonMenuItem[14];
 	private JScrollPane scrollPane;
 	private JSplitPane painelSeparador;
 	private ArvoreDeProjetos adp;
@@ -198,23 +197,23 @@ public class JCEditor extends JFrame {
 		Sua estrutura é semelhante a do método "configMenu" exceto por utilizar um ButtonGroup(para que
 		só exista um botão selecionado) e também pelo fato de não existir um ícone */
 		bg = new ButtonGroup();
-		padrao = configRadioMenus("JCE", new LAFPadraoListener(), bg, lookAndFeel);
-		nimbus = configRadioMenus("Nimbus", new LAFListener("javax.swing.plaf.nimbus.NimbusLookAndFeel"), bg, lookAndFeel);
-		metal = configRadioMenus("Metal", new LAFListener("javax.swing.plaf.metal.MetalLookAndFeel"), bg, lookAndFeel);
-		sistema = configRadioMenus("Sistema", new LAFListener(UIManager.getSystemLookAndFeelClassName()), bg, lookAndFeel);
-		motif = configRadioMenus("Motif", new LAFListener("com.sun.java.swing.plaf.motif.MotifLookAndFeel"), bg, lookAndFeel);
+		menusAparencia[0] = configRadioMenus("JCE", new LAFPadraoListener(), bg, lookAndFeel);
+		menusAparencia[1] = configRadioMenus("Nimbus", new LAFListener("javax.swing.plaf.nimbus.NimbusLookAndFeel"), bg, lookAndFeel);
+		menusAparencia[2] = configRadioMenus("Metal", new LAFListener("javax.swing.plaf.metal.MetalLookAndFeel"), bg, lookAndFeel);
+		menusAparencia[3] = configRadioMenus("Sistema", new LAFListener(UIManager.getSystemLookAndFeelClassName()), bg, lookAndFeel);
+		menusAparencia[4] = configRadioMenus("Motif", new LAFListener("com.sun.java.swing.plaf.motif.MotifLookAndFeel"), bg, lookAndFeel);
 
 		/* Código de configuração dos menus de temas */
 		bg3 = new ButtonGroup();
-		jce = configRadioMenus("JCE", new TemaListener("jce"), bg3, tema);
-		dark = configRadioMenus("Dark", new TemaListener("dark"), bg3, tema);
-		darkii = configRadioMenus("Dark II", new TemaListener("darkii"), bg3, tema);
-		defaultT = configRadioMenus("Default", new TemaListener("default"), bg3, tema);
-		defaultAlt = configRadioMenus("Default-Alt", new TemaListener("default-alt"), bg3, tema);
-		eclipse = configRadioMenus("Eclipse", new TemaListener("eclipse"), bg3, tema);
-		idea = configRadioMenus("IDEA", new TemaListener("idea"), bg3, tema);
-		dark = configRadioMenus("IDLE", new TemaListener("idle"), bg3, tema);
-		vs = configRadioMenus("Visual Studio", new TemaListener("vs"), bg3, tema);
+		menusAparencia[5] = configRadioMenus("JCE", new TemaListener("jce"), bg3, tema);
+		menusAparencia[6] = configRadioMenus("Dark", new TemaListener("dark"), bg3, tema);
+		menusAparencia[7] = configRadioMenus("Dark II", new TemaListener("darkii"), bg3, tema);
+		menusAparencia[8] = configRadioMenus("Default", new TemaListener("default"), bg3, tema);
+		menusAparencia[9] = configRadioMenus("Default-Alt", new TemaListener("default-alt"), bg3, tema);
+		menusAparencia[10] = configRadioMenus("Eclipse", new TemaListener("eclipse"), bg3, tema);
+		menusAparencia[11] = configRadioMenus("IDEA", new TemaListener("idea"), bg3, tema);
+		menusAparencia[12] = configRadioMenus("IDLE", new TemaListener("idle"), bg3, tema);
+		menusAparencia[13] = configRadioMenus("Visual Studio", new TemaListener("vs"), bg3, tema);
 
 		gerarEstrutura = new JRadioButtonMenuItem("Gerar estrutura");
 		gerarEstrutura.setIcon(new ImageIcon(getClass().getResource("imagens/estrutura.png")));
@@ -743,6 +742,14 @@ public class JCEditor extends JFrame {
 	*/
 	public JRadioButtonMenuItem getQuebrarLinha() {
 		return this.quebrarLinha;
+	}
+
+	/**
+	* Retorna a matriz que contém os itens de menu que fazem
+	* o controle da aparência (tema e LAF).
+	*/
+	public JRadioButtonMenuItem[] getMenusDeAparencia() {
+		return this.menusAparencia;
 	}
 
 	/**

@@ -98,10 +98,56 @@ public class Preferencias {
 					}
 					editor = new JCEditor();
 					editor.sLAF = conteudo;
+
+					switch (conteudo) {
+						case "jce":
+							editor.getMenusDeAparencia()[0].setSelected(true);
+							break;
+						case "javax.swing.plaf.nimbus.NimbusLookAndFeel":
+							editor.getMenusDeAparencia()[1].setSelected(true);
+							break;
+						case "javax.swing.plaf.metal.MetalLookAndFeel":
+							editor.getMenusDeAparencia()[2].setSelected(true);
+							break;
+						case "com.sun.java.swing.plaf.motif.MotifLookAndFeel":
+							editor.getMenusDeAparencia()[4].setSelected(true);
+							break;
+						default:
+							editor.getMenusDeAparencia()[3].setSelected(true);
+					}
 				}
 
 				if (sub.equals("2")) {
 					editor.sTema = conteudo;
+
+					switch (conteudo) {
+						case "jce":
+							editor.getMenusDeAparencia()[5].setSelected(true);
+							break;
+						case "dark":
+							editor.getMenusDeAparencia()[6].setSelected(true);
+							break;
+						case "darkii":
+							editor.getMenusDeAparencia()[7].setSelected(true);
+							break;
+						case "default":
+							editor.getMenusDeAparencia()[8].setSelected(true);
+							break;
+						case "default-alt":
+							editor.getMenusDeAparencia()[9].setSelected(true);
+							break;
+						case "eclipse":
+							editor.getMenusDeAparencia()[10].setSelected(true);
+							break;
+						case "idea":
+							editor.getMenusDeAparencia()[11].setSelected(true);
+							break;
+						case "idle":
+							editor.getMenusDeAparencia()[12].setSelected(true);
+							break;
+						case "vs":
+							editor.getMenusDeAparencia()[13].setSelected(true);
+					}
 				}
 
 				if (sub.equals("3")) {
