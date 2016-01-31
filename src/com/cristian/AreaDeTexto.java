@@ -39,7 +39,6 @@ import org.fife.rsta.ac.java.JavaLanguageSupport;
 
 public class AreaDeTexto extends JPanel {
 	private RSyntaxTextArea display = null;
-	private JPanel pnlText = null;
 	private InputStream in;
 	private Map<String, String> extensao = new HashMap<>();
 	private JFileChooser jfc;
@@ -201,7 +200,6 @@ public class AreaDeTexto extends JPanel {
 			return;
 		} else {
 			setArquivo(fileChooser().getSelectedFile());
-			String s = fileChooser().getSelectedFile().toString();
 			extensao(fileChooser().getSelectedFile());
 				if (arquivo.exists()) {
 					JOptionPane.showMessageDialog(this, "Sobrescrever?");
