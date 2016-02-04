@@ -597,6 +597,10 @@ public class JCEditor extends JFrame {
 			}
 		}
 
+		if (!arquivo.exists()) {
+			return;
+		}
+
 		at = new AreaDeTexto();
 		lista.add(at);
 		arquivos.addTab("Sem nome", at);
