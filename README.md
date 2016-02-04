@@ -1,9 +1,9 @@
 # JCEditor
 Editor de texto criado em Java
 
-[![Gitter](https://badges.gitter.im/cristian-henrique/JCEditor.svg)](https://gitter.im/cristian-henrique/JCEditor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integração com a linguagem [Potigol](http://potigol.github.io/), desenvolvida no IFRN.
+
+[![Gitter](https://badges.gitter.im/cristian-henrique/JCEditor.svg)](https://gitter.im/cristian-henrique/JCEditor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Configuração no Linux
   ![JCEditor](http://i.imgur.com/ftFqutt.png)
