@@ -12,14 +12,12 @@ import javax.swing.JButton;
 * @since     Segunda atualização
 */
 public class EfeitoBtn {
-	private JButton btn;
 
 	/**
 	* Construtor da classe EfeitoBtn, se encarrega da criação de bordas e efeitos das mesmas
 	* @param btn JButton - botão que receberá os efeitos
 	*/
 	public EfeitoBtn(final JButton btn) {
-		this.btn = btn;
 		btn.setContentAreaFilled(false);
 		btn.setFocusPainted(false);
 		btn.setFocusable(false);
