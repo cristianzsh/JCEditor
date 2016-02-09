@@ -6,7 +6,7 @@ O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integ
 [![Gitter](https://badges.gitter.im/cristian-henrique/JCEditor.svg)](https://gitter.im/cristian-henrique/JCEditor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Configuração no Linux
-  ![JCEditor](http://i.imgur.com/ftFqutt.png)
+  ![JCEditor](http://i.imgur.com/mpWaKwC.png)
   - Baixe os arquivos JCEditor.jar e configPotigol.zip e os coloque no mesmo diretório;
   - Entre no Terminal e digite: ````java -jar JCEditor.jar````;
 
@@ -28,11 +28,11 @@ O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integ
   - Salve o arquivo criado com o nome desejado e a extensão ````.desktop````
 
 ## Configuração no Mac
-  ![JCEditor](http://i.imgur.com/Xcdfgr1.png)
+  ![JCEditor](http://i.imgur.com/r8o8BiG.png)
   - Baixe os arquivos JCEditor.jar e configPotigol.zip e os coloque no mesmo diretório;
   - Apenas clique duas vezes no arquivo JCEditor.jar e espere a mensagem informando que o Potigol está configurado aparecer.
 
 ## Configuração no Windows
-  ![JCEditor](http://i.imgur.com/D1CvS4h.png)
+  ![JCEditor](http://i.imgur.com/LVg5JWP.png)
   - Baixe os arquivos JCEditor.jar e configPotigol.zip e os coloque no mesmo diretório;
   - Dê um duplo clique no arquivo JCEditor.jar e, se tudo ocorrer normalmente, você verá uma mensagem informando que o Potigol foi configurado.
