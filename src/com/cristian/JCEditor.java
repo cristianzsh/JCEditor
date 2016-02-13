@@ -96,8 +96,9 @@ public class JCEditor extends JFrame {
 	private ArrayList<String> arquivosAbertos = new ArrayList<>();
 	private JRadioButtonMenuItem[] menusAparencia = new JRadioButtonMenuItem[14];
 	private JScrollPane scrollPane;
-	private JSplitPane painelSeparador;
+	private JSplitPane painelSeparador, painelPrincipal;
 	private ArvoreDeProjetos adp;
+	private TerminalPotigol terminal;
 	private String sistemaOperacional = System.getProperty("os.name");
 
 	/**
@@ -398,9 +399,15 @@ public class JCEditor extends JFrame {
 		painelSeparador.setOneTouchExpandable(true);
 		painelSeparador.setBorder(null);
 
+		terminal = new TerminalPotigol();
+		painelPrincipal = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, painelSeparador, terminal);
+		painelPrincipal.setDividerLocation(600);
+		painelPrincipal.setOneTouchExpandable(true);
+		painelPrincipal.setBorder(null);
+
 		getContentPane().add(BorderLayout.NORTH, barraS);
 		getContentPane().add(BorderLayout.SOUTH, panel);	// apenas define o layout dos componentes
-		getContentPane().add(BorderLayout.CENTER, painelSeparador);
+		getContentPane().add(BorderLayout.CENTER, painelPrincipal);
 		this.setJMenuBar(barraDeMenu);
 		this.setIconImage(icone);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -630,11 +637,14 @@ public class JCEditor extends JFrame {
 	private void atualizarLAF() {
 		SwingUtilities.updateComponentTreeUI(this);
 		barraDeMenu.setBorder(null);
+		painelPrincipal.setBorder(null);
+		painelSeparador.setBorder(null);
+		scrollPane.setBorder(null);
+		terminal.getBarra().setBorder(null);
+
 		for (AreaDeTexto adt : lista) {
 			adt.setBorder(null);
 			adt.barraDeRolagem().setBorder(null);
-			scrollPane.setBorder(null);
-			painelSeparador.setBorder(null);
 			SwingUtilities.updateComponentTreeUI(adt.fileChooser());
 		}
 	}
@@ -1172,23 +1182,7 @@ public class JCEditor extends JFrame {
 			}
 
 			if (lista.get(arquivos.getSelectedIndex()).isPotigol() && lista.get(arquivos.getSelectedIndex()).getArquivo() != null) {
-				String cmd;
-				String usuario = System.getProperty("user.home") + "/ConfigJCE/.potigol";
-
-				try {
-					if (sistemaOperacional.equals("Linux")) {
-						cmd = usuario + "/ExecPotigol.sh " + lista.get(arquivos.getSelectedIndex()).getArquivo().toString().replace(" ", "?")
-							+ " " + lista.get(arquivos.getSelectedIndex()).getArquivo().getName();
-						Runtime.getRuntime().exec(cmd);
-					} else if (sistemaOperacional.equals("Mac OS X")) {
-						cmd = "osascript " + usuario + "/ExecPotigol.scpt " + lista.get(arquivos.getSelectedIndex()).getArquivo().toString();
-						Runtime.getRuntime().exec(cmd);
-					} else {
-						cmd = "cmd.exe /c start " + usuario + "/ExecPotigol.bat " +
-							"\"" + lista.get(arquivos.getSelectedIndex()).getArquivo().toString() + "\" " + lista.get(arquivos.getSelectedIndex()).getArquivo().getName();
-						Runtime.getRuntime().exec(cmd);
-					}
-				} catch (Exception ex) { ex.printStackTrace(); }
+				terminal.executarComando(lista.get(arquivos.getSelectedIndex()).getArquivo());
 			}
 		}
 	}
