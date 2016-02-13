@@ -27,6 +27,7 @@ import javax.swing.text.DocumentFilter;
 * Classe que executa os arquivos do Potigol.
 * @author   Cristian Henrique (cristianmsbr@gmail.com)
 * @version  1.0
+* @since    Versão 2.0
 */
 
 public class TerminalPotigol extends JTabbedPane {
