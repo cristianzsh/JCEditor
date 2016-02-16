@@ -706,7 +706,9 @@ public class JCEditor extends JFrame {
 	private void abrirProjeto() {
 		JFileChooser jfc = new JFileChooser();
 		jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		jfc.showOpenDialog(this);
+		if (jfc.showOpenDialog(null) == JFileChooser.CANCEL_OPTION) {
+			return;
+		}
 		adp.adicionarFilhos(new File(jfc.getSelectedFile().toString()));
 	}
 
