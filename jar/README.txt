@@ -6,8 +6,8 @@ Se você estiver utilizando a versão 1.9 ou anteriores, entre no Terminal e per
 .sh (responsável pela execução do Potigol), para isso, entre na pasta ConfigJCE/.potigol
 (localizada em sua pasta de usuário) e depois digite chmod 777 ExecPotigol.sh
 
-Caso você tenha problemas para executar programas em Potigol, por conta de pastas com espaçamentos,
-utilize a versão 1.9 do JCEditor ou coloque os arquivos em pastas sem espaçamentos no nome.
+Caso você tenha problemas para executar programas em Potigol, por conta de pastas com
+espaçamentos, utilize a versão 1.9 do JCEditor ou coloque os arquivos em pastas sem espaçamentos no nome.
 
 Agradecimentos especiais ao site Icons8 e ao Freepik por alguns dos ícones e texturas utilizados no editor.
 
