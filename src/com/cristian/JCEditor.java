@@ -375,10 +375,6 @@ public class JCEditor extends JFrame {
 				if (tp != null && !adp.getArq().isDirectory() && ev.getClickCount() == 2) {
 					adicionarAba(adp.getArq());
 					lista.get(arquivos.getSelectedIndex()).getRSyntax().requestFocus();
-
-					if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
-						bExecutarPotigol.setEnabled(true);
-					}
 				}
 			}
 		});
