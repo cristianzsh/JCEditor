@@ -57,6 +57,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.tree.TreePath;
+import org.fife.ui.autocomplete.AutoCompletion;
+import org.fife.ui.autocomplete.CompletionProvider;
 import org.fife.ui.rsyntaxtextarea.AbstractTokenMakerFactory;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.Theme;
@@ -795,6 +797,17 @@ public class JCEditor extends JFrame {
 		}
 	}
 
+	private void completarPotigol() {
+		CompletionProvider provedor = new AutocompletarPotigol().criar();
+		AutoCompletion ac = new AutoCompletion(provedor);
+		ac.setAutoActivationDelay(300);
+		ac.setAutoActivationEnabled(true);
+		ac.setAutoCompleteSingleChoices(false);
+		ac.setParameterAssistanceEnabled(true);
+		ac.setShowDescWindow(true);
+		ac.install(lista.get(arquivos.getSelectedIndex()).getRSyntax());
+	}
+
 	/**
 	* Classe interna que implementa ActionListener
 	* Esta classe chama o JDialog que contém informações sobre o JCE
@@ -1157,6 +1170,7 @@ public class JCEditor extends JFrame {
 			atmf.putMapping("text/potigol", "com.cristian.PotigolTokenMaker");
 			lista.get(arquivos.getSelectedIndex()).getRSyntax().setSyntaxEditingStyle("text/potigol");
 			updateLanguage("Potigol");
+			completarPotigol();
 
 			if (lista.get(arquivos.getSelectedIndex()).getArquivo() != null && lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 				bExecutarPotigol.setEnabled(true);
