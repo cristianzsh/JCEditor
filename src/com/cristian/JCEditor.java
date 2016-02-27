@@ -625,6 +625,7 @@ public class JCEditor extends JFrame {
 
 		if (lista.get(arquivos.getSelectedIndex()).isPotigol()) {
 			bExecutarPotigol.setEnabled(true);
+			completarPotigol();
 		}
 	}
 
