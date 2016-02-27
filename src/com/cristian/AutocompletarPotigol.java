@@ -7,6 +7,12 @@ import org.fife.ui.autocomplete.CompletionProvider;
 import org.fife.ui.autocomplete.DefaultCompletionProvider;
 import org.fife.ui.autocomplete.ShorthandCompletion;
 
+/**
+* Funções de autocompletar da linguagem Potigol.
+* @author  Cristian Henrique (cristianmsbr@gmail.com)
+* @version 1.0
+* @since   Versão 2.0
+*/
 public class AutocompletarPotigol {
 	private DefaultCompletionProvider provedor;
 	private String[][] palavrasComExplicacao = {
