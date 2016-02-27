@@ -10,11 +10,11 @@ import org.fife.ui.autocomplete.ShorthandCompletion;
 public class AutocompletarPotigol {
 	private DefaultCompletionProvider provedor;
 	private String[][] palavrasComExplicacao = {
-	{"leia_inteiro",        ""},
-	{"leia_texto",          ""},
-	{"leia_inteiros",       ""},
-	{"inteiro",             ""},
-	{"arredonde",           ""},
+	{"leia_inteiro",        "<b>leia_inteiro</b><p>Lê um número inteiro<br/><br/>Exemplos:<br/><br/>n = leia_inteiro<br/>x, y, z = leia_inteiro</p>"},
+	{"leia_texto",          "<b>leia_texto</b><p>Lê um texto<br/><br/>Exemplos:<br/><br/>t = leia_texto<br/>a, b = leia_texto</p>"},
+	{"leia_inteiros",       "<b>leia_inteiros</b><p>Lê uma lista de inteiros<br/><br/>Exemplos:<br/><br/>números = leia_inteiros<br/>números = leia_inteiros(5)</p>"},
+	{"inteiro",             "<b>inteiro</b><p>Converte para o tipo inteiro<br/><br/>Exemplos:<br/><br/>12345.678.inteiro<br/>\"123\".inteiro</p>"},
+	{"arredonde",           "<b>arredonde</b><p>Arredonda o número<br/><br/>Exemplos:<br/><br/>12345.678.arredonde<br/>12345.678.arredonde(2)</p>"},
 	{"texto",               ""},
 	{"formato",             ""},
 	{"real",                ""},
