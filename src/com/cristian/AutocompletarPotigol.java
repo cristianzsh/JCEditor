@@ -9,74 +9,99 @@ import org.fife.ui.autocomplete.ShorthandCompletion;
 
 /**
 * Funções de autocompletar da linguagem Potigol.
+* @author  Leonardo Lucena (leonardo.lucena@ifrn.edu.br)
 * @author  Cristian Henrique (cristianmsbr@gmail.com)
 * @version 1.0
 * @since   Versão 2.0
 */
+
 public class AutocompletarPotigol {
 	private DefaultCompletionProvider provedor;
 	private String[][] palavrasComExplicacao = {
-	{"leia_inteiro",        "<b>leia_inteiro</b><p>Lê um número inteiro<br/><br/>Exemplos:<br/><br/>n = leia_inteiro<br/>x, y, z = leia_inteiro</p>"},
-	{"leia_texto",          "<b>leia_texto</b><p>Lê um texto<br/><br/>Exemplos:<br/><br/>t = leia_texto<br/>a, b = leia_texto</p>"},
-	{"leia_inteiros",       "<b>leia_inteiros</b><p>Lê uma lista de inteiros<br/><br/>Exemplos:<br/><br/>números = leia_inteiros<br/>números = leia_inteiros(5)</p>"},
-	{"inteiro",             "<b>inteiro</b><p>Converte para o tipo inteiro<br/><br/>Exemplos:<br/><br/>12345.678.inteiro<br/>\"123\".inteiro</p>"},
-	{"arredonde",           "<b>arredonde</b><p>Arredonda o número<br/><br/>Exemplos:<br/><br/>12345.678.arredonde<br/>12345.678.arredonde(2)</p>"},
-	{"texto",               "<b>texto</b><p>Converte para texto<br/><br/>Exemplos:<br/><br/>12345.texto</p>"},
-	{"formato",             "<b>formato</b><p>Formata uma expressão<br/><br/>Exemplos:<br/><br/>12345 formato \"%8d\"<br/>123.45 formato \"%.1f\"</p>"},
-	{"real",                "<b>real</b><p>Converte para um número de ponto flutuante<br/><br/>Exemplos:<br/><br/>\"12.3\".real<br/>\"12a.3\".real</p>"},
-	{"tamanho",             "<b>tamanho</b><p>Retorna o tamanho de uma lista ou string<br/><br/>Exemplos:<br/><br/>\"abc\".tamanho<br/>[2, 4, 6, 8, 10].tamanho</p>"},
-	{"posição",             "<b>posição</b><p>Retorna a posição onde o item passado como argumento está<br/><br/>Exemplos:<br/><br/>\"abc\".posição('b')<br/>a.posição(6)</p>"},
-	{"contém",              "<b>contém</b><p>Verifica se uma string ou lista contém o argumento informado<br/><br/>Exemplos:<br/><br/>\"abc\".contém('a')<br/>a.contém(6)</p>"},
-	{"maiúsculo",           "<b>maiúsculo</b><p>Deixa o texto maiúsculo<br/><br/>Exemplos:<br/><br/>\"Abc\".maiúsculo<br/>\"AbCd\".maiúsculo</p>"},
-	{"minúsculo",           "<b>minúsculo</b><p>Deixa o texto minúsculo<br/><br/>Exemplos:<br/><br/>\"AbCd\".minúsculo<br/>\"ABC\".minúsculo</p>"},
-	{"inverta",             "<b>inverta</b><p>Inverte a ordem de um texto ou lista<br/><br/>Exemplos:<br/><br/>\"Abc\".inverta<br/>[2, 4, 6, 8, 10].inverta</p>"},
-	{"divida",              "<b>divida</b><p>Divide o texto<br/><br/>Exemplos:<br/><br/>\"Este é um texto\".divida<br/>\"Este é um texto\".divida(\"t\")</p>"},
-	{"cabeça",              ""},
-	{"último",              ""},
-	{"cauda",               ""},
-	{"pegue",               ""},
-	{"descarte",            ""},
-	{"selecione",           ""},
-	{"descarte_enquanto",   ""},
-	{"pegue_enquanto",      ""},
-	{"ordene",              ""},
-	{"junte",               ""},
-	{"remova",              ""},
-	{"insira",              ""},
-	{"mapeie",              ""},
-	{"injete",              ""},
-	{"sen",                 ""},
-	{"cos",                 ""},
-	{"tg",                  ""},
-	{"arcsen",              ""},
-	{"arccos",              ""},
-	{"arctg",               ""},
-	{"abs",                 ""},
-	{"raiz",                ""},
-	{"log",                 ""},
-	{"log10",               ""},
-	{"então",               ""},
-	{"fim",                 ""},
-	{"senãose",             ""},
-	{"caso",                ""},
-	{"de",                  ""},
-	{"até",                 ""},
-	{"faça",                ""},
-	{"var",                 ""},
-	{"passo",               ""},
-	{"em",                  ""},
-	{"tipo",                ""},
-	{"e",                   ""},
-	{"ou",                  ""},
-	{"não",                 ""},
-	{"verdadeiro",          ""},
-	{"falso",               ""},
+	{"leia_inteiro",        "<b>leia_inteiro</b><p>lê um número inteiro do teclado</p><code>num = leia_inteiro</code>"},
+	{"leia_real",           "<b>leia_real</b><p>lê um número real do teclado</p><code>num = leia_real</code>"},
+	{"leia_texto",          "<b>leia_texto</b><p>lê um texto do teclado</p><code>texto = leia_texto"},
+	{"leia_inteiros",       "<b>leia_inteiros(delimitador: Texto)</b><p>lê uma lista de números inteiros separados por um delimitador</p><code>números = leia_inteiros(\",\")"},
+	{"leia_inteiros",       "<b>leia_inteiros(n: Inteiro)</b><p>lê n números inteiros (um por linha).</p><code>números = leia_inteiros(4)"},
+	{"inteiro",             "<b>inteiro</b><p>converte para inteiro</p><code>número = 12.23<br>n = número.inteiro   # 12"},
+	{"arredonde",           "<b>arredonde</b><p>arredonda o número para o inteiro mais próximo</p><code>n=12.89<br>n.arredonde    # 13</code>"},
+	{"arredonde",           "<b>arredonde(casas: Inteiro)</b><p>arredonda o número para o quantidade de casas decimais</p><code>n=12.34<br>n.arredonde(1)   # 12.3"},
+	{"texto",               "<b>texto</b><p>converte para texto</p>"},
+	{"formato",             "<b>formato</b><p>formata um número para ser exibido como texto</p><code>123.45 formato \"%.1f\"   # 123.4"},
+	{"real",                "<b>real</b><p>converte para real</p><code>\"12.3\".real   # 12.3<br>\"12a.3\".real   # 12.0"},
+	{"tamanho",             "<b>tamanho</b><p>devolve o tamanho de uma lista ou de um texto</p>"},
+	{"posição",             "<b>posição(elemento)</b><p>devolve a posição do elemento na lista ou no texto</p>"},
+	{"contém",              "<b>contém(conteúdo)</b><p>verifica se conteúdo pertence a uma lista ou a um texto</p>"},
+	{"maiúsculo",           "<b>maiúsculo</b><p>devolve o texto convertido em letras maiúsculas</p><code>m = \"Potigol\" # \"POTIGOL\""},
+	{"minúsculo",           "<b>minúsculo</b><p>devolve o texto convertido em letras minúsculas</p>"},
+	{"inverta",             "<b>inverta</b><p>devolve uma nova lista ou um novo texto como os elementos invertidos</p>"},
+	{"divida",              "<b>divida(delimitador = \" \")</b><p>divide um texto em subtextos baseado em um delimitador, devolve uma lista destes subtextos</p>"},
+	{"cabeça",              "<b>cabeça</b><p>devolve o primeiro elemento de um texto ou de uma lista</p>"},
+	{"último",              "<b>último</b><p>devolve o último elemento de um texto ou de uma lista</p>"},
+	{"cauda",               "<b>cauda</b><p>devolve um novo texto ou uma nova lista contendo todos os elementos, exceto o primeiro</p>"},
+	{"pegue",               "<b>pegue(n)</b><p>devolve os n primeiros caracteres de um texto ou os n primeiros elementos de uma lista</p>"},
+	{"descarte",            "<b>descarte</b><p>descarta os n primeiros caracteres do texto ou os primeiros n elementos da lista, devolve o restante</p>"},
+	{"selecione",           "<b>selecione(condição)</b><p>devolve uma lista ou um texto com os elementos que satisfazem a condição</p><code>[1,2,3,4,5,6].selecione(n => n mod 2 == 0)   # [2,4,6]</code>"},
+	{"descarte_enquanto",   "<b>descarte_enquanto(condição)</b><p>descarta os primeiros caracteres do texto ou os primeiros n elementos da lista até que a condição seja falsa, devolve o restante</p>"},
+	{"pegue_enquanto",      "<b>pegue_enquanto(condição)</b><p>devolve os primeiros caracteres de um texto ou os primeiros elementos de uma lista até que a condição seja falsa</p>"},
+	{"ordene",              "<b>ordene</b><p>devolve uma nova lista com os elementos em ordem crescente</p>"},
+	{"junte",               "<b>junte(delimitador = \"\")</b><p>devolve um texto contendo os elementos separados pelo delimitador</p>"},
+	{"junte",               "<b>junte(início, delimitador, fim)</b><p>devolve um texto contendo o início, os elementos separados pelo delimitador e o fim</p>"},
+	{"remova",              "<b>remova(posição)</b><p>devolve uma nova lista sem o elemento da posição indicada</p>"},
+	{"insira",              "<b>insira(posição, valor)</b><p>devolve uma nova lista acrescida do valor na posição indicada</p>"},
+	{"mapeie",              "<b>mapeie(função)</b><p>devolve uma nova lista mapeando os elementos da lista original aplicando a função</p>"},
+	{"injete",              "<b>injete(neutro)(operação)</b><p>devolve o resultado da injeção da operação entre os elementos</p><code>[1,3,5,7].injete(0)((a,b) => a + b)  # 0 + 1 + 3 + 5 + 7</code>"},
+	{"primeiro",            "<b>primeiro</b><p>devolve o primeiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).primeiro   # \"potigol\"</code>"},
+	{"segundo",             "<b>segundo</b><p>devolve o segundo componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).segundo   # 2016</code>"},
+	{"terceiro",            "<b>terceiro</b><p>devolve o terceiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).terceiro   # verdadeiro</code>"},
+	{"quarto",              "<b>quarto</b><p>devolve o quarto componente de uma tupla</p>"},
+	{"quinto",              "<b>quinto</b><p>devolve o quinto componente de uma tupla</p>"},
+	{"sexto",               "<b>sexto</b><p>devolve o sexto componente de uma tupla</p>"},
+	{"sétimo",              "<b>sétimo</b><p>devolve o sétimo componente de uma tupla</p>"},
+	{"oitavo",              "<b>oitavo</b><p>devolve o oitavo componente de uma tupla</p>"},
+	{"nono",                "<b>nono</b><p>devolve o nono componente de uma tupla</p>"},
+	{"décimo",              "<b>décimo</b><p>devolve o décimo componente de uma tupla</p>"},
+	{"Lista.imutável",      "<b>Lista.imutável(tamanho, valor)</b><p>devolve uma lista do tamanho indicado contendo o mesmo valor</p><code>Lista.imutável(5,0)   #  [0,0,0,0,0]</code>"},
+	{"Lista.imutável",      "<b>Lista.vazia[Tipo]</b><p>devolve uma lista vazia do tipo indicado</p>"},
+	{"Lista.mutável",       "<b>Lista.mutável(tamanho, valor)</b><p>devolve uma lista mutável do tamanho indicado contendo o mesmo valor</p><code>Lista.mutável(5,0)   #  [0,0,0,0,0].mutável</code>"},
+	{"Matriz.imutável",     "<b>Matriz.imutável(linhas, colunas, valor)</b><p>devolve uma matriz do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.imutável(2,2,0)   #  [[0,0],[0,0]]</code>"},
+	{"Matriz.mutável",      "<b>Matriz.mutável(linhas, colunas, valor)</b><p>devolve uma matriz mutável do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.mutável(2,2,0)</code>"},
+	{"Cubo.imutável",       "<b>Cubo.imutável(x, y, z, valor)</b><p>devolve um cubo do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.imutável(2,2,2,0)   #  [[[0,0],[0,0]],[[0,0],[0,0]]]</code>"},
+	{"Cubo.mutável",        "<b>Cubo.mutável(x, y, z, valor)</b><p>devolve um cubo mutável do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.mutável(2,2,2,0)</code>"},
+	{"sen",                 "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>"},
+	{"cos",                 "<b>cos(ângulo)</b><p>calcula o cosseno do ângulo</p>"},
+	{"tg",                  "<b>tg(ângulo)</b><p>calcula a tangente do ângulo</p>"},
+	{"arcsen",              "<b>arcsen(n: Real)</b><p>calcula o arco cujo seno é n</p>"},
+	{"arccos",              "<b>arccos(n: Real)</b><p>calcula o arco cujo cosseno é n</p>"},
+	{"arctg",               "<b>arctg(n: Real)</b><p>calcula o arco cuja tangente é n</p>"},
+	{"abs",                 "<b>abs(n)</b><p>calcula o valor absoluto de n</p>"},
+	{"raiz",                "<b>raiz(n)</b><p>calcula a raiz quadrada de n</p>"},
+	{"log",                 "<b>log(n)</b><p>calcula o logaritmo de n</p>"},
+	{"log10",               "<b>log10(n)</b><p>calcula o logaritmo de n na base 10</p>"},
+	{"aleatório",           "<b>aleatório</b><p>devolve um número aleatório entre 0 e 1</p>"},
+	{"aleatório",           "<b>aleatório(máximo)</b><p>devolve um número aleatório entre 1 e máximo</p>"},
+	{"aleatório",           "<b>aleatório(mínimo, máximo)</b><p>devolve um número aleatório entre mínimo e máximo</p>"},
+	{"aleatório",           "<b>aleatório(lista)</b><p>devolve um valor escolhido aleatoreamente entre os valores da lista</p>"},
+	{"então",               "<b>então</b><p></p>"},
+	{"fim",                 "<b>fim</b><p></p>"},
+	{"senãose",             "<b>senãose</b><p>permite uma outra condição dentro de um se</p>"},
+	{"caso",                "<b>caso</b><p></p>"},
+	{"de",                  "<b>de</b><p></p>"},
+	{"até",                 "<b>até</b><p></p>"},
+	{"faça",                "<b>faça</b><p></p>"},
+	{"gere",                "<b>gere</b><p></p>"},
+	{"passo",               "<b>passo</b><p>define o passo entre os valores de uma faixa</p>"},
+	{"em",                  "<b>em</b><p></p>"},
+	{"e",                   "<b>e</b><p>e lógico</p>"},
+	{"ou",                  "<b>ou</b><p>ou lógico</p>"},
+	{"não",                 "<b>não</b><p>não lógico</p>"},
+	{"verdadeiro",          "<b>verdadeiro</b><p></p>"},
+	{"falso",               "<b>falso</b><p></p>"}
 	};
 
 	public CompletionProvider criar() {
 		provedor = new DefaultCompletionProvider();
-		provedor.setAutoActivationRules(true, "");
-		// provedor.setParameterizedCompletionParams('(', ".", ')');
+		provedor.setAutoActivationRules(true, ".");
 
 		for (String[] exp : palavrasComExplicacao) {
 			String palavra = exp[0];
@@ -84,12 +109,19 @@ public class AutocompletarPotigol {
 			provedor.addCompletion(new BasicCompletion(provedor, palavra, null, explic));
 		}
 
-		addTemplateCompletion("para", "para ${x} de ${y}${cursor} até ${z} faça\n\t${cursor}\nfim", "gera a estrutura do loop para");
-		addTemplateCompletion("se", "se (${}) então\n\t${cursor}\nfim", "gera a estrutura do condicional se");
-		addTemplateCompletion("escolha", "escolha (${x})\n\t${cursor}\nfim", "gera a estrutura do comando escolha");
-		addTemplateCompletion("enquanto", "enquanto (${x}) faça\n\t${cursor}\n\t${x} := ${x} + 1\nfim", "gera a estrutura do comando enquanto");
-		addTemplateCompletion("escreva", "escreva \"${cursor}\"", "escreve com quebra de linha");
-		addTemplateCompletion("imprima", "imprima \"${cursor}\"", "escreve sem quebra de linha");
+		addTemplateCompletion("para", "para ${x} de ${cursor} até ${cursor} faça\n\t${cursor}\nfim", "gera a estrutura do laço para");
+		addTemplateCompletion("paragere", "para ${x} de ${cursor} até ${cursor} gere\n\t${cursor}\nfim", "gera a estrutura do laço para gere");
+		addTemplateCompletion("função", "${cursor}(${cursor})\n\t${cursor}\nfim", "gera a estrutura de função em linha");
+		addTemplateCompletion("lambda", "(${n}) => ${cursor}", "gera a estrutura de uma expressão lambda");
+		addTemplateCompletion("função em linha", "${cursor}(${cursor}) = ${cursor}", "gera a estrutura de função em linha");
+		addTemplateCompletion("variável", "var ${cursor} := ${cursor}", "gera a estrutura de declaração de uma variável");
+		addTemplateCompletion("tipo", "tipo ${cursor} = ${cursor}", "gera a estrutura de declaração de um tipo");
+		addTemplateCompletion("se", "se ${cursor} então\n\t${cursor}\nfim", "gera a estrutura do condicional se");
+		addTemplateCompletion("sesenão", "se ${cursor} então\n\t${cursor}\nsenão\n\t${cursor}\nfim", "gera a estrutura do condicional se então senão");
+		addTemplateCompletion("escolha", "escolha ${cursor}\n\tcaso ${cursor} => ${cursor}\nfim", "gera a estrutura do comando escolha");
+		addTemplateCompletion("enquanto", "enquanto ${cursor} faça\n\t${cursor}\nfim", "gera a estrutura do comando enquanto");
+		addTemplateCompletion("escreva", "escreva \"${cursor}\"", "escreve e passe para a próxima linha");
+		addTemplateCompletion("imprima", "imprima \"${cursor}\"", "escreve e continua na mesma linha");
 
 		return provedor;
 	}
