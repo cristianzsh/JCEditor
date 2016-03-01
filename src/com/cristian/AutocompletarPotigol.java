@@ -109,8 +109,8 @@ public class AutocompletarPotigol {
 			provedor.addCompletion(new BasicCompletion(provedor, palavra, null, explic));
 		}
 
-		addTemplateCompletion("para", "para ${x} de ${cursor} até ${cursor} faça\n\t${cursor}\nfim", "gera a estrutura do laço para");
-		addTemplateCompletion("paragere", "para ${x} de ${cursor} até ${cursor} gere\n\t${cursor}\nfim", "gera a estrutura do laço para gere");
+		addTemplateCompletion("para", "para ${x} de ${y} até ${z} faça\n\t${cursor}\nfim", "gera a estrutura do laço para");
+		addTemplateCompletion("paragere", "para ${x} de ${y} até ${z} gere\n\t${cursor}\nfim", "gera a estrutura do laço para gere");
 		addTemplateCompletion("função", "${cursor}(${cursor})\n\t${cursor}\nfim", "gera a estrutura de função em linha");
 		addTemplateCompletion("lambda", "(${n}) => ${cursor}", "gera a estrutura de uma expressão lambda");
 		addTemplateCompletion("função em linha", "${cursor}(${cursor}) = ${cursor}", "gera a estrutura de função em linha");
