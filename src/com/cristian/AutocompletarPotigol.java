@@ -111,9 +111,9 @@ public class AutocompletarPotigol {
 
 		addTemplateCompletion("para", "para ${x} de ${y} até ${z} faça\n\t${cursor}\nfim", "gera a estrutura do laço para");
 		addTemplateCompletion("paragere", "para ${x} de ${y} até ${z} gere\n\t${cursor}\nfim", "gera a estrutura do laço para gere");
-		addTemplateCompletion("função", "${cursor}(${cursor})\n\t${cursor}\nfim", "gera a estrutura de função em linha");
+		addTemplateCompletion("função", "(${})\n\t${cursor}\nfim", "gera a estrutura de função em linha");
 		addTemplateCompletion("lambda", "(${n}) => ${cursor}", "gera a estrutura de uma expressão lambda");
-		addTemplateCompletion("função em linha", "${cursor}(${cursor}) = ${cursor}", "gera a estrutura de função em linha");
+		addTemplateCompletion("função em linha", "(${}) = ${cursor}", "gera a estrutura de função em linha");
 		addTemplateCompletion("variável", "var ${cursor} := ${cursor}", "gera a estrutura de declaração de uma variável");
 		addTemplateCompletion("tipo", "tipo ${cursor} = ${cursor}", "gera a estrutura de declaração de um tipo");
 		addTemplateCompletion("se", "se ${cursor} então\n\t${cursor}\nfim", "gera a estrutura do condicional se");
