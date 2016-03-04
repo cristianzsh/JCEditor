@@ -116,12 +116,12 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("função em linha", "(${}) = ${cursor}", "gera a estrutura de função em linha");
 		addTemplateCompletion("variável", "var ${x} := ${cursor}", "gera a estrutura de declaração de uma variável");
 		addTemplateCompletion("tipo", "tipo ${t} = ${cursor}", "gera a estrutura de declaração de um tipo");
-		addTemplateCompletion("se", "se (${condição}) então\n\t${cursor}\nfim", "gera a estrutura do condicional se");
-		addTemplateCompletion("sesenão", "se (${condição}) então\n\t${cursor}\nsenão\n\nfim", "gera a estrutura do condicional se então senão");
-		addTemplateCompletion("escolha", "escolha ${cursor}\n\tcaso ${cursor} => ${cursor}\nfim", "gera a estrutura do comando escolha");
-		addTemplateCompletion("enquanto", "enquanto ${cursor} faça\n\t${cursor}\nfim", "gera a estrutura do comando enquanto");
-		addTemplateCompletion("escreva", "escreva \"${cursor}\"", "escreve e passe para a próxima linha");
-		addTemplateCompletion("imprima", "imprima \"${cursor}\"", "escreve e continua na mesma linha");
+		addTemplateCompletion("se", "se ${condição} então\n\t${cursor}\nfim", "gera a estrutura do condicional se");
+		addTemplateCompletion("sesenão", "se ${condição} então\n\t${cursor}\nsenão\n\nfim", "gera a estrutura do condicional se então senão");
+		addTemplateCompletion("escolha", "escolha ${x}\n\tcaso ${y} => ${cursor}\nfim", "gera a estrutura do comando escolha");
+		addTemplateCompletion("enquanto", "enquanto ${condição} faça\n\t${cursor}\nfim", "gera a estrutura do comando enquanto");
+		addTemplateCompletion("escreva", "escreva \"${}\"${cursor}", "escreve e passe para a próxima linha");
+		addTemplateCompletion("imprima", "imprima \"${}\"${cursor}", "escreve e continua na mesma linha");
 
 		return provedor;
 	}
