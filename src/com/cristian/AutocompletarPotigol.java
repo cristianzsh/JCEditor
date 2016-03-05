@@ -25,13 +25,11 @@ public class AutocompletarPotigol {
 	{"leia_inteiros",       "<b>leia_inteiros(n: Inteiro)</b><p>lê n números inteiros (um por linha).</p><code>números = leia_inteiros(4)"},
 	{"inteiro",             "<b>inteiro</b><p>converte para inteiro</p><code>número = 12.23<br>n = número.inteiro   # 12"},
 	{"arredonde",           "<b>arredonde</b><p>arredonda o número para o inteiro mais próximo</p><code>n=12.89<br>n.arredonde    # 13</code>"},
-	{"arredonde",           "<b>arredonde(casas: Inteiro)</b><p>arredonda o número para o quantidade de casas decimais</p><code>n=12.34<br>n.arredonde(1)   # 12.3"},
 	{"texto",               "<b>texto</b><p>converte para texto</p>"},
 	{"formato",             "<b>formato</b><p>formata um número para ser exibido como texto</p><code>123.45 formato \"%.1f\"   # 123.4"},
 	{"real",                "<b>real</b><p>converte para real</p><code>\"12.3\".real   # 12.3<br>\"12a.3\".real   # 12.0"},
 	{"tamanho",             "<b>tamanho</b><p>devolve o tamanho de uma lista ou de um texto</p>"},
 	{"posição",             "<b>posição(elemento)</b><p>devolve a posição do elemento na lista ou no texto</p>"},
-	{"contém",              "<b>contém(conteúdo)</b><p>verifica se conteúdo pertence a uma lista ou a um texto</p>"},
 	{"maiúsculo",           "<b>maiúsculo</b><p>devolve o texto convertido em letras maiúsculas</p><code>m = \"Potigol\" # \"POTIGOL\""},
 	{"minúsculo",           "<b>minúsculo</b><p>devolve o texto convertido em letras minúsculas</p>"},
 	{"inverta",             "<b>inverta</b><p>devolve uma nova lista ou um novo texto como os elementos invertidos</p>"},
@@ -66,10 +64,7 @@ public class AutocompletarPotigol {
 	{"Lista.mutável",       "<b>Lista.mutável(tamanho, valor)</b><p>devolve uma lista mutável do tamanho indicado contendo o mesmo valor</p><code>Lista.mutável(5,0)   #  [0,0,0,0,0].mutável</code>"},
 	{"Matriz.imutável",     "<b>Matriz.imutável(linhas, colunas, valor)</b><p>devolve uma matriz do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.imutável(2,2,0)   #  [[0,0],[0,0]]</code>"},
 	{"Matriz.mutável",      "<b>Matriz.mutável(linhas, colunas, valor)</b><p>devolve uma matriz mutável do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.mutável(2,2,0)</code>"},
-	{"Cubo.imutável",       "<b>Cubo.imutável(x, y, z, valor)</b><p>devolve um cubo do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.imutável(2,2,2,0)   #  [[[0,0],[0,0]],[[0,0],[0,0]]]</code>"},
-	{"Cubo.mutável",        "<b>Cubo.mutável(x, y, z, valor)</b><p>devolve um cubo mutável do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.mutável(2,2,2,0)</code>"},
 	{"sen",                 "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>"},
-	{"cos",                 "<b>cos(ângulo)</b><p>calcula o cosseno do ângulo</p>"},
 	{"tg",                  "<b>tg(ângulo)</b><p>calcula a tangente do ângulo</p>"},
 	{"raiz",                "<b>raiz(n)</b><p>calcula a raiz quadrada de n</p>"},
 	{"log",                 "<b>log(n)</b><p>calcula o logaritmo de n</p>"},
@@ -122,6 +117,11 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("arcsen", "arcsen(${n})${cursor}", "<b>arcsen(n: Real)</b><p>calcula o arco cujo seno é n</p>");
 		addTemplateCompletion("arccos", "arccos(${n})${cursor}", "<b>arccos(n: Real)</b><p>calcula o arco cujo cosseno é n</p>");
 		addTemplateCompletion("arctg", "arctg(${n})${cursor}", "<b>arctg(n: Real)</b><p>calcula o arco cuja tangente é n</p>");
+		addTemplateCompletion("arredonde", "arredonde(${casas})${cursor}", "<b>arredonde(casas: Inteiro)</b><p>arredonda o número para o quantidade de casas decimais</p><code>n=12.34<br>n.arredonde(1)   # 12.3");
+		addTemplateCompletion("contém", "contém(${conteúdo})${cursor}", "<b>contém(conteúdo)</b><p>verifica se conteúdo pertence a uma lista ou a um texto</p>");
+		addTemplateCompletion("cos", "cos(${ângulo})${cursor}", "<b>cos(ângulo)</b><p>calcula o cosseno do ângulo</p>");
+		addTemplateCompletion("Cubo.imutável", "Cubo.imutável(${x}, ${y}, ${z}, ${valor})${cursor}", "<b>Cubo.imutável(x, y, z, valor)</b><p>devolve um cubo do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.imutável(2,2,2,0)   #  [[[0,0],[0,0]],[[0,0],[0,0]]]</code>");
+		addTemplateCompletion("Cubo.mutável", "Cubo.mutável(${x}, ${y}, ${z}, ${valor})${cursor}", "<b>Cubo.mutável(x, y, z, valor)</b><p>devolve um cubo mutável do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.mutável(2,2,2,0)</code>");
 
 		return provedor;
 	}
