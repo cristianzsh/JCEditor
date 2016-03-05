@@ -71,14 +71,10 @@ public class AutocompletarPotigol {
 	{"sen",                 "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>"},
 	{"cos",                 "<b>cos(ângulo)</b><p>calcula o cosseno do ângulo</p>"},
 	{"tg",                  "<b>tg(ângulo)</b><p>calcula a tangente do ângulo</p>"},
-	{"arcsen",              "<b>arcsen(n: Real)</b><p>calcula o arco cujo seno é n</p>"},
-	{"arccos",              "<b>arccos(n: Real)</b><p>calcula o arco cujo cosseno é n</p>"},
-	{"arctg",               "<b>arctg(n: Real)</b><p>calcula o arco cuja tangente é n</p>"},
 	{"raiz",                "<b>raiz(n)</b><p>calcula a raiz quadrada de n</p>"},
 	{"log",                 "<b>log(n)</b><p>calcula o logaritmo de n</p>"},
 	{"log10",               "<b>log10(n)</b><p>calcula o logaritmo de n na base 10</p>"},
 	{"aleatório",           "<b>aleatório</b><p>devolve um número aleatório entre 0 e 1</p>"},
-	{"aleatório",           "<b>aleatório(lista)</b><p>devolve um valor escolhido aleatoreamente entre os valores da lista</p>"},
 	{"então",               "<b>então</b><p></p>"},
 	{"fim",                 "<b>fim</b><p></p>"},
 	{"senãose",             "<b>senãose</b><p>permite uma outra condição dentro de um se</p>"},
@@ -122,6 +118,10 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("abs", "abs(${n})${cursor}", "<b>abs(n)</b><p>calcula o valor absoluto de n</p>");
 		addTemplateCompletion("aleatório", "aleatório(${máximo})${cursor}", "<b>aleatório(máximo)</b><p>devolve um número aleatório entre 1 e máximo</p>");
 		addTemplateCompletion("aleatório", "aleatório(${mínimo}, ${máximo})${cursor}", "<b>aleatório(mínimo, máximo)</b><p>devolve um número aleatório entre mínimo e máximo</p>");
+		addTemplateCompletion("aleatório", "aleatório(${l})${cursor}", "<b>aleatório(lista)</b><p>devolve um valor escolhido aleatoreamente entre os valores da lista</p>");
+		addTemplateCompletion("arcsen", "arcsen(${n})${cursor}", "<b>arcsen(n: Real)</b><p>calcula o arco cujo seno é n</p>");
+		addTemplateCompletion("arccos", "arccos(${n})${cursor}", "<b>arccos(n: Real)</b><p>calcula o arco cujo cosseno é n</p>");
+		addTemplateCompletion("arctg", "arctg(${n})${cursor}", "<b>arctg(n: Real)</b><p>calcula o arco cuja tangente é n</p>");
 
 		return provedor;
 	}
