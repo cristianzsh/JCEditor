@@ -33,14 +33,12 @@ public class AutocompletarPotigol {
 	{"maiúsculo",           "<b>maiúsculo</b><p>devolve o texto convertido em letras maiúsculas</p><code>m = \"Potigol\" # \"POTIGOL\""},
 	{"minúsculo",           "<b>minúsculo</b><p>devolve o texto convertido em letras minúsculas</p>"},
 	{"inverta",             "<b>inverta</b><p>devolve uma nova lista ou um novo texto como os elementos invertidos</p>"},
-	{"divida",              "<b>divida(delimitador = \" \")</b><p>divide um texto em subtextos baseado em um delimitador, devolve uma lista destes subtextos</p>"},
 	{"cabeça",              "<b>cabeça</b><p>devolve o primeiro elemento de um texto ou de uma lista</p>"},
 	{"último",              "<b>último</b><p>devolve o último elemento de um texto ou de uma lista</p>"},
 	{"cauda",               "<b>cauda</b><p>devolve um novo texto ou uma nova lista contendo todos os elementos, exceto o primeiro</p>"},
 	{"pegue",               "<b>pegue(n)</b><p>devolve os n primeiros caracteres de um texto ou os n primeiros elementos de uma lista</p>"},
 	{"descarte",            "<b>descarte</b><p>descarta os n primeiros caracteres do texto ou os primeiros n elementos da lista, devolve o restante</p>"},
 	{"selecione",           "<b>selecione(condição)</b><p>devolve uma lista ou um texto com os elementos que satisfazem a condição</p><code>[1,2,3,4,5,6].selecione(n => n mod 2 == 0)   # [2,4,6]</code>"},
-	{"descarte_enquanto",   "<b>descarte_enquanto(condição)</b><p>descarta os primeiros caracteres do texto ou os primeiros n elementos da lista até que a condição seja falsa, devolve o restante</p>"},
 	{"pegue_enquanto",      "<b>pegue_enquanto(condição)</b><p>devolve os primeiros caracteres de um texto ou os primeiros elementos de uma lista até que a condição seja falsa</p>"},
 	{"ordene",              "<b>ordene</b><p>devolve uma nova lista com os elementos em ordem crescente</p>"},
 	{"junte",               "<b>junte(delimitador = \"\")</b><p>devolve um texto contendo os elementos separados pelo delimitador</p>"},
@@ -122,6 +120,8 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("cos", "cos(${ângulo})${cursor}", "<b>cos(ângulo)</b><p>calcula o cosseno do ângulo</p>");
 		addTemplateCompletion("Cubo.imutável", "Cubo.imutável(${x}, ${y}, ${z}, ${valor})${cursor}", "<b>Cubo.imutável(x, y, z, valor)</b><p>devolve um cubo do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.imutável(2,2,2,0)   #  [[[0,0],[0,0]],[[0,0],[0,0]]]</code>");
 		addTemplateCompletion("Cubo.mutável", "Cubo.mutável(${x}, ${y}, ${z}, ${valor})${cursor}", "<b>Cubo.mutável(x, y, z, valor)</b><p>devolve um cubo mutável do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.mutável(2,2,2,0)</code>");
+		addTemplateCompletion("descarte_enquanto", "descarte_enquanto(${condição})${cursor}", "<b>descarte_enquanto(condição)</b><p>descarta os primeiros caracteres do texto ou os primeiros n elementos da lista até que a condição seja falsa, devolve o restante</p>");
+		addTemplateCompletion("divida", "divida(\"${delimitador}\")${cursor}", "<b>divida(delimitador = \" \")</b><p>divide um texto em subtextos baseado em um delimitador, devolve uma lista destes subtextos</p>");
 
 		return provedor;
 	}
