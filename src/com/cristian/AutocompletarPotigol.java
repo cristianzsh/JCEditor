@@ -46,7 +46,6 @@ public class AutocompletarPotigol {
 	{"remova",              "<b>remova(posição)</b><p>devolve uma nova lista sem o elemento da posição indicada</p>"},
 	{"insira",              "<b>insira(posição, valor)</b><p>devolve uma nova lista acrescida do valor na posição indicada</p>"},
 	{"mapeie",              "<b>mapeie(função)</b><p>devolve uma nova lista mapeando os elementos da lista original aplicando a função</p>"},
-	{"injete",              "<b>injete(neutro)(operação)</b><p>devolve o resultado da injeção da operação entre os elementos</p><code>[1,3,5,7].injete(0)((a,b) => a + b)  # 0 + 1 + 3 + 5 + 7</code>"},
 	{"primeiro",            "<b>primeiro</b><p>devolve o primeiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).primeiro   # \"potigol\"</code>"},
 	{"segundo",             "<b>segundo</b><p>devolve o segundo componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).segundo   # 2016</code>"},
 	{"terceiro",            "<b>terceiro</b><p>devolve o terceiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).terceiro   # verdadeiro</code>"},
@@ -122,6 +121,7 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("Cubo.mutável", "Cubo.mutável(${x}, ${y}, ${z}, ${valor})${cursor}", "<b>Cubo.mutável(x, y, z, valor)</b><p>devolve um cubo mutável do tamanho indicado por x, y e z contendo o mesmo valor</p><code>Cubo.mutável(2,2,2,0)</code>");
 		addTemplateCompletion("descarte_enquanto", "descarte_enquanto(${condição})${cursor}", "<b>descarte_enquanto(condição)</b><p>descarta os primeiros caracteres do texto ou os primeiros n elementos da lista até que a condição seja falsa, devolve o restante</p>");
 		addTemplateCompletion("divida", "divida(\"${delimitador}\")${cursor}", "<b>divida(delimitador = \" \")</b><p>divide um texto em subtextos baseado em um delimitador, devolve uma lista destes subtextos</p>");
+		addTemplateCompletion("injete", "injete(${neutro})(${operação})${cursor}", "<b>injete(neutro)(operação)</b><p>devolve o resultado da injeção da operação entre os elementos</p><code>[1,3,5,7].injete(0)((a,b) => a + b)  # 0 + 1 + 3 + 5 + 7</code>");
 
 		return provedor;
 	}
