@@ -41,10 +41,7 @@ public class AutocompletarPotigol {
 	{"selecione",           "<b>selecione(condição)</b><p>devolve uma lista ou um texto com os elementos que satisfazem a condição</p><code>[1,2,3,4,5,6].selecione(n => n mod 2 == 0)   # [2,4,6]</code>"},
 	{"pegue_enquanto",      "<b>pegue_enquanto(condição)</b><p>devolve os primeiros caracteres de um texto ou os primeiros elementos de uma lista até que a condição seja falsa</p>"},
 	{"ordene",              "<b>ordene</b><p>devolve uma nova lista com os elementos em ordem crescente</p>"},
-	{"junte",               "<b>junte(delimitador = \"\")</b><p>devolve um texto contendo os elementos separados pelo delimitador</p>"},
-	{"junte",               "<b>junte(início, delimitador, fim)</b><p>devolve um texto contendo o início, os elementos separados pelo delimitador e o fim</p>"},
 	{"remova",              "<b>remova(posição)</b><p>devolve uma nova lista sem o elemento da posição indicada</p>"},
-	{"insira",              "<b>insira(posição, valor)</b><p>devolve uma nova lista acrescida do valor na posição indicada</p>"},
 	{"mapeie",              "<b>mapeie(função)</b><p>devolve uma nova lista mapeando os elementos da lista original aplicando a função</p>"},
 	{"primeiro",            "<b>primeiro</b><p>devolve o primeiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).primeiro   # \"potigol\"</code>"},
 	{"segundo",             "<b>segundo</b><p>devolve o segundo componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).segundo   # 2016</code>"},
@@ -122,6 +119,9 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("descarte_enquanto", "descarte_enquanto(${condição})${cursor}", "<b>descarte_enquanto(condição)</b><p>descarta os primeiros caracteres do texto ou os primeiros n elementos da lista até que a condição seja falsa, devolve o restante</p>");
 		addTemplateCompletion("divida", "divida(\"${delimitador}\")${cursor}", "<b>divida(delimitador = \" \")</b><p>divide um texto em subtextos baseado em um delimitador, devolve uma lista destes subtextos</p>");
 		addTemplateCompletion("injete", "injete(${neutro})(${operação})${cursor}", "<b>injete(neutro)(operação)</b><p>devolve o resultado da injeção da operação entre os elementos</p><code>[1,3,5,7].injete(0)((a,b) => a + b)  # 0 + 1 + 3 + 5 + 7</code>");
+		addTemplateCompletion("insira", "insira(${pos}, ${valor})${cursor}", "<b>insira(posição, valor)</b><p>devolve uma nova lista acrescida do valor na posição indicada</p>");
+		addTemplateCompletion("junte", "junte(\"${delimitador}\")${cursor}", "<b>junte(delimitador = \"\")</b><p>devolve um texto contendo os elementos separados pelo delimitador</p>");
+		addTemplateCompletion("junte", "junte(\"${início}\", \"${delimitador}\", \"${fim}\")${cursor}", "<b>junte(início, delimitador, fim)</b><p>devolve um texto contendo o início, os elementos separados pelo delimitador e o fim</p>");
 
 		return provedor;
 	}
