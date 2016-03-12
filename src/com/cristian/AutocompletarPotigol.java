@@ -21,8 +21,6 @@ public class AutocompletarPotigol {
 	{"leia_inteiro",        "<b>leia_inteiro</b><p>lê um número inteiro do teclado</p><code>num = leia_inteiro</code>"},
 	{"leia_real",           "<b>leia_real</b><p>lê um número real do teclado</p><code>num = leia_real</code>"},
 	{"leia_texto",          "<b>leia_texto</b><p>lê um texto do teclado</p><code>texto = leia_texto"},
-	{"leia_inteiros",       "<b>leia_inteiros(delimitador: Texto)</b><p>lê uma lista de números inteiros separados por um delimitador</p><code>números = leia_inteiros(\",\")"},
-	{"leia_inteiros",       "<b>leia_inteiros(n: Inteiro)</b><p>lê n números inteiros (um por linha).</p><code>números = leia_inteiros(4)"},
 	{"inteiro",             "<b>inteiro</b><p>converte para inteiro</p><code>número = 12.23<br>n = número.inteiro   # 12"},
 	{"arredonde",           "<b>arredonde</b><p>arredonda o número para o inteiro mais próximo</p><code>n=12.89<br>n.arredonde    # 13</code>"},
 	{"texto",               "<b>texto</b><p>converte para texto</p>"},
@@ -122,6 +120,8 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("insira", "insira(${pos}, ${valor})${cursor}", "<b>insira(posição, valor)</b><p>devolve uma nova lista acrescida do valor na posição indicada</p>");
 		addTemplateCompletion("junte", "junte(\"${delimitador}\")${cursor}", "<b>junte(delimitador = \"\")</b><p>devolve um texto contendo os elementos separados pelo delimitador</p>");
 		addTemplateCompletion("junte", "junte(\"${início}\", \"${delimitador}\", \"${fim}\")${cursor}", "<b>junte(início, delimitador, fim)</b><p>devolve um texto contendo o início, os elementos separados pelo delimitador e o fim</p>");
+		addTemplateCompletion("leia_inteiros", "leia_inteiros(\"${delimitador}\")${cursor}", "<b>leia_inteiros(delimitador: Texto)</b><p>lê uma lista de números inteiros separados por um delimitador</p><code>números = leia_inteiros(\",\")");
+		addTemplateCompletion("leia_inteiros", "leia_inteiros(${x})${cursor}", "<b>leia_inteiros(n: Inteiro)</b><p>lê n números inteiros (um por linha).</p><code>números = leia_inteiros(4)");
 
 		return provedor;
 	}
