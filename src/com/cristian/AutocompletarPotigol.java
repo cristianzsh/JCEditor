@@ -51,9 +51,6 @@ public class AutocompletarPotigol {
 	{"oitavo",              "<b>oitavo</b><p>devolve o oitavo componente de uma tupla</p>"},
 	{"nono",                "<b>nono</b><p>devolve o nono componente de uma tupla</p>"},
 	{"décimo",              "<b>décimo</b><p>devolve o décimo componente de uma tupla</p>"},
-	{"Lista.imutável",      "<b>Lista.imutável(tamanho, valor)</b><p>devolve uma lista do tamanho indicado contendo o mesmo valor</p><code>Lista.imutável(5,0)   #  [0,0,0,0,0]</code>"},
-	{"Lista.imutável",      "<b>Lista.vazia[Tipo]</b><p>devolve uma lista vazia do tipo indicado</p>"},
-	{"Lista.mutável",       "<b>Lista.mutável(tamanho, valor)</b><p>devolve uma lista mutável do tamanho indicado contendo o mesmo valor</p><code>Lista.mutável(5,0)   #  [0,0,0,0,0].mutável</code>"},
 	{"Matriz.imutável",     "<b>Matriz.imutável(linhas, colunas, valor)</b><p>devolve uma matriz do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.imutável(2,2,0)   #  [[0,0],[0,0]]</code>"},
 	{"Matriz.mutável",      "<b>Matriz.mutável(linhas, colunas, valor)</b><p>devolve uma matriz mutável do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.mutável(2,2,0)</code>"},
 	{"sen",                 "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>"},
@@ -122,6 +119,9 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("junte", "junte(\"${início}\", \"${delimitador}\", \"${fim}\")${cursor}", "<b>junte(início, delimitador, fim)</b><p>devolve um texto contendo o início, os elementos separados pelo delimitador e o fim</p>");
 		addTemplateCompletion("leia_inteiros", "leia_inteiros(\"${delimitador}\")${cursor}", "<b>leia_inteiros(delimitador: Texto)</b><p>lê uma lista de números inteiros separados por um delimitador</p><code>números = leia_inteiros(\",\")");
 		addTemplateCompletion("leia_inteiros", "leia_inteiros(${x})${cursor}", "<b>leia_inteiros(n: Inteiro)</b><p>lê n números inteiros (um por linha).</p><code>números = leia_inteiros(4)");
+		addTemplateCompletion("Lista.imutável", "Lista.imutável(${tam}, ${valor})${cursor}", "<b>Lista.imutável(tamanho, valor)</b><p>devolve uma lista do tamanho indicado contendo o mesmo valor</p><code>Lista.imutável(5,0)   #  [0,0,0,0,0]</code>");
+		addTemplateCompletion("Lista.vazia", "Lista.vazia[${Tipo}]${cursor}", "<b>Lista.vazia[Tipo]</b><p>devolve uma lista vazia do tipo indicado</p>");
+		addTemplateCompletion("Lista.mutável", "Lista.mutável(${tam}, ${valor})${cursor}", "<b>Lista.mutável(tamanho, valor)</b><p>devolve uma lista mutável do tamanho indicado contendo o mesmo valor</p><code>Lista.mutável(5,0)   #  [0,0,0,0,0].mutável</code>");
 
 		return provedor;
 	}
