@@ -27,19 +27,14 @@ public class AutocompletarPotigol {
 	{"formato",             "<b>formato</b><p>formata um número para ser exibido como texto</p><code>123.45 formato \"%.1f\"   # 123.4"},
 	{"real",                "<b>real</b><p>converte para real</p><code>\"12.3\".real   # 12.3<br>\"12a.3\".real   # 12.0"},
 	{"tamanho",             "<b>tamanho</b><p>devolve o tamanho de uma lista ou de um texto</p>"},
-	{"posição",             "<b>posição(elemento)</b><p>devolve a posição do elemento na lista ou no texto</p>"},
 	{"maiúsculo",           "<b>maiúsculo</b><p>devolve o texto convertido em letras maiúsculas</p><code>m = \"Potigol\" # \"POTIGOL\""},
 	{"minúsculo",           "<b>minúsculo</b><p>devolve o texto convertido em letras minúsculas</p>"},
 	{"inverta",             "<b>inverta</b><p>devolve uma nova lista ou um novo texto como os elementos invertidos</p>"},
 	{"cabeça",              "<b>cabeça</b><p>devolve o primeiro elemento de um texto ou de uma lista</p>"},
 	{"último",              "<b>último</b><p>devolve o último elemento de um texto ou de uma lista</p>"},
 	{"cauda",               "<b>cauda</b><p>devolve um novo texto ou uma nova lista contendo todos os elementos, exceto o primeiro</p>"},
-	{"pegue",               "<b>pegue(n)</b><p>devolve os n primeiros caracteres de um texto ou os n primeiros elementos de uma lista</p>"},
 	{"descarte",            "<b>descarte</b><p>descarta os n primeiros caracteres do texto ou os primeiros n elementos da lista, devolve o restante</p>"},
-	{"selecione",           "<b>selecione(condição)</b><p>devolve uma lista ou um texto com os elementos que satisfazem a condição</p><code>[1,2,3,4,5,6].selecione(n => n mod 2 == 0)   # [2,4,6]</code>"},
-	{"pegue_enquanto",      "<b>pegue_enquanto(condição)</b><p>devolve os primeiros caracteres de um texto ou os primeiros elementos de uma lista até que a condição seja falsa</p>"},
 	{"ordene",              "<b>ordene</b><p>devolve uma nova lista com os elementos em ordem crescente</p>"},
-	{"remova",              "<b>remova(posição)</b><p>devolve uma nova lista sem o elemento da posição indicada</p>"},
 	{"primeiro",            "<b>primeiro</b><p>devolve o primeiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).primeiro   # \"potigol\"</code>"},
 	{"segundo",             "<b>segundo</b><p>devolve o segundo componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).segundo   # 2016</code>"},
 	{"terceiro",            "<b>terceiro</b><p>devolve o terceiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).terceiro   # verdadeiro</code>"},
@@ -52,7 +47,6 @@ public class AutocompletarPotigol {
 	{"décimo",              "<b>décimo</b><p>devolve o décimo componente de uma tupla</p>"},
 	{"sen",                 "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>"},
 	{"tg",                  "<b>tg(ângulo)</b><p>calcula a tangente do ângulo</p>"},
-	{"raiz",                "<b>raiz(n)</b><p>calcula a raiz quadrada de n</p>"},
 	{"aleatório",           "<b>aleatório</b><p>devolve um número aleatório entre 0 e 1</p>"},
 	{"então",               "<b>então</b><p></p>"},
 	{"fim",                 "<b>fim</b><p></p>"},
@@ -122,6 +116,12 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("mapeie", "mapeie(${função})${cursor}", "<b>mapeie(função)</b><p>devolve uma nova lista mapeando os elementos da lista original aplicando a função</p>");
 		addTemplateCompletion("Matriz.imutável", "Matriz.imutável(${linhas}, ${colunas}, ${valor})${cursor}", "<b>Matriz.imutável(linhas, colunas, valor)</b><p>devolve uma matriz do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.imutável(2,2,0)   #  [[0,0],[0,0]]</code>");
 		addTemplateCompletion("Matriz.mutável", "Matriz.mutável(${linhas}, ${colunas}, ${valor})${cursor}", "<b>Matriz.mutável(linhas, colunas, valor)</b><p>devolve uma matriz mutável do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.mutável(2,2,0)</code>");
+		addTemplateCompletion("pegue", "pegue(${n})${cursor}", "<b>pegue(n)</b><p>devolve os n primeiros caracteres de um texto ou os n primeiros elementos de uma lista</p>");
+		addTemplateCompletion("pegue_enquanto", "pegue_enquanto(${condição})${cursor}", "<b>pegue_enquanto(condição)</b><p>devolve os primeiros caracteres de um texto ou os primeiros elementos de uma lista até que a condição seja falsa</p>");
+		addTemplateCompletion("posição", "posição(${elemento})${cursor}", "<b>posição(elemento)</b><p>devolve a posição do elemento na lista ou no texto</p>");
+		addTemplateCompletion("raiz", "raiz(${n})${cursor}", "<b>raiz(n)</b><p>calcula a raiz quadrada de n</p>");
+		addTemplateCompletion("remova", "remova(${pos})${cursor}", "<b>remova(posição)</b><p>devolve uma nova lista sem o elemento da posição indicada</p>");
+		addTemplateCompletion("selecione", "selecione(${condição})${cursor}", "<b>selecione(condição)</b><p>devolve uma lista ou um texto com os elementos que satisfazem a condição</p><code>[1,2,3,4,5,6].selecione(n => n mod 2 == 0)   # [2,4,6]</code>");
 
 		return provedor;
 	}
