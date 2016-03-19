@@ -798,6 +798,10 @@ public class JCEditor extends JFrame {
 		}
 	}
 
+	/**
+	* Adiciona o recurso de autocompletar para a linguagem Potigol na
+	* aba atual.
+	*/
 	private void completarPotigol() {
 		CompletionProvider provedor = new AutocompletarPotigol().criar();
 		AutoCompletion ac = new AutoCompletion(provedor);
