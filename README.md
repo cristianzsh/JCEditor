@@ -34,6 +34,6 @@ O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integ
   - Apenas clique duas vezes no arquivo JCEditor.jar e espere a mensagem informando que o Potigol está configurado aparecer.
 
 ## Configuração no Windows
-  ![JCEditor](http://i.imgur.com/B8RM5RT.png)
+  ![JCEditor](http://i.imgur.com/dx7ItUs.png)
   - Baixe os arquivos JCEditor.jar e configPotigol.zip e os coloque no mesmo diretório;
   - Dê um duplo clique no arquivo JCEditor.jar e, se tudo ocorrer normalmente, você verá uma mensagem informando que o Potigol foi configurado.
