@@ -56,8 +56,6 @@ public class AutocompletarPotigol {
 	{"sen",                 "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>"},
 	{"tg",                  "<b>tg(ângulo)</b><p>calcula a tangente do ângulo</p>"},
 	{"raiz",                "<b>raiz(n)</b><p>calcula a raiz quadrada de n</p>"},
-	{"log",                 "<b>log(n)</b><p>calcula o logaritmo de n</p>"},
-	{"log10",               "<b>log10(n)</b><p>calcula o logaritmo de n na base 10</p>"},
 	{"aleatório",           "<b>aleatório</b><p>devolve um número aleatório entre 0 e 1</p>"},
 	{"então",               "<b>então</b><p></p>"},
 	{"fim",                 "<b>fim</b><p></p>"},
@@ -122,6 +120,8 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("Lista.imutável", "Lista.imutável(${tam}, ${valor})${cursor}", "<b>Lista.imutável(tamanho, valor)</b><p>devolve uma lista do tamanho indicado contendo o mesmo valor</p><code>Lista.imutável(5,0)   #  [0,0,0,0,0]</code>");
 		addTemplateCompletion("Lista.vazia", "Lista.vazia[${Tipo}]${cursor}", "<b>Lista.vazia[Tipo]</b><p>devolve uma lista vazia do tipo indicado</p>");
 		addTemplateCompletion("Lista.mutável", "Lista.mutável(${tam}, ${valor})${cursor}", "<b>Lista.mutável(tamanho, valor)</b><p>devolve uma lista mutável do tamanho indicado contendo o mesmo valor</p><code>Lista.mutável(5,0)   #  [0,0,0,0,0].mutável</code>");
+		addTemplateCompletion("log", "log(${n})${cursor}", "<b>log(n)</b><p>calcula o logaritmo de n</p>");
+		addTemplateCompletion("log10", "log10(${n})${cursor}", "<b>log10(n)</b><p>calcula o logaritmo de n na base 10</p>");
 
 		return provedor;
 	}
