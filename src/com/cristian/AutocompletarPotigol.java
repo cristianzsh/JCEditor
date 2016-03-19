@@ -40,7 +40,6 @@ public class AutocompletarPotigol {
 	{"pegue_enquanto",      "<b>pegue_enquanto(condição)</b><p>devolve os primeiros caracteres de um texto ou os primeiros elementos de uma lista até que a condição seja falsa</p>"},
 	{"ordene",              "<b>ordene</b><p>devolve uma nova lista com os elementos em ordem crescente</p>"},
 	{"remova",              "<b>remova(posição)</b><p>devolve uma nova lista sem o elemento da posição indicada</p>"},
-	{"mapeie",              "<b>mapeie(função)</b><p>devolve uma nova lista mapeando os elementos da lista original aplicando a função</p>"},
 	{"primeiro",            "<b>primeiro</b><p>devolve o primeiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).primeiro   # \"potigol\"</code>"},
 	{"segundo",             "<b>segundo</b><p>devolve o segundo componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).segundo   # 2016</code>"},
 	{"terceiro",            "<b>terceiro</b><p>devolve o terceiro componente de uma tupla</p><code>(\"potigol\", 2016, verdadeiro).terceiro   # verdadeiro</code>"},
@@ -51,8 +50,6 @@ public class AutocompletarPotigol {
 	{"oitavo",              "<b>oitavo</b><p>devolve o oitavo componente de uma tupla</p>"},
 	{"nono",                "<b>nono</b><p>devolve o nono componente de uma tupla</p>"},
 	{"décimo",              "<b>décimo</b><p>devolve o décimo componente de uma tupla</p>"},
-	{"Matriz.imutável",     "<b>Matriz.imutável(linhas, colunas, valor)</b><p>devolve uma matriz do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.imutável(2,2,0)   #  [[0,0],[0,0]]</code>"},
-	{"Matriz.mutável",      "<b>Matriz.mutável(linhas, colunas, valor)</b><p>devolve uma matriz mutável do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.mutável(2,2,0)</code>"},
 	{"sen",                 "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>"},
 	{"tg",                  "<b>tg(ângulo)</b><p>calcula a tangente do ângulo</p>"},
 	{"raiz",                "<b>raiz(n)</b><p>calcula a raiz quadrada de n</p>"},
@@ -122,6 +119,9 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("Lista.mutável", "Lista.mutável(${tam}, ${valor})${cursor}", "<b>Lista.mutável(tamanho, valor)</b><p>devolve uma lista mutável do tamanho indicado contendo o mesmo valor</p><code>Lista.mutável(5,0)   #  [0,0,0,0,0].mutável</code>");
 		addTemplateCompletion("log", "log(${n})${cursor}", "<b>log(n)</b><p>calcula o logaritmo de n</p>");
 		addTemplateCompletion("log10", "log10(${n})${cursor}", "<b>log10(n)</b><p>calcula o logaritmo de n na base 10</p>");
+		addTemplateCompletion("mapeie", "mapeie(${função})${cursor}", "<b>mapeie(função)</b><p>devolve uma nova lista mapeando os elementos da lista original aplicando a função</p>");
+		addTemplateCompletion("Matriz.imutável", "Matriz.imutável(${linhas}, ${colunas}, ${valor})${cursor}", "<b>Matriz.imutável(linhas, colunas, valor)</b><p>devolve uma matriz do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.imutável(2,2,0)   #  [[0,0],[0,0]]</code>");
+		addTemplateCompletion("Matriz.mutável", "Matriz.mutável(${linhas}, ${colunas}, ${valor})${cursor}", "<b>Matriz.mutável(linhas, colunas, valor)</b><p>devolve uma matriz mutável do tamanho indicado por linhas e colunas contendo o mesmo valor</p><code>Matriz.mutável(2,2,0)</code>");
 
 		return provedor;
 	}
