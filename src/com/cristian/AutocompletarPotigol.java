@@ -45,8 +45,6 @@ public class AutocompletarPotigol {
 	{"oitavo",              "<b>oitavo</b><p>devolve o oitavo componente de uma tupla</p>"},
 	{"nono",                "<b>nono</b><p>devolve o nono componente de uma tupla</p>"},
 	{"décimo",              "<b>décimo</b><p>devolve o décimo componente de uma tupla</p>"},
-	{"sen",                 "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>"},
-	{"tg",                  "<b>tg(ângulo)</b><p>calcula a tangente do ângulo</p>"},
 	{"aleatório",           "<b>aleatório</b><p>devolve um número aleatório entre 0 e 1</p>"},
 	{"então",               "<b>então</b><p></p>"},
 	{"fim",                 "<b>fim</b><p></p>"},
@@ -122,6 +120,8 @@ public class AutocompletarPotigol {
 		addTemplateCompletion("raiz", "raiz(${n})${cursor}", "<b>raiz(n)</b><p>calcula a raiz quadrada de n</p>");
 		addTemplateCompletion("remova", "remova(${pos})${cursor}", "<b>remova(posição)</b><p>devolve uma nova lista sem o elemento da posição indicada</p>");
 		addTemplateCompletion("selecione", "selecione(${condição})${cursor}", "<b>selecione(condição)</b><p>devolve uma lista ou um texto com os elementos que satisfazem a condição</p><code>[1,2,3,4,5,6].selecione(n => n mod 2 == 0)   # [2,4,6]</code>");
+		addTemplateCompletion("sen", "sen(${ângulo})${cursor}", "<b>sen(ângulo)</b><p>calcula o seno do ângulo</p>");
+		addTemplateCompletion("tg", "tg(${ângulo})${cursor}", "<b>tg(ângulo)</b><p>calcula a tangente do ângulo</p>");
 
 		return provedor;
 	}
