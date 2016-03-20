@@ -67,7 +67,7 @@ import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 /**
 * Classe que cria a interface principal e manipula parte dos eventos
 * @author   Cristian Henrique (cristianmsbr@gmail.com)
-* @version  2.0
+* @version  2.1
 * @since    Desde a primeira versão
 */
 
@@ -75,19 +75,17 @@ public class JCEditor extends JFrame {
 	private AreaDeTexto at;
 	private JTabbedPane arquivos;
 	private Font roboto = new Font("Roboto Light", Font.PLAIN, 14);
-	private JLabel separador = new JLabel("   ");
-	private JLabel separador2 = new JLabel("   ");
 	private JLabel fonteAtual, linguagem;
 	private JToolBar barraS;
 	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, addProjeto, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
-		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props, desfazer, refazer, selecionarTudo;
+		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props, desfazer, refazer, selecionarTudo, limparTerminal;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch, plainText;
 	private JRadioButtonMenuItem gerarEstrutura, dobrarCodigo, quebrarLinha;
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema, projeto;
 	private InputStream in;
-	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir, bDesfazer, bRefazer;
+	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir, bDesfazer, bRefazer, bLimparTerminal;
 	private Image icone;
 	private ButtonGroup bg, bg2, bg3;
 	private String fonteEscolhida = "Monospaced";
@@ -171,6 +169,7 @@ public class JCEditor extends JFrame {
 		menu.addSeparator();
 		imprimir = configMenu("Imprimir", "imagens/imprimir.png", new ImprimirPotigolListener(), KeyEvent.VK_P, ActionEvent.CTRL_MASK, menu);
 		executarPotigol = configMenu("Executar Potigol", "imagens/play.png", new ExecutarPotigolListener(), KeyEvent.VK_F9, 0, menu);
+		limparTerminal = configMenu("Limpar terminal", "imagens/limpar.png", new LimparTerminalListener(), KeyEvent.VK_L, ActionEvent.CTRL_MASK, menu);
 		fecharAba = configMenu("Fechar aba", "imagens/fecharAba.png", new FecharAbaListener(), KeyEvent.VK_W, ActionEvent.CTRL_MASK, menu);
 		menu.addSeparator();
 		sair = configMenu("Sair", "imagens/sair.png", new SairListener(), KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK, menu);
@@ -267,16 +266,17 @@ public class JCEditor extends JFrame {
 		bAbrir = configBtns("Abrir arquivo", "imagens/25x25/abrir25.png", new AbrirListener());
 		bSalvar = configBtns("Salvar arquivo", "imagens/25x25/salvar25.png", new SalvarListener());
 		bSalvarComo = configBtns("Salvar como", "imagens/25x25/salvarComo25.png", new SalvarComoListener());
-		barraS.add(separador);
+		barraS.addSeparator();
 		bCopiar = configBtns("Copiar", "imagens/25x25/copiar25.png", new CopiarListener());
 		bColar = configBtns("Colar", "imagens/25x25/colar25.png", new ColarListener());
 		bRecortar = configBtns("Recortar", "imagens/25x25/recortar25.png", new RecortarListener());
 		bDesfazer = configBtns("Desfazer", "imagens/25x25/desfazer25.png", new DesfazerListener());
 		bRefazer = configBtns("Refazer", "imagens/25x25/refazer25.png", new RefazerListener());
 		bPesquisar = configBtns("Pesquisar", "imagens/25x25/pesquisar25.png", new PesquisarListener());
-		barraS.add(separador2);
+		barraS.addSeparator();
 		bExecutarPotigol = configBtns("Executar Potigol", "imagens/25x25/play25.png", new ExecutarPotigolListener());
 		bExecutarPotigol.setEnabled(false);
+		bLimparTerminal = configBtns("Limpar terminal", "imagens/25x25/limpar25.png", new LimparTerminalListener());
 		bImprimir = configBtns("Imprimir", "imagens/25x25/imprimir25.png", new ImprimirPotigolListener());
 
 		/* Define o tamanho do ícone com base no SO */
@@ -1202,6 +1202,15 @@ public class JCEditor extends JFrame {
 			if (lista.get(arquivos.getSelectedIndex()).isPotigol() && lista.get(arquivos.getSelectedIndex()).getArquivo() != null) {
 				terminal.executarComando(lista.get(arquivos.getSelectedIndex()).getArquivo());
 			}
+		}
+	}
+
+	/**
+	* Limpa o terminal inserindo várias quebras de linha.
+	*/
+	class LimparTerminalListener implements ActionListener {
+		public void actionPerformed(ActionEvent ev) {
+			terminal.limpar();
 		}
 	}
 	
