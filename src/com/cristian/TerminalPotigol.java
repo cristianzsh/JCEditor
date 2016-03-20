@@ -139,6 +139,12 @@ public class TerminalPotigol extends JTabbedPane {
 		}
 	}
 
+	public void limpar() {
+		if (!cmd.emExecucao()) {
+			consolePotigol.inserir("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+		}
+	}
+
 	public JScrollPane getBarra() {
 		return this.barra;
 	}
