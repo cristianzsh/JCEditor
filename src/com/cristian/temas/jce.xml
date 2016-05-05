@@ -10,7 +10,7 @@
    <background color="272822"/>
    <caret color="FFFFFF"/>
    <selection useFG="false" bg="404E51" roundedEdges="false"/>
-   <currentLineHighlight color="2F393C" fade="false"/>
+   <currentLineHighlight color="49483E" fade="false"/>
    <marginLine fg="394448"/>
    <markAllHighlight color="6b8189"/> <!-- TODO: Fix me -->
    <markOccurrencesHighlight color="5b7179" border="false"/>
