@@ -9,7 +9,7 @@
    <!--  General editor colors. -->
    <background color="272822"/>
    <caret color="FFFFFF"/>
-   <selection useFG="false" bg="404E51" roundedEdges="false"/>
+   <selection useFG="false" bg="49483E" roundedEdges="false"/>
    <currentLineHighlight color="49483E" fade="false"/>
    <marginLine fg="394448"/>
    <markAllHighlight color="6b8189"/> <!-- TODO: Fix me -->
