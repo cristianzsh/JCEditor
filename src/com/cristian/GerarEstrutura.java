@@ -37,7 +37,7 @@ public class GerarEstrutura {
 			t = "algoritmo : \"Nome\"\n\nvar\n\ninicio\n\nfimalgoritmo";
 		} else if (linguagem.equals("PHP")) {
 			t = "<?php\n\n?>";
-		} else if (linguagen.equals("HTML")) {
+		} else if (linguagem.equals("HTML")) {
 			t = "<!DOCTYPE html>\n<html>\n<head>\n\t<title></title>\n</head>\n<body>\n\n</body>\n</html>";
 		}
 
