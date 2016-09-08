@@ -7,7 +7,7 @@ O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integ
 [![Gitter](https://badges.gitter.im/cristian-henrique/JCEditor.svg)](https://gitter.im/cristian-henrique/JCEditor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Configuração no Linux
-  <p align="center"><img src="http://i.imgur.com/H6lye4T.png"/><p>
+  <p align="center"><img src="screenshots/JCE_Linux.png"/><p>
   - Baixe os arquivos JCEditor.jar e configPotigol.zip e os coloque no mesmo diretório;
   - Entre no Terminal e digite: ````java -jar JCEditor.jar````;
 
