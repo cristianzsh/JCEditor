@@ -30,7 +30,7 @@ O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integ
   - Salve o arquivo criado com o nome desejado e a extensão ````.desktop````
 
 ## Configuração no Mac
-  <p align="center"><img src="http://i.imgur.com/Cu3v3bT.png"/></p>
+  <p align="center"><img src="screenshots/JCE_Mac.tiff"/></p>
   - Baixe os arquivos JCEditor.jar e configPotigol.zip e os coloque no mesmo diretório;
   - Apenas clique duas vezes no arquivo JCEditor.jar e espere a mensagem informando que o Potigol está configurado aparecer.
 
