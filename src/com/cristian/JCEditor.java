@@ -157,6 +157,8 @@ public class JCEditor extends JFrame {
 		barraS.setBorderPainted(false);
 		tema.setIcon(new ImageIcon(getClass().getResource("imagens/escolherTema.png")));
 		lookAndFeel.setIcon(new ImageIcon(getClass().getResource("imagens/pincel.png")));
+		tema.setFont(roboto);
+		lookAndFeel.setFont(roboto);
 
 		/* Código de configuração dos menus de funções, sua estrutura é:
 		JMenuItem, String(nome do menu), String(imagem do menu), ActionListener, KeyEvent, ActionEvent, JMenu
@@ -343,11 +345,13 @@ public class JCEditor extends JFrame {
 		dobrarCodigo = new JRadioButtonMenuItem("Dobrar código");
 		dobrarCodigo.setIcon(new ImageIcon(getClass().getResource("imagens/dobrarCodigo.png")));
 		dobrarCodigo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
+		dobrarCodigo.setFont(roboto);
 		dobrarCodigo.addActionListener(new DobrarCodigoListener());
 
 		quebrarLinha = new JRadioButtonMenuItem("Quebrar linha");
 		quebrarLinha.setIcon(new ImageIcon(getClass().getResource("imagens/quebrarLinha.png")));
 		quebrarLinha.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+		quebrarLinha.setFont(roboto);
 		quebrarLinha.addActionListener(new QuebrarLinhaListener());
 
 		preferencias.add(lookAndFeel);
