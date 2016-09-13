@@ -35,7 +35,7 @@
       <style token="RESERVED_WORD_2" fg="f92672"/>
       <style token="ANNOTATION" fg="E8E2B7"/>
       <style token="COMMENT_DOCUMENTATION" fg="676E54"/>
-      <style token="COMMENT_EOL" fg="66747B"/>
+      <style token="COMMENT_EOL" fg="676E54"/>
       <style token="COMMENT_MULTILINE" fg="676E54"/>
       <style token="COMMENT_KEYWORD" fg="ae9fbf"/>
       <style token="COMMENT_MARKUP" fg="ae9fbf"/>
