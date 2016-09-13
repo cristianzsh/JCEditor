@@ -78,14 +78,14 @@ public class JCEditor extends JFrame {
 	private JLabel fonteAtual, linguagem;
 	private JToolBar barraS;
 	private JMenuItem novoArq, salvarArq, salvarArqComo, abrirArq, addProjeto, sair, recortar, copiar, colar, versao, sobrePC, fonte, pesquisar, fontePadrao, aumentarFonte,
-		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props, desfazer, refazer, selecionarTudo, limparTerminal;
+		diminuirFonte, executarPotigol, imprimir, fecharAba, sobrePotigol, delProjeto, props, desfazer, refazer, selecionarTudo;
 	private JRadioButtonMenuItem java, cPlusPlus, pythonL, html, css, javaScript, xml, c, unixShell, properties, groovy, jsp,
 		actionScript, assembly, clojure, d, delphi, fortran, json, latex, lisp, lua, perl, php, ruby, scala, portugol, pascal, potigol, cSharp, vb, batch, plainText;
 	private JRadioButtonMenuItem gerarEstrutura, dobrarCodigo, quebrarLinha;
 	private JMenuBar barraDeMenu;
 	private JMenu menu, editar, sobre, preferencias, lookAndFeel, formatar, linguagemMenu, tema, projeto;
 	private InputStream in;
-	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir, bDesfazer, bRefazer, bLimparTerminal;
+	private JButton bNovo, bAbrir, bSalvar, bSalvarComo, bCopiar, bColar, bRecortar, bPesquisar, bExecutarPotigol, bImprimir, bDesfazer, bRefazer;
 	private Image icone;
 	private ButtonGroup bg, bg2, bg3;
 	private String fonteEscolhida = "Monospaced";
@@ -96,9 +96,8 @@ public class JCEditor extends JFrame {
 	private ArrayList<String> arquivosAbertos = new ArrayList<>();
 	private JRadioButtonMenuItem[] menusAparencia = new JRadioButtonMenuItem[14];
 	private JScrollPane scrollPane;
-	private JSplitPane painelSeparador, painelPrincipal;
+	private JSplitPane painelSeparador;
 	private ArvoreDeProjetos adp;
-	private TerminalPotigol terminal;
 	private String sistemaOperacional = System.getProperty("os.name");
 
 	/**
@@ -169,7 +168,6 @@ public class JCEditor extends JFrame {
 		menu.addSeparator();
 		imprimir = configMenu("Imprimir", "imagens/imprimir.png", new ImprimirPotigolListener(), KeyEvent.VK_P, ActionEvent.CTRL_MASK, menu);
 		executarPotigol = configMenu("Executar Potigol", "imagens/play.png", new ExecutarPotigolListener(), KeyEvent.VK_F9, 0, menu);
-		limparTerminal = configMenu("Limpar terminal", "imagens/limpar.png", new LimparTerminalListener(), KeyEvent.VK_L, ActionEvent.CTRL_MASK, menu);
 		fecharAba = configMenu("Fechar aba", "imagens/fecharAba.png", new FecharAbaListener(), KeyEvent.VK_W, ActionEvent.CTRL_MASK, menu);
 		menu.addSeparator();
 		sair = configMenu("Sair", "imagens/sair.png", new SairListener(), KeyEvent.VK_F4, InputEvent.ALT_DOWN_MASK, menu);
@@ -276,7 +274,6 @@ public class JCEditor extends JFrame {
 		barraS.addSeparator();
 		bExecutarPotigol = configBtns("Executar Potigol", "imagens/25x25/play25.png", new ExecutarPotigolListener());
 		bExecutarPotigol.setEnabled(false);
-		bLimparTerminal = configBtns("Limpar terminal", "imagens/25x25/limpar25.png", new LimparTerminalListener());
 		bImprimir = configBtns("Imprimir", "imagens/25x25/imprimir25.png", new ImprimirPotigolListener());
 
 		/* Define o tamanho do ícone com base no SO */
@@ -397,15 +394,9 @@ public class JCEditor extends JFrame {
 		painelSeparador.setOneTouchExpandable(true);
 		painelSeparador.setBorder(null);
 
-		terminal = new TerminalPotigol();
-		painelPrincipal = new JSplitPane(JSplitPane.VERTICAL_SPLIT, true, painelSeparador, terminal);
-		painelPrincipal.setDividerLocation(600);
-		painelPrincipal.setOneTouchExpandable(true);
-		painelPrincipal.setBorder(null);
-
 		getContentPane().add(BorderLayout.NORTH, barraS);
 		getContentPane().add(BorderLayout.SOUTH, panel);	// apenas define o layout dos componentes
-		getContentPane().add(BorderLayout.CENTER, painelPrincipal);
+		getContentPane().add(BorderLayout.CENTER, painelSeparador);
 		this.setJMenuBar(barraDeMenu);
 		this.setIconImage(icone);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -636,10 +627,8 @@ public class JCEditor extends JFrame {
 	private void atualizarLAF() {
 		SwingUtilities.updateComponentTreeUI(this);
 		barraDeMenu.setBorder(null);
-		painelPrincipal.setBorder(null);
 		painelSeparador.setBorder(null);
 		scrollPane.setBorder(null);
-		terminal.getBarra().setBorder(null);
 
 		for (AreaDeTexto adt : lista) {
 			adt.setBorder(null);
@@ -1193,24 +1182,30 @@ public class JCEditor extends JFrame {
 	*/
 	class ExecutarPotigolListener implements ActionListener {
 		public void actionPerformed(ActionEvent ev) {
-
 			if (lista.get(arquivos.getSelectedIndex()).arquivoModificado()) {
 				lista.get(arquivos.getSelectedIndex()).salvar(lista.get(arquivos.getSelectedIndex()).getRSyntax().getText());
 				definirTitulo();
 			}
 
 			if (lista.get(arquivos.getSelectedIndex()).isPotigol() && lista.get(arquivos.getSelectedIndex()).getArquivo() != null) {
-				terminal.executarComando(lista.get(arquivos.getSelectedIndex()).getArquivo());
-			}
-		}
-	}
+				String cmd;
+				String usuario = System.getProperty("user.home") + "/ConfigJCE/.potigol";
 
-	/**
-	* Limpa o terminal inserindo várias quebras de linha.
-	*/
-	class LimparTerminalListener implements ActionListener {
-		public void actionPerformed(ActionEvent ev) {
-			terminal.limpar();
+				try {
+					if (sistemaOperacional.equals("Linux")) {
+						cmd = usuario + "/ExecPotigol.sh " + lista.get(arquivos.getSelectedIndex()).getArquivo().toString().replace(" ", "?")
+							+ " " + lista.get(arquivos.getSelectedIndex()).getArquivo().getName();
+						Runtime.getRuntime().exec(cmd);
+					} else if (sistemaOperacional.equals("Mac OS X")) {
+						cmd = "osascript " + usuario + "/ExecPotigol.scpt " + lista.get(arquivos.getSelectedIndex()).getArquivo().toString();
+						Runtime.getRuntime().exec(cmd);
+					} else {
+						cmd = "cmd.exe /c start " + usuario + "/ExecPotigol.bat " +
+							"\"" + lista.get(arquivos.getSelectedIndex()).getArquivo().toString() + "\" " + lista.get(arquivos.getSelectedIndex()).getArquivo().getName();
+						Runtime.getRuntime().exec(cmd);
+					}
+				} catch (Exception ex) { ex.printStackTrace(); }
+			}
 		}
 	}
 	
