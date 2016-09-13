@@ -218,6 +218,7 @@ public class JCEditor extends JFrame {
 		gerarEstrutura = new JRadioButtonMenuItem("Gerar estrutura");
 		gerarEstrutura.setIcon(new ImageIcon(getClass().getResource("imagens/estrutura.png")));
 		gerarEstrutura.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_G, ActionEvent.CTRL_MASK));
+		gerarEstrutura.setFont(roboto);
 		formatar.add(gerarEstrutura);
 
 		/* Código de configuração dos menus de linguagem, este método também é utilizado para a configuração dos itens de LAF e tema
