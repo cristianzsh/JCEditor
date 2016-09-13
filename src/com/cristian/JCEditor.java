@@ -179,7 +179,7 @@ public class JCEditor extends JFrame {
 		colar = configMenu("Colar", "imagens/colar.png", new ColarListener(), KeyEvent.VK_V, ActionEvent.CTRL_MASK, editar);
 		editar.addSeparator();
 		selecionarTudo = configMenu("Selecionar tudo", "imagens/selecionarTudo.png", new SelecionarTudoListener(), KeyEvent.VK_A, ActionEvent.CTRL_MASK, editar);
-		sobrePotigol = configMenu("Potigol", "imagens/potigol.png", new SobrePotigolListener(), KeyEvent.VK_I, ActionEvent.CTRL_MASK, sobre);
+		sobrePotigol = configMenu("Potigol", "imagens/potigol.png", new SobrePotigolListener(), KeyEvent.VK_F4, 0, sobre);
 		sobrePC = configMenu("Sobre este PC", "imagens/config.png", new SobrePCListener(), KeyEvent.VK_F3, 0, sobre);
 		versao = configMenu("Versão", "imagens/versaoIcone.png", new VersaoListener(), KeyEvent.VK_F1, 0, sobre);
 		pesquisar = configMenu("Pesquisar","imagens/pesquisar.png", new PesquisarListener(), KeyEvent.VK_F, ActionEvent.CTRL_MASK, formatar);
