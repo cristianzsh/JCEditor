@@ -13,9 +13,9 @@ O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integ
 
    Se tudo ocorrer normalmente, você verá uma mensagem informando que o Potigol está configurado.
    
-   Se você estiver utilizando a versão [1.9](https://github.com/cristian-henrique/JCEditor/releases/tag/1.9) ou anteriores: em um Terminal, entre na pasta ConfigJCE/.potigol(localizada em sua pasta de usuário) e digite:
+  - Em um Terminal, entre na pasta ConfigJCE/.potigol(localizada em sua pasta de usuário) e digite:
   
-  ````chmod 777 ExecPotigol.sh````
+    ````chmod 777 ExecPotigol.sh````
 
 ## (Opcional) Criando um atalho
   - Crie um documento vazio e digite:
