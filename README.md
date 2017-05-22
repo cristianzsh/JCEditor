@@ -15,19 +15,19 @@ O JCE possui suporte a diversas linguagens como Java, C++, Python, Scala e integ
    
   - Em um Terminal, entre na pasta ConfigJCE/.potigol (localizada em sua pasta de usuário) e digite:
   
-    ````chmod 777 ExecPotigol.sh````
+    ``chmod 777 ExecPotigol.sh``
 
 ## (Opcional) Criando um atalho
   - Crie um documento vazio e digite:
   
-````[Desktop Entry]
+``[Desktop Entry]
   Name=JCEditor
   Type=Application
   Exec=java -jar /caminho_para_a_pasta_do_JCE/JCEditor.jar
-  Icon=/caminho_para_o_ícone/jceIcone.png````
+  Icon=/caminho_para_o_ícone/jceIcone.png``
   
   (Informar um ícone é opcional)
-  - Salve o arquivo criado com o nome desejado e a extensão ````.desktop````
+  - Salve o arquivo criado com o nome desejado e a extensão ``.desktop``
 
 ## Configuração no Mac
   <p align="center"><img src="screenshots/JCE_Mac.png"/></p>
