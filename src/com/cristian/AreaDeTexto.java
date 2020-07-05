@@ -4,9 +4,11 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Cursor;
+
 import javax.swing.JOptionPane;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStreamWriter;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+
 import org.fife.ui.rsyntaxtextarea.AbstractTokenMakerFactory;
 import org.fife.ui.rsyntaxtextarea.TokenMakerFactory;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
@@ -167,6 +170,10 @@ public class AreaDeTexto extends JPanel {
 			JOptionPane.showMessageDialog(this, "Erro ao ler o arquivo!");
 		}
 
+		st = new StringBuffer(
+				CryModule.intercept_leer( a , new String(st) )
+			);
+		
 		extensao(a);
 		getRSyntax().setText(st.toString());
 		arquivoModificado(false);
@@ -179,6 +186,9 @@ public class AreaDeTexto extends JPanel {
 	public void salvar(String texto) {
 		this.texto = texto;
 		try {
+			
+			texto = CryModule.intercept_salvar( arquivo , texto );
+			
 			OutputStreamWriter escritor = new OutputStreamWriter(new FileOutputStream(arquivo), "UTF-8");
 			escritor.write(texto);
 			escritor.flush();
